@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import './index.css'
+import Login from './components/login'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">travel wallet</h1>
+    <div>
+      <Login />
     </div>
   )
 }
