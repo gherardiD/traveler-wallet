@@ -2,9 +2,6 @@ import { useState } from "react";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.png";
 
-//<a target="_blank" href="https://icons8.com/icon/83195/menu">Menu</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-//<a target="_blank" href="https://icons8.com/icon/IyF52aJ6ROno/multiply">X</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-
 export const navLinks = [
   {
     id: "home",

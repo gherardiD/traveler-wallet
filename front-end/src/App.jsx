@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Login from './components/login'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +16,7 @@ function App() {
       
 
         <Login />
-        
+        <Footer/>
     </div>
   )
 }
