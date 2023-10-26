@@ -40,7 +40,8 @@ EMAIL  PASSWORD  NOME  COGNOME  DATA_DI_NASCITA  (?NUM_CONTO)  DISPONIBILITA  VA
 
 
 **MOCKUP**
-![sign_up](https://github.com/gherardiD/project/assets/101709520/b4fb9a8d-f21b-4808-a5b1-d2e970655f66)
+![mockup_login](https://github.com/gherardiD/project/assets/101709520/0d1b4c94-5221-4926-9f4b-a25968067771)
+
 ![mokcup_landing](https://github.com/gherardiD/project/assets/101709520/57c89275-844f-4efc-84a9-134853f7dec0)
 ![mockup_currencies](https://github.com/gherardiD/project/assets/101709520/5ed7eb2c-afb6-4ee8-9a55-71d80baadf09)
 ![mockuo_transactions](https://github.com/gherardiD/project/assets/101709520/de52459c-e763-492c-b7a3-59d4fd90c448)
