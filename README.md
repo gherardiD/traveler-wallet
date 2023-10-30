@@ -29,7 +29,7 @@ A personal deposit account to manage and track your money when you travel
     - ammontare/amount (+-) 
 
 **ER**
-![ER](https://github.com/gherardiD/project/assets/101709520/8b983782-f99e-46d4-adf2-f0236e4d80b5)
+![ER](https://github.com/gherardiD/project/assets/101709520/812c7fa2-65a5-4bfd-8129-44ebd16e1814)
 
 
 **MOCKUP**
