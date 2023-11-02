@@ -1,6 +1,12 @@
 # project
 A personal deposit account to manage and track your money when you travel 
 
+**target**
+persone che amano viaggiare
+
+**problema**
+gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
+
 **functionalities**
 - creazione account
 - eliminazione account
