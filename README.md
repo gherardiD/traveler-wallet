@@ -35,7 +35,8 @@ gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
     - ammontare/amount (+-) 
 
 **ER**
-![ER](https://github.com/gherardiD/project/assets/101709520/812c7fa2-65a5-4bfd-8129-44ebd16e1814)
+
+![ER_definitivo](https://github.com/gherardiD/project/assets/101709520/3383e288-40c7-4d9e-a000-abf8364b779b)
 
 
 **MOCKUP**
