@@ -28,13 +28,13 @@ gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
     - pk codice/code
     - simbolo
     - ?stati?
-    - fk transaction_id
 - operazione/transaction
     - pk id
     - ammontare/amount (+-)
     - data
     - tipo
     - fk utente_id
+    - fk valuta_cod
 
 **ER**
 
