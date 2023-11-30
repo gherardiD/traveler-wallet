@@ -14,7 +14,7 @@ gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
 - cambio password (con invio di email)
 - cambio valuta
 - tracciamento movimenti
-- multiWallet in diverse valute
+- gestione del proprio account/portafoglio in diverse valute
 
 **schema logico**
 - utente/account
