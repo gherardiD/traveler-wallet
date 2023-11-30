@@ -5,7 +5,7 @@ A personal deposit account to manage and track your money when you travel
 persone che amano viaggiare
 
 **problema**
-gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
+gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione 
 
 **functionalities**
 - creazione account
@@ -16,23 +16,25 @@ gestione soldi per viaggi, commissioni cambio valuta ad ogni transazione
 - tracciamento movimenti
 - multiWallet in diverse valute
 
-**entities**
+**schema logico**
 - utente/account
+    - pk id    
     -  email
     -  password
     -  nome
     -  cognome
     -  data nascita
-    - **valute/currencies** (1 a *)
-    - **operazione/transactons** (1 a *)
 - valuta/currencies
-    - codice/code
+    - pk codice/code
     - simbolo
     - ?stati?
-    - **transaction** (1 a *)
+    - fk transaction_id
 - operazione/transaction
-    - numero/number
-    - ammontare/amount (+-) 
+    - pk id
+    - ammontare/amount (+-)
+    - data
+    - tipo
+    - fk utente_id
 
 **ER**
 
