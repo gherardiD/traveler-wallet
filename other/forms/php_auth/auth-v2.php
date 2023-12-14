@@ -16,14 +16,14 @@ $risultato_row=$connessione->query($get_password)->fetch_array(MYSQLI_ASSOC);
 if($risultato_row["password"] != $password){
   echo("Errore nell'esecuzione della query: ".$connessione->error.".");
   //header("Location: http://127.0.0.1/esercitazioni/php_auth/login.php?errore=1");
-  header("Location: http://127.0.0.1/5ia/php_auth/login.php?errore=1");
+  header("Location: http://127.0.0.1/5ia/forms/php_auth/login.php?errore=1");
   die();
 }
 else{
   // header("Location: http://127.0.0.1/esercitazioni/php_auth/home.php");
   session_start();
   $_SESSION["email"] = $email;
-  header("Location: http://127.0.0.1/5ia/php_auth/home.php");
+  header("Location: http://127.0.0.1/5ia/forms/php_auth/home.php");
   die();
 }
 ?>

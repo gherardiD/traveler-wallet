@@ -15,8 +15,8 @@ $password = "";
 //
 // nome del database
 //
-// $db = "project";
-$db = "5ia";
+$db = "project";
+// $db = "5ia";
 //
 // 	Istanza dell'oggetto della classe MySQLi
 //
