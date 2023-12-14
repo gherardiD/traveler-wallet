@@ -9,14 +9,19 @@ Progetto per gestire un portaglio in diverse valute in modo da evitare commissio
 ## Target
 L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semplicemente di persone che amano viaggiare.
 ## Funzionalità
-
-- creazione account
-- eliminazione account
-- aggiunta soldi
-- cambio password (con invio di email)
-- cambio valuta
-- tracciamento movimenti
-- resoconto movimenti
+**utente**
+  - creazione account
+  - eliminazione account
+  - aggiunta soldi
+  - cambio password (con invio di email)
+  - cambio valuta
+  - tracciamento movimenti
+  - resoconto movimenti
+**amministratore**
+  - gestiscione valute (visualizzazione. modifica, aggiunta)
+  - gestione utenti
+  - visualizzazione utenti (per numero di movimenti, per saldo totale...)
+  - visualizzazione delle valute più usate
 
 
 ## Run Locally
