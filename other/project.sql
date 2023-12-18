@@ -2,7 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-CREATE TABLE `account` (
+CREATE TABLE IF NOT EXISTS `account` (
   `ID` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cognome` varchar(25) NOT NULL,
   `nome` varchar(25) NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE `account` (
 -- (10, 'Rosellini', 'Rosa', '1962-12-19', '0422/940930', 'rosa.rosellini@virgilio.it', 'BN20doosW02B'),
 -- (11, 'Gherardi', 'Daniele', '2005-04-26', '3207256463', 'dani.ghera05@gmail.com', 'daniele');
 
-CREATE TABLE `movement` (
+CREATE TABLE IF NOT EXISTS `movement` (
   `ID` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `ACCOUNT_ID` int(11) NOT NULL,
   `VALUTA_COD` varchar(10) NOT NULL,
@@ -37,10 +37,10 @@ ALTER TABLE movement
 ADD FOREIGN KEY (ACCOUNT_ID)
 REFERENCES account(ID);
 
-CREATE TABLE `valuta` (
+CREATE TABLE IF NOT EXISTS `valuta` (
   `COD` varchar(10) PRIMARY KEY NOT NULL,
   `NOME` varchar(25) NOT NULL,
-  `SIMBLO` varchar(10) NOT NULL
+  `SIMBOLO` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE movement 
