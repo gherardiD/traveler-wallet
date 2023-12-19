@@ -31,6 +31,7 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
 
 - Xampp in macchina locale con un database chiamato project
 - Nella cartella htdocs avere una cartella chiamata 5ia
+- Eseguire il file project.sql nel database project
 
 Clone the project
 
@@ -45,6 +46,11 @@ Start Xampp and open this url:
   http://127.0.0.1/5ia/forms/front-end/
 ```
 
+Creare un nuovo account o accedere come amministratore usando:
+```bash
+  email: dani.ghera05@gmail.com
+  psw: daniele
+```
 
 
 ## Schema logico
