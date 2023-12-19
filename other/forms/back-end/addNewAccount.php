@@ -20,7 +20,6 @@
   $phone = mysqli_real_escape_string($connessione, $_POST['phone']);
   $email = mysqli_real_escape_string($connessione, $_POST['email']);
   $email = mysqli_real_escape_string($connessione, $_POST['email']);
-  // $password = mysqli_real_escape_string($connessione, md5($_POST['password']));
   $password = md5($_POST['password']);
   
   $la_query = "insert into account (cognome,nome, data_nascita, telefono, email, password) 
@@ -28,11 +27,14 @@
   
   if ($connessione->query($la_query))
 	{
-		echo "Record aggiunto!<br/>";
-		echo "Il suo id e' ".$connessione->insert_id;
+		session_start();
+    $_SESSION["email"] = $email;
+    header("Location: http://127.0.0.1/5ia/forms/front-end/home.php");
+    die();
 	}
-	else
+	else{
 		echo "Errore: ".$la_query."<br/>".$connessione->error;
+  }
 	$connessione->close();
   
 ?>

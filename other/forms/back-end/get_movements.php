@@ -8,17 +8,17 @@ if ($connessione->connect_error) {
   die("Connection failed: " . $connessione->connect_error);
 }
 
-$get_currencies = "SELECT * FROM valuta;";
-$result = $connessione->query($get_currencies);
+$get_movements = "SELECT * FROM movement";
+$result = $connessione->query($get_movements);
 
 if ($result->num_rows > 0) {
-  $currenciesArray = array();
+  $movementsArray = array();
 
   while ($row = $result->fetch_assoc()) {
-    $currenciesArray[] = $row['NOME'] . " " . $row['SIMBOLO'] . " " . $row['COD'];
+    $movementsArray[] = $row['ACCOUNT_ID'] . " / " . $row['VALUTA_COD'] . " / " . $row['AMMONTARE'] . " / " . $row['DATA'];
   }
 
-  echo json_encode($currenciesArray);
+  echo json_encode($movementsArray);
 } else {
   echo json_encode(array("message" => "No currencies found"));
 }

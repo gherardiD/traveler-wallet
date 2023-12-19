@@ -15,7 +15,7 @@
     ?>
     <div class="container">
       <h2 class="animated">Log In</h2>
-      <form action="auth-v2.php" method="post">
+      <form action="../back-end/auth-v2.php" method="post">
         <div class="form-group animated">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required />
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group animated">
           <button type="submit" class="btn-animated">Sign In</button>
-          <a href="http://127.0.0.1/5ia/forms/signUpForm/signUp.html">Sign up</a>
+          <a href="http://127.0.0.1/5ia/forms/front-end/index.html">Sign up</a>
         </div>
       </form>
     </div>

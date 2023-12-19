@@ -15,7 +15,7 @@ if ($result->num_rows > 0) {
     $usersArray = array();
 
     while ($row = $result->fetch_assoc()) {
-        $usersArray[] = $row['nome'] . " " . $row['cognome'] . " " . $row['email'];
+        $usersArray[] = $row['nome'] . " / " . $row['cognome'] . " / " . $row['email'];
     }
 
     echo json_encode($usersArray);

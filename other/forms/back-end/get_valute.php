@@ -16,7 +16,7 @@ if ($result->num_rows > 0) {
     $valuteArray = array();
 
     while ($row = $result->fetch_assoc()) {
-        $valuteArray[] = $row['NOME']; // Replace 'your_column_name' with the actual column name from the valute table
+        $valuteArray[] = $row['NOME']; 
     }
 
     echo json_encode($valuteArray);

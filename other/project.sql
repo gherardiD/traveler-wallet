@@ -12,17 +12,8 @@ CREATE TABLE IF NOT EXISTS `account` (
   `password` varchar(260) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- INSERT INTO `account` (`ID`, `cognome`, `nome`, `data_nascita`, `telefono`, `email`, `password`) VALUES
--- (1, 'Oberti', 'Boris', '1977-10-26', '081/140336', 'boris.ardengo@teletu.it', 'BS27rozdD52D'),
--- (3, 'Pirandelli', 'Barnaba', '1963-07-17', '011/597834', 'barnaba.pirandelli@aruba.it', 'ZG15kctkR56A'),
--- (4, 'Asinari', 'Piera', '2001-06-15', '045/510012', 'piera.asinari@teletu.it', 'GW23jqttU72P'),
--- (5, 'Zanco', 'Guglielmo', '1952-02-20', '0131/527077', 'guglielmo.zanco@katamail.it', 'IN37nqbzF54I'),
--- (6, 'Ardovini', 'Valeria', '1994-09-05', '010/409715', 'valeria.ardovini@gmail.it', 'FT00mmxaI51F'),
--- (7, 'Danova', 'Goffredo', '2020-04-27', '070/343016', '', 'NL30lefzP74I'),
--- (8, 'Aiana', 'Ildebrando', '1959-11-29', '031/186551', 'ildebrando.aiana@hotmail.com', 'RD89bjhyX80D'),
--- (9, 'Tarantino', 'Mattia', '1985-07-28', '0761/150121', 'mattia.tarantino@tele2.it', 'XY06bzplC95J'),
--- (10, 'Rosellini', 'Rosa', '1962-12-19', '0422/940930', 'rosa.rosellini@virgilio.it', 'BN20doosW02B'),
--- (11, 'Gherardi', 'Daniele', '2005-04-26', '3207256463', 'dani.ghera05@gmail.com', 'daniele');
+INSERT INTO `account` (`cognome`, `nome`, `data_nascita`, `telefono`, `email`, `password`) VALUES
+('Gherardi', 'Daniele', '2005-04-26', '3207256463', 'dani.ghera05@gmail.com', '679ab793796da4cbd0dda3d0daf74ec1');
 
 CREATE TABLE IF NOT EXISTS `movement` (
   `ID` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -47,7 +38,7 @@ ALTER TABLE movement
 ADD FOREIGN KEY (VALUTA_COD)
 REFERENCES valuta(COD);
 
-INSERT INTO `valuta` (`COD`, `NOME`, `SIMBLO`) VALUES
+INSERT INTO `valuta` (`COD`, `NOME`, `SIMBOLO`) VALUES
 ('CHF', 'franco svizzero', 'CHF'),
 ('DKK', 'corona danese', 'DKK'),
 ('EUR', 'euro', '€'),
@@ -64,8 +55,6 @@ INSERT INTO `valuta` (`COD`, `NOME`, `SIMBLO`) VALUES
 -- (4, 1, 'eur', 'food', -500, '2023-11-04'),
 -- (5, 5, 'CHF', 'extra', 200, '2023-11-06'),
 -- (6, 5, 'DKK', 'tip', 300, '2023-11-06');
-
--- try CREATE TABLE IF NOT EXISTS `abuses`
 
 -- DROP TABLE movement;
 -- DROP TABLE account;

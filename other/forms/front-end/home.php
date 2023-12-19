@@ -1,10 +1,10 @@
 <?php
     session_start();
 
-    include("connessione.php");
+    include("../back-end/connessione.php");
 
     if (!isset($_SESSION["email"])) {
-        header("Location: http://127.0.0.1/5ia/forms/php_auth/login.php");
+        header("Location: http://127.0.0.1/5ia/forms/front-end/login.php");
     } else if ($_SESSION["email"] == "dani.ghera05@gmail.com") {
         $email = $_SESSION["email"];
 ?>
@@ -79,16 +79,16 @@
         <div class="container">
             <p class="welcome-message">Benvenuto, sei l'amministratore</p>
 
-            <a href='logout.php' class="button">Logout</a>
+            <a href='../back-end/logout.php' class="button">Logout</a>
             <div class="container-btn">
                 <button id='getValute'>Valute</button>
                 <button id='getUsers'>Utenti</button>
-                <button id='getCurrencies'>Currencies</button>
+                <button id='getMovements'>Movements</button>
                 <button id='addCurrency'>Add Currency</button>
             </div>
             <div id='valuteContainer'></div>
             <div id='usersContainer'></div>
-            <div id='currenciesContainer'></div>
+            <div id='movementsContainer'></div>
         </div>
 
         <script>
@@ -97,8 +97,9 @@
             const valuteContainer = document.getElementById("valuteContainer");
             const getUsersBtn = document.getElementById("getUsers");
             const usersContainer = document.getElementById("usersContainer");
-            const getCurrenciesBtn = document.getElementById("getCurrencies");
-            const currenciesContainer = document.getElementById("currenciesContainer");
+            const getMovementsBtn = document.getElementById("getMovements");
+            const movementsContainer = document.getElementById("movementsContainer");
+            const addCurrencyBtn = document.getElementById("addCurrency");
 
             // Add an event listener to the getValuesBtn
             getValuesBtn.addEventListener("click", function () {
@@ -120,7 +121,7 @@
                     }
                 };
 
-                xhr.open("GET", "get_valute.php", true);
+                xhr.open("GET", "../back-end/get_valute.php", true);
                 xhr.send();
             }else{
                 valuteContainer.innerHTML = '';
@@ -147,38 +148,43 @@
                     }
                 };
 
-                xhr.open("GET", "get_users.php", true);
+                xhr.open("GET", "../back-end/get_users.php", true);
                 xhr.send();
             }else{
                 usersContainer.innerHTML = '';
             }
             });
 
-            // Add an event listener to the getCurrenciesBtn
-            getCurrenciesBtn.addEventListener("click", function () {
-            if(currenciesContainer.childNodes.length === 0){
+            // Add an event listener to the getMovementsBtn
+            getMovementsBtn.addEventListener("click", function () {
+            if(movementsContainer.childNodes.length === 0){
                 const xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         const result = JSON.parse(xhr.responseText);
 
-                        // Clear previous content in the currenciesContainer
-                        currenciesContainer.innerHTML = '';
+                        // Clear previous content in the movementsContainer
+                        movementsContainer.innerHTML = '';
 
-                        // Create a div for each currency and append it to the currenciesContainer
+                        // Create a div for each currency and append it to the movementsContainer
                         result.forEach(function (currency) {
                             const currencyDiv = document.createElement("div");
                             currencyDiv.textContent = currency;
-                            currenciesContainer.appendChild(currencyDiv);
+                            movementsContainer.appendChild(currencyDiv);
                         });
                     }
                 };
 
-                xhr.open("GET", "get_currencies.php", true);
+                xhr.open("GET", "../back-end/get_movements.php", true);
                 xhr.send();
             }else{
-                currenciesContainer.innerHTML = '';
+                movementsContainer.innerHTML = '';
             }
+            });
+            
+            // Add an event listener to the addCurrencyBtn
+            addCurrencyBtn.addEventListener("click", function () {
+                window.location.href = "add-currency-form.php";
             });
         </script>
     </body>
@@ -187,8 +193,10 @@
 <?php
     } else {
     $email = $_SESSION["email"];
-    $get_name = "SELECT nome FROM account WHERE email = '$email';";
-    $nome = $connessione->query($get_name)->fetch_array(MYSQLI_ASSOC)["nome"];
+    $get_name = "SELECT id, nome FROM account WHERE email = '$email';";
+    $user = $connessione->query($get_name)->fetch_array(MYSQLI_ASSOC);
+    $nome = $user["nome"];
+    $id = $user["id"];
 ?>
 
 <!DOCTYPE html>
@@ -247,17 +255,17 @@
 
     <body>
     <div class="container">
-            <p class="welcome-message">Benvenuto, <?= $nome ?></p>
+            <p class="welcome-message">Benvenuto, <?= $nome ?>  </p>
 
-            <a href='logout.php' class="button">Logout</a>
+            <a href='../back-end/logout.php' class="button">Logout</a>
             <div class="container-btn">
-                <button id='addMovement'>Add movement</button>
+                <button id='addMovement'>Add income</button>
             </div>
         </div>
         <script>
             const addMovement = document.getElementById("addMovement");
             addMovement.addEventListener("click", () => {
-                window.location.href = "add-expense.php";
+                window.location.href = "add-income-form.php";
             });
         </script>
     </body>
