@@ -17,6 +17,7 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
   - cambio valuta
   - tracciamento movimenti
   - resoconto movimenti
+
 **amministratore**
   - gestiscione valute (visualizzazione. modifica, aggiunta)
   - gestione utenti
@@ -26,30 +27,24 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
 
 ## Run Locally
 
+**Prerequisiti**:
+
+- Xampp in macchina locale con un database chiamato project
+- Nella cartella htdocs avere una cartella chiamata 5ia
+
 Clone the project
 
 ```bash
   git clone https://github.com/gherardiD/project
 ```
 
-Go to the project directory
+Copy the folder forms in to 5ia
 
+Start Xampp and open this url: 
 ```bash
-  cd project
-  cd front-end
+  http://127.0.0.1/5ia/forms/front-end/
 ```
 
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run dev
-```
 
 
 ## Schema logico
@@ -90,4 +85,3 @@ Attualmente no, è solo possibile tenere traccia manualmente dei propri soldi e 
 #### Si puo avere uno storico dei movimenti?
 
 Si, sono i movimenti sono registrati con una data quindi è possibile avere un resoconto.
-
