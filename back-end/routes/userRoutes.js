@@ -1,15 +1,21 @@
 const express = require("express");
 
-const userController = require("../controllers/userController.js");
-const authController = require("../controllers/authController.js");
+const {
+  getAllUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require("../controllers/userController.js");
+const { signup, login } = require("../controllers/authController.js");
 
 // currencies controller methods
 const router = express.Router();
-router.route("/").post(userController.createUser);
-// router
-//   .route("/:id")
-//   .get(userController.getUser)
-//   .patch(userController.updateUser)
-//   .delete(userController.deleteUser);
+
+router.post("/signup", signup);
+router.post("/login", login);
+
+router.route("/").get(getAllUsers).post(createUser);
+router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 
 module.exports = router;

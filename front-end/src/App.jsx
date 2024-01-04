@@ -1,24 +1,29 @@
-import { useState } from 'react'
-import Login from './components/Login'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
+// import Login from "./components/Login";
+// import Footer from "./components/Footer";
+
+import { useState } from "react";
+import SignUp from "./components/Signup";
+import Login from "./components/Login";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showSignUpForm, setShowSignUpForm] = useState(true);
 
+  const handleShowLoginForm = () => {
+    setShowLoginForm(true);
+    setShowSignUpForm(false);
+  };
+
+  const handleShowSignUpForm = () => {
+    setShowLoginForm(false);
+    setShowSignUpForm(true);
+  };
   return (
-    <div className='bg-neutral-400 w-full overflow-hidden h-screen'>
-      <div className={`sm:px-16 px-6 flex justify-center items-center`}>
-        <div className={`xl:max-w-[1280px] w-full`}>
-          <Nav />
-        </div>
-      </div>
-      
-
-        <Login />
-        <Footer/>
+    <div className="bg-neutral-400 w-full overflow-hidden flex h-screen ">
+      {showSignUpForm && <SignUp showLogin={handleShowLoginForm} />}
+      {showLoginForm && <Login showSignup={handleShowSignUpForm} />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -8,13 +8,18 @@ const {
   deleteCurrency,
 } = require("../controllers/currencyController.js");
 
+const { protect, restrictTo } = require("../controllers/authController.js");
+
 const router = express.Router();
 
-router.route("/").get(getAllCurrencies).post(createCurrency);
+router
+  .route("/")
+  .get(protect, getAllCurrencies)
+  .post(protect, restrictTo("admin"), createCurrency);
 router
   .route("/:id")
-  .get(getCurrency)
-  .patch(updateCurrency)
-  .delete(deleteCurrency);
+  .get(protect, getCurrency)
+  .patch(protect, restrictTo("admin"), updateCurrency)
+  .delete(protect, restrictTo("admin"), deleteCurrency);
 
 module.exports = router;
