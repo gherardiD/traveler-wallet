@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -58,11 +59,12 @@ const userSchema = new mongoose.Schema({
   emailConfirmExpires: Date,
   active: {
     type: Boolean,
-    default: true,
+    default: false,
     select: false,
   },
 });
 
+// * DOCUMENT MIDDLEWARES * //
 // Encrypt password
 userSchema.pre("save", async function (next) {
   // only run this function if password was actually modified
@@ -79,7 +81,15 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// Compare passwords return true if match
+// * QUERY MIDDLEWARES * //
+// exclude inactive users
+userSchema.pre(/^find/, function (next) {
+  // this points to the current query
+  this.find({ active: { $ne: false } });
+  next();
+});
+
+// * INSTANCE METHODS * //
 userSchema.methods.comparePassword = async function (
   candidatePassword,
   userPassword
@@ -101,6 +111,38 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 
   // false means NOT changed
   return false;
+};
+
+userSchema.methods.createEmailConfirmToken = function () {
+  // create random token
+  const confirmToken = crypto.randomBytes(32).toString("hex");
+
+  // encrypt token
+  this.emailConfirmToken = crypto
+    .createHash("sha256")
+    .update(confirmToken)
+    .digest("hex");
+
+  // set token expiration time
+  this.emailConfirmExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+  return confirmToken;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  // create random token
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  // encrypt token
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  // set token expiration time
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+  return resetToken;
 };
 
 const User = mongoose.model("User", userSchema);

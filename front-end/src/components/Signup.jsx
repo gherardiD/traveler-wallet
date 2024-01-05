@@ -149,7 +149,13 @@ const SignUp = ({ showLogin }) => {
           >
             {submitting ? "Submitting..." : "Register"}
           </button>
-          <button onClick={showLogin} className="ml-4 text-gray-700">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              showLogin();
+            }}
+            className="ml-4 text-gray-700"
+          >
             Login
           </button>
         </div>
