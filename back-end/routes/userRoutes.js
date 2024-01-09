@@ -20,10 +20,10 @@ const {
 const router = express.Router();
 
 router.post("/signup", signup, checkUserEmail);
-router.get("/confirmEmail/:token", confirmEmail);
+router.get("/confirmemail/:token", confirmEmail);
 router.post("/login", login);
-router.post("/forgotPassword", forgotPassword);
-router.patch("/resetPassword/:token", resetPassword);
+router.post("/forgotpassword", forgotPassword);
+router.patch("/resetpassword/:token", resetPassword);
 
 router.route("/").get(getAllUsers).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);

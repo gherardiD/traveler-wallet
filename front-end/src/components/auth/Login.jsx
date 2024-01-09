@@ -3,9 +3,10 @@
 import { useState } from "react";
 import axios from "axios";
 import FormField from "./FormField";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-function Login({ showSignup, showForgotPassword }) {
+function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -67,7 +68,7 @@ function Login({ showSignup, showForgotPassword }) {
           onChange={handleInputChange}
         />
 
-        <div className="form-group animated flex justify-between">
+        <div className="form-group animated flex justify-between content-center">
           <div>
             <button
               type="submit"
@@ -75,25 +76,13 @@ function Login({ showSignup, showForgotPassword }) {
             >
               {submitting ? "Submitting..." : "Log in"}
             </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                showSignup();
-              }}
-              className="ml-4 text-blue-500"
-            >
+            <Link to="/signup" className="ml-4 text-blue-500">
               Sign up
-            </button>
+            </Link>
           </div>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              showForgotPassword();
-            }}
-            className="ml-4 text-blue-500"
-          >
+          <Link to="/forgotpassword" className="mt-2 text-blue-500">
             Forgot password?
-          </button>
+          </Link>
         </div>
       </form>
       {error && <p className="text-red-500 mt-4">{error}</p>}

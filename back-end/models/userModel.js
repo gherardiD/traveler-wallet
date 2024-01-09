@@ -94,7 +94,6 @@ userSchema.methods.comparePassword = async function (
   candidatePassword,
   userPassword
 ) {
-  console.log("passo");
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 

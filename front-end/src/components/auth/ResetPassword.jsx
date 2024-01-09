@@ -1,13 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useParams, redirect } from "react-router-dom";
 import FormField from "./FormField";
 
 // eslint-disable-next-line react/prop-types
-function ResetPassword({ showLogin }) {
+function ResetPassword() {
   const [formData, setFormData] = useState({
     password: "",
     passwordConfirm: "",
   });
+
+  const params = useParams();
+  const token = params.token;
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -23,20 +28,15 @@ function ResetPassword({ showLogin }) {
     e.preventDefault();
 
     setSubmitting(true);
+    console.log(token);
 
     try {
       const response = await axios.patch(
-        // ! FIND A WAY TO GET A FORM WITH A TOKEN PASSED VIA EMAIL
-        // ! AND THEN USE THAT TOKEN TO RESET THE PASSWORD
-        // ! THE TOKEN IS GENERATED IN THE BACKEND
-        // ! AND SENT VIA EMAIL TO THE USER
-        "http://127.0.0.1:3001/api/users/resetpassword/x",
+        `http://127.0.0.1:3001/api/users/resetpassword/${token}`,
         formData
       );
 
       console.log("Success:", response.data);
-
-      showLogin();
 
       setFormData({
         password: "",
@@ -44,6 +44,8 @@ function ResetPassword({ showLogin }) {
       });
 
       setSubmitting(false);
+
+      return redirect("/login");
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);
@@ -78,15 +80,9 @@ function ResetPassword({ showLogin }) {
           >
             {submitting ? "Submitting..." : "Reset password"}
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              showLogin();
-            }}
-            className="btn-animated py-2 text-blue-500 hover:text-blue-700"
-          >
+          <Link to="/login" className="mt-2 text-blue-500">
             Annul
-          </button>
+          </Link>
         </div>
       </form>
       {error && <p className="text-red-500 mt-4">{error}</p>}

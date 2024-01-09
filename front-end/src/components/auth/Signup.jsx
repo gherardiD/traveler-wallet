@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import FormField from "./FormField";
 
 // eslint-disable-next-line react/prop-types
-const SignUp = ({ showLogin }) => {
+const SignUp = () => {
   // State to manage form data
   const [formData, setFormData] = useState({
     firstName: "",
@@ -149,15 +150,9 @@ const SignUp = ({ showLogin }) => {
           >
             {submitting ? "Submitting..." : "Register"}
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              showLogin();
-            }}
-            className="ml-4 text-gray-700"
-          >
+          <Link to="/login" className="ml-4 text-gray-700">
             Login
-          </button>
+          </Link>
         </div>
       </form>
       {error && <p className="text-red-500 mt-4">{error}</p>}

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import FormField from "./FormField";
+import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-function ForgotPassword({ showResetPassword, showLogin }) {
+function ForgotPassword() {
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -30,8 +31,6 @@ function ForgotPassword({ showResetPassword, showLogin }) {
       );
 
       console.log("Success:", response.data);
-
-      showResetPassword();
 
       setFormData({
         email: "",
@@ -62,15 +61,9 @@ function ForgotPassword({ showResetPassword, showLogin }) {
           >
             {submitting ? "Submitting..." : "Change password"}
           </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              showLogin();
-            }}
-            className="btn-animated py-2 text-blue-500 hover:text-blue-700"
-          >
+          <Link to="/login" className="mt-2 text-blue-500">
             Annul
-          </button>
+          </Link>
         </div>
       </form>
       {error && <p className="text-red-500 mt-4">{error}</p>}
