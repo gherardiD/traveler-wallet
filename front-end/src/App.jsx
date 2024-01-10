@@ -7,7 +7,7 @@ import Home from "./components/Home";
 
 function App() {
   return (
-    <div className="bg-neutral-400 w-full overflow-hidden flex h-screen">
+    <div className="bg-neutral-400 w-full flex h-screen">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
