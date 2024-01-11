@@ -1,43 +1,53 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Currency from "./Currency";
 
-
-const currencies = [
-  {
-    id: 1,
-    name: 'Euro',
-    cod: 'EUR',
-  },
-  {
-    id: 2,
-    name: 'Dollaro',
-    cod: 'USD',
-  },
-  {
-    id: 3,
-    name: 'Sterlina',
-    cod: 'GBP',
-  },
-  {
-    id: 4,
-    name: 'Yen',
-    cod: 'JPY',
-  },
-  {
-    id: 5,
-    name: 'Rublo',
-    cod: 'RUB',
-  },
-];
+// const currencies = [
+//   {
+//     id: 1,
+//     name: 'Euro',
+//     cod: 'EUR',
+//   },
+//   {
+//     id: 2,
+//     name: 'Dollaro',
+//     cod: 'USD',
+//   },
+//   {
+//     id: 3,
+//     name: 'Sterlina',
+//     cod: 'GBP',
+//   },
+//   {
+//     id: 4,
+//     name: 'Yen',
+//     cod: 'JPY',
+//   },
+//   {
+//     id: 5,
+//     name: 'Rublo',
+//     cod: 'RUB',
+//   },
+// ];
 
 function Currencies() {
-  // const [currencies, setCurrencies] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get('http://127.0.0.1:3001/api/currenciess')
-  //     .then((response) => {
-  //       setCurrencies(response.data);
-  //     });
-  // }, []);
+  useEffect(
+    () =>
+      async function fetchCurrencies() {
+        const res = await axios.get("http://127.0.0.1:3001/api/currencies");
+
+        const data = res.data;
+        if (data.results) {
+          setCurrencies(data.data.currencies);
+        }
+        console.log(data);
+        // setCurrencies(res.data.currencies);
+      },
+    []
+  );
 
   return (
     <div className="w-full h-screen bg-gray-100">
@@ -65,21 +75,12 @@ function Currencies() {
           <h2 className="text-2xl font-bold my-4">Currencies</h2>
           <ul className="list-group">
             {currencies.map((currency) => {
-              return (
-                <li
-                  key={currency.id}
-                  className="list-group-item flex justify-between items-center"
-                >
-                  <span className="font-bold">{currency.name}</span>
-                  <span className="font-bold">{currency.cod}</span>
-                </li>
-              );
+              return <Currency key={currency.code} currency={currency} />;
             })}
           </ul>
         </div>
       </div>
     </div>
-    
   );
 }
 
