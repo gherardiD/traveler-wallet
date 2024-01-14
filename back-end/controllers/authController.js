@@ -82,7 +82,7 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
   // send it to user's email
   const resetURL = `${req.protocol}://${req.get(
     "host"
-  )}/api/users/confirmEmail/${resetToken}`;
+  )}/api/users/confirmemail/${resetToken}`;
 
   const message = `Click on this link to confirm your email: ${resetURL}`;
 

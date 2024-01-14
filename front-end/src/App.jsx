@@ -10,7 +10,7 @@ import Currencies from "./components/Currencies";
 
 function App() {
   return (
-    <div className="bg-neutral-400 w-full flex h-screen ">
+    <div className="bg-gray-200 w-full flex h-screen ">
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -21,9 +21,9 @@ function App() {
             path="api/users/resetpassword/:token"
             element={<ResetPassword />}
           />
-          <Route path="/home" element={<Home />} />
-          <Route path="/movements" element={<Movements />} />
-          <Route path="/currencies" element={<Currencies />} />
+          <Route path="/app/home" element={<Home />} />
+          <Route path="/app/movements" element={<Movements />} />
+          <Route path="/app/currencies" element={<Currencies />} />
         </Routes>
       </Router>
     </div>

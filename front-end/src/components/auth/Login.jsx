@@ -33,14 +33,20 @@ function Login() {
         formData
       );
 
-      console.log("Success:", response.data);
+      const token = response.data.token;
 
-      setFormData({
-        email: "",
-        password: "",
-      });
+      // Store the token in document.cookie or localStorage
+      document.cookie = `userToken=${token}; path=/app`;
 
-      setSubmitting(false);
+      // redirect the user to the home page
+      window.location.href = "/app/home";
+
+      // setFormData({
+      //   email: "",
+      //   password: "",
+      // });
+
+      // setSubmitting(false);
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);

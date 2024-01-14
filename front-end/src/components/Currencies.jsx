@@ -56,13 +56,19 @@ function Currencies() {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">Financial Hub</h1>
           <nav>
-            <Link to="/home" className="text-white hover:underline mx-2">
+            <Link to="/app/home" className="text-white hover:underline mx-2">
               Home
             </Link>
-            <Link to="/movements" className="text-white hover:underline mx-2">
+            <Link
+              to="/app/movements"
+              className="text-white hover:underline mx-2"
+            >
               Movements
             </Link>
-            <Link to="/currencies" className="text-white hover:underline mx-2">
+            <Link
+              to="/app/currencies"
+              className="text-white hover:underline mx-2"
+            >
               Currencies
             </Link>
           </nav>

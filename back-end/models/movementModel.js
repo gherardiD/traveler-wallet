@@ -8,7 +8,6 @@ const movementSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "Please tell us the movement description!"],
     trim: true,
   },
   type: {
