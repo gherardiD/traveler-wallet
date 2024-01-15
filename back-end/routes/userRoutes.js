@@ -16,15 +16,16 @@ const {
   resetPassword,
 } = require("../controllers/authController.js");
 
-// currencies controller methods
 const router = express.Router();
 
+// user routes
 router.post("/signup", signup, checkUserEmail);
 router.get("/confirmemail/:token", confirmEmail);
 router.post("/login", login);
 router.post("/forgotpassword", forgotPassword);
 router.patch("/resetpassword/:token", resetPassword);
 
+// admin routes
 router.route("/").get(getAllUsers).post(createUser);
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const movements = [
   {
@@ -29,23 +29,25 @@ function Home() {
   // const [movements, setMovements] = useState(movements);
 
   useEffect(() => {
-    console.log(document.cookie);
-    const getTokenFromCookies = () => {
-      const cookies = document.cookie.split("; ");
+    // console.log(document.cookie);
+    // const getTokenFromCookies = () => {
+    //   const cookies = document.cookie.split("; ");
 
-      for (const cookie of cookies) {
-        const [name, value] = cookie.split("=");
+    //   for (const cookie of cookies) {
+    //     const [name, value] = cookie.split("=");
 
-        if (name === "userToken") {
-          return value;
-        }
-      }
+    //     if (name === "userToken") {
+    //       return value;
+    //     }
+    //   }
 
-      return null;
-    };
+    //   return null;
+    // };
 
-    const token = getTokenFromCookies();
-    if (!token) {
+    // const token = getTokenFromCookies();
+    const accessToken = sessionStorage.getItem('accessToken');
+    console.log(accessToken);
+    if (!accessToken) {
       // Redirect the user to the login page
       // window.location.href = "/login";
     }
@@ -81,31 +83,7 @@ function Home() {
   return (
     <div className="w-full h-screen flex flex-col">
       {/* Header */}
-      <header className="bg-blue-700 text-white py-4">
-        <div className="container mx-auto px-10 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Financial Hub</h1>
-          <nav>
-            <Link
-              to="/app/movements"
-              className="text-white hover:underline mx-2"
-            >
-              Movements
-            </Link>
-            <Link
-              to="/app/currencies"
-              className="text-white hover:underline mx-2"
-            >
-              Currencies
-            </Link>
-            <Link to="account" className="text-white hover:underline mx-2">
-              Account
-            </Link>
-            <Link to="/logout" className="text-white hover:underline mx-2">
-              Logout
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Content */}
       <div className="container mx-auto flex-grow flex">

@@ -36,7 +36,8 @@ function Login() {
       const token = response.data.token;
 
       // Store the token in document.cookie or localStorage
-      document.cookie = `userToken=${token}; path=/app`;
+      // document.cookie = `userToken=${token}; path=/app`;
+      sessionStorage.setItem('accessToken', token);
 
       // redirect the user to the home page
       window.location.href = "/app/home";

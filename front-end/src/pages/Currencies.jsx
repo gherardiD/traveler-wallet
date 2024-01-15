@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Currency from "./Currency";
+import Currency from "../components/Currency";
+import Header from "../components/Header";
 
 // const currencies = [
 //   {
@@ -52,28 +53,7 @@ function Currencies() {
   return (
     <div className="w-full h-screen bg-gray-100">
       {/* Header */}
-      <header className="bg-blue-500 text-white py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Financial Hub</h1>
-          <nav>
-            <Link to="/app/home" className="text-white hover:underline mx-2">
-              Home
-            </Link>
-            <Link
-              to="/app/movements"
-              className="text-white hover:underline mx-2"
-            >
-              Movements
-            </Link>
-            <Link
-              to="/app/currencies"
-              className="text-white hover:underline mx-2"
-            >
-              Currencies
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Main */}
       <div className="container mx-auto flex justify-between items-center">

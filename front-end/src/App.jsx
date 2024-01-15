@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignUp from "./components/auth/Signup";
-import Login from "./components/auth/Login";
-import ForgotPassword from "./components/auth/ForgotPassword";
-import ResetPassword from "./components/auth/ResetPassword";
-import LandingPage from "./components/LandingPage";
-import Home from "./components/Home";
-import Movements from "./components/Movements";
-import Currencies from "./components/Currencies";
+import SignUp from "./pages/auth/Signup";
+import Login from "./pages/auth/Login";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
+import LandingPage from "./pages/LandingPage";
+import Home from "./pages/Home";
+import Movements from "./pages/Movements";
+import Currencies from "./pages/Currencies";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/app/home" element={<Home />} />
           <Route path="/app/movements" element={<Movements />} />
           <Route path="/app/currencies" element={<Currencies />} />
+          <Route path="/app/account" element={<Account />} />
         </Routes>
       </Router>
     </div>
