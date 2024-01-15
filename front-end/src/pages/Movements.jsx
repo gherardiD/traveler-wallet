@@ -1,7 +1,7 @@
 // import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Movement from "../components/Movement";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const movements = [
   {
@@ -49,11 +49,11 @@ function Movements() {
   }, 0);
 
   return (
-    <div className="w-full h-screen bg-gray-100">
+    <div className="w-full h-screen flex flex-col bg-gray-100">
       {/* Header */}
       <Header />
 
-      <div className="flex justify-around mt-8">
+      <div className="flex-grow flex justify-around mt-8">
         {/* Total Money */}
         <div className="text-center">
           <h1 className="text-2xl font-bold">Total Money</h1>
@@ -70,6 +70,9 @@ function Movements() {
           </ul>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

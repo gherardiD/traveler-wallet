@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import axios from "../api/Axios";
 import Currency from "../components/Currency";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 // const currencies = [
 //   {
@@ -38,7 +38,7 @@ function Currencies() {
   useEffect(
     () =>
       async function fetchCurrencies() {
-        const res = await axios.get("http://127.0.0.1:3001/api/currencies");
+        const res = await axios.get("/currencies");
 
         const data = res.data;
         if (data.results) {
@@ -51,12 +51,12 @@ function Currencies() {
   );
 
   return (
-    <div className="w-full h-screen bg-gray-100">
+    <div className="w-full h-screen flex flex-col bg-gray-100">
       {/* Header */}
       <Header />
 
       {/* Main */}
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex-grow flex justify-between items-center">
         <div className="w-1/3">
           <h2 className="text-2xl font-bold my-4">Currencies</h2>
           <ul className="list-group">
@@ -66,6 +66,9 @@ function Currencies() {
           </ul>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

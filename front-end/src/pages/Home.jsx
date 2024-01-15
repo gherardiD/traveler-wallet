@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
+import axios from "../api/Axios";
 
 const movements = [
   {
@@ -29,28 +31,24 @@ function Home() {
   // const [movements, setMovements] = useState(movements);
 
   useEffect(() => {
-    // console.log(document.cookie);
-    // const getTokenFromCookies = () => {
-    //   const cookies = document.cookie.split("; ");
-
-    //   for (const cookie of cookies) {
-    //     const [name, value] = cookie.split("=");
-
-    //     if (name === "userToken") {
-    //       return value;
-    //     }
-    //   }
-
-    //   return null;
-    // };
-
-    // const token = getTokenFromCookies();
-    const accessToken = sessionStorage.getItem('accessToken');
+    // Check if the user is logged in
+    const accessToken = sessionStorage.getItem("accessToken");
     console.log(accessToken);
     if (!accessToken) {
       // Redirect the user to the login page
-      // window.location.href = "/login";
+      window.location.href = "/login";
     }
+
+    const getMovements = async function fetchData() {
+      const response = await axios.get("/#", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+    };
+    getMovements();
 
     // const getMovements = async function fetchData() {
     //   const response = await fetch("/api/user-data", {
@@ -111,11 +109,7 @@ function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-blue-700 text-white py-8">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 Financial Hub. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
