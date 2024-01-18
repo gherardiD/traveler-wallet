@@ -55,13 +55,13 @@ function Movements() {
 
       <div className="flex-grow flex justify-around mt-8">
         {/* Total Money */}
-        <div className="text-center">
+        <div className="text-center w-1/2 p-8">
           <h1 className="text-2xl font-bold">Total Money</h1>
           <h1 className="text-3xl font-bold text-green-500">${totalMoney}</h1>
         </div>
 
         {/* Movements */}
-        <div>
+        <div className="w-full p-8">
           <h1 className="text-2xl font-bold mb-4">Movements</h1>
           <ul>
             {movements.map((movement) => (
@@ -69,6 +69,7 @@ function Movements() {
             ))}
           </ul>
         </div>
+
       </div>
 
       {/* Footer */}

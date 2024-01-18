@@ -7,9 +7,9 @@ const Account = () => {
       {/* Header */}
       <Header />
 
-      <div className="container mx-auto flex-grow flex">
+      <div className="container mx-auto flex-grow flex ">
         {/* Account Section */}
-        <div className="w-full bg-white p-8 rounded-lg shadow-md animate__animated animate__fadeIn animate__delay-1s">
+        <div className="w-1/3 bg-white p-8 rounded-lg shadow-md animate__animated animate__fadeIn animate__delay-1s">
           <h2 className="text-3xl font-bold mb-6 text-gray-800">
             Account Settings
           </h2>
@@ -52,6 +52,14 @@ const Account = () => {
                 Other Options
               </button>
             </Link>
+          </div>
+        </div>
+        <div className="w-full bg-white p-8 text-center">
+          <div>
+            <h2 className="text-3xl font-bold mb-4">User Stats</h2>
+            {/* Add your main content here */}
+            <p className="text-lg mb-5">vari grafici</p>
+            
           </div>
         </div>
       </div>

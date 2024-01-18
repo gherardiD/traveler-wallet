@@ -26,6 +26,11 @@ const movementSchema = new mongoose.Schema({
     required: [true, "Please tell us the movement sign!"],
     trim: true,
   },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: [true, "Please tell us the movement user!"],
+  },
   currency: {
     type: mongoose.Schema.ObjectId,
     ref: "Currency",
