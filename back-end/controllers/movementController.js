@@ -31,6 +31,17 @@ exports.getMovement = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.createMovement = catchAsync(async (req, res, next) => {
+  const newMovement = await Movement.create(req.body);
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      movement: newMovement,
+    },
+  });
+});
+
 exports.updateMovement = catchAsync(async (req, res, next) => {
   const movement = await Movement.findOneAndUpdate(
     { _id: req.params.id},

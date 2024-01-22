@@ -29,8 +29,9 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
 
 **Prerequisiti**:
 
-- node & npm
-- environment variables in config.env
+- Xampp in macchina locale con un database chiamato project
+- Nella cartella htdocs avere una cartella chiamata 5ia
+- Eseguire il file project.sql nel database project
 
 Clone the project
 
@@ -38,16 +39,17 @@ Clone the project
   git clone https://github.com/gherardiD/project
 ```
 
-Start front end app: 
+Copy the folder forms in to 5ia
+
+Start Xampp and open this url: 
 ```bash
-  cd front-end
-  npm run dev
+  http://127.0.0.1/5ia/forms/front-end/
 ```
 
-Start server
+Creare un nuovo account o accedere come amministratore usando:
 ```bash
-  cd back-end
-  node server.js {or npm start}
+  email: dani.ghera05@gmail.com
+  psw: daniele
 ```
 
 

@@ -38,7 +38,7 @@ function Currencies() {
   // useEffect(
   //   () =>
   //     async function fetchCurrencies() {
-  //       const res = await axios.get("/currencies");
+  //       const res = await axios.get("/user/currencies");
 
   //       const data = res.data;
   //       if (data.results) {

@@ -12,10 +12,11 @@ dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
 // DB is the connection string to the MongoDB database
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+// const DB = process.env.DATABASE.replace(
+//   "<PASSWORD>",
+//   process.env.DATABASE_PASSWORD
+// );
+const DB = process.env.DATABASE_LOCAL;
 
 // Connect to MongoDB database
 mongoose.connect(DB).then(() => {
@@ -23,7 +24,7 @@ mongoose.connect(DB).then(() => {
 });
 
 // Start server
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
@@ -31,7 +32,7 @@ const server = app.listen(port, () => {
 // Handle unhandled rejections
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTION! Shutting down...");
-  console.log(err.name, err.message);
+  console.log(err.name, err.message, err);
   server.close(() => {
     process.exit(1);
   });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../api/Axios";
 import FormField from "./FormField";
 import { Link } from "react-router-dom";
 
@@ -26,7 +26,7 @@ function ForgotPassword() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3001/api/users/forgotpassword",
+        "/users/forgotpassword",
         formData
       );
 

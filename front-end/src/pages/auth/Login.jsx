@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../api/Axios";
 import FormField from "./FormField";
 import { Link } from "react-router-dom";
 
@@ -29,7 +29,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3001/api/users/login",
+        "/users/login",
         formData
       );
 
@@ -38,16 +38,12 @@ function Login() {
       // Store the token in document.cookie or localStorage
       // document.cookie = `userToken=${token}; path=/app`;
       sessionStorage.setItem('accessToken', token);
+      
+      setSubmitting(false);
 
       // redirect the user to the home page
       window.location.href = "/app/home";
 
-      // setFormData({
-      //   email: "",
-      //   password: "",
-      // });
-
-      // setSubmitting(false);
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);

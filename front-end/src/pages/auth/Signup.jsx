@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import FormField from "./FormField";
 
@@ -40,7 +40,7 @@ const SignUp = () => {
     try {
       // Make a POST request to the back-end endpoint
       const response = await axios.post(
-        "http://127.0.0.1:3001/api/users/signup",
+        "/users/signup",
         formData
       );
 

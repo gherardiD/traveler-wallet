@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams, redirect } from "react-router-dom";
 import FormField from "./FormField";
@@ -32,7 +32,7 @@ function ResetPassword() {
 
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:3001/api/users/resetpassword/${token}`,
+        `/users/resetpassword/${token}`,
         formData
       );
 

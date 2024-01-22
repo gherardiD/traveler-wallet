@@ -41,7 +41,7 @@ function Home() {
   //   }
 
   //   const getMovements = async function fetchData() {
-  //     const response = await axios.get("/#", {
+  //     const response = await axios.get("/user/movements", {
   //       headers: {
   //         Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
   //         "Content-Type": "application/json",
@@ -50,17 +50,6 @@ function Home() {
   //     console.log(response.data);
   //   };
   //   getMovements();
-
-    // const getMovements = async function fetchData() {
-    //   const response = await fetch("/api/user-data", {
-    //     method: "GET",
-    //     headers: {
-    //       Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    // };
-    // getMovements();
   // }, []);
 
   const totalIncome = movements.reduce((acc, movement) => {

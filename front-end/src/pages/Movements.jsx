@@ -2,6 +2,7 @@
 import Movement from "../components/Movement";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import axios from "../api/Axios";
 
 const movements = [
   {
@@ -32,7 +33,7 @@ function Movements() {
 
   // useEffect(() => {
   //   const getMovements = async function fetchData() {
-  //     const response = await axios.get("http://127.0.0.1:3001/user/movements");
+  //     const response = await axios.get("/user/movements");
   //     const data = await response.json();
   //     setMovements(data);
   //     console.log(data);

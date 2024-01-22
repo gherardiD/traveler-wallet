@@ -24,8 +24,13 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 app.use("/api/users", userRouter);
-app.use("/api/currencies", currencyRouter);
-app.use("/api/movements", movementRouter);
+app.use("/api/user/currencies", currencyRouter);
+app.use("/api/user/movements", movementRouter);
+
+
+// admin routes 
+// app.use("/api/currencies", currencyRouter);
+// app.use("/api/movements", movementRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
