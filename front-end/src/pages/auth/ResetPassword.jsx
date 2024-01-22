@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
-import { useParams, redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FormField from "./FormField";
 
 // eslint-disable-next-line react/prop-types
@@ -45,7 +45,7 @@ function ResetPassword() {
 
       setSubmitting(false);
 
-      return redirect("/login");
+      return (window.location.href = "/login");
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);

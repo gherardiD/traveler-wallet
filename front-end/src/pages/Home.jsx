@@ -1,56 +1,59 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Movement from "../components/Movement";
 import axios from "../api/Axios";
 
-const movements = [
-  {
-    id: 1,
-    amount: 1000,
-    sign: "+",
-    date: "2021-07-01",
-    type: "deposit",
-  },
-  {
-    id: 2,
-    amount: 500,
-    sign: "+",
-    date: "2021-07-02",
-    type: "deposit",
-  },
-  {
-    id: 3,
-    amount: 200,
-    sign: "-",
-    date: "2021-07-03",
-    type: "withdrawal",
-  },
-];
+// const movements = [
+//   {
+//     id: 1,
+//     amount: 1000,
+//     sign: "+",
+//     date: "2021-07-01",
+//     type: "deposit",
+//   },
+//   {
+//     id: 2,
+//     amount: 500,
+//     sign: "+",
+//     date: "2021-07-02",
+//     type: "deposit",
+//   },
+//   {
+//     id: 3,
+//     amount: 200,
+//     sign: "-",
+//     date: "2021-07-03",
+//     type: "withdrawal",
+//   },
+// ];
 
 function Home() {
-  // const [movements, setMovements] = useState(movements);
+  // eslint-disable-next-line no-unused-vars
+  const [movements, setMovements] = useState([]);
 
-  // useEffect(() => {
-  //   // Check if the user is logged in
-  //   const accessToken = sessionStorage.getItem("accessToken");
-  //   console.log(accessToken);
-  //   if (!accessToken) {
-  //     // Redirect the user to the login page
-  //     window.location.href = "/login";
-  //   }
+  useEffect(() => {
+    // Check if the user is logged in
+    const accessToken = sessionStorage.getItem("accessToken");
+    console.log(accessToken);
+    if (!accessToken) {
+      window.location.href = "/login";
+    }
 
-  //   const getMovements = async function fetchData() {
-  //     const response = await axios.get("/user/movements", {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     console.log(response.data);
-  //   };
-  //   getMovements();
-  // }, []);
+    // Fetch the movements
+    const getMovements = async function fetchData() {
+      const response = await axios.get("/user/movements", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data);
+      // ! check the response.data
+      // setMovements(response.data.movements);
+    };
+    getMovements();
+  }, []);
 
   const totalIncome = movements.reduce((acc, movement) => {
     if (movement.sign === "+") {
@@ -105,7 +108,6 @@ function Home() {
             </ul>
           </div>
         </div>
-
       </div>
 
       {/* Footer */}

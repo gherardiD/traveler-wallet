@@ -79,6 +79,8 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
   const resetToken = req.user.createEmailConfirmToken();
   await req.user.save({ validateBeforeSave: false });
 
+  console.log(req.user);
+
   // send it to user's email
   const resetURL = `${req.protocol}://${req.get(
     "host"
@@ -115,10 +117,15 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
     .update(req.params.token)
     .digest("hex");
 
+  console.log(hashedToken);
+
   const user = await User.findOne({
+    // ! doesn't work
     emailConfirmToken: hashedToken,
     emailConfirmExpires: { $gt: Date.now() },
   });
+
+  console.log(user);
 
   // if token has not expired and there is user, set the new password
   if (!user) {

@@ -82,7 +82,7 @@ userSchema.pre("save", async function (next) {
 });
 
 // * QUERY MIDDLEWARES * //
-// exclude inactive users
+// ! this is why the forgotPassword route doesn't work
 userSchema.pre(/^find/, function (next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
