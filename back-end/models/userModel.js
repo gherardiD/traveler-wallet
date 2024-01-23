@@ -82,8 +82,10 @@ userSchema.pre("save", async function (next) {
 });
 
 // * QUERY MIDDLEWARES * //
-// ! this is why the forgotPassword route doesn't work
+// ! this is why the confirmEmail route doesn't work
 userSchema.pre(/^find/, function (next) {
+  const query = this.getQuery();
+  const inactiveUser = query.inactiverUser;
   // this points to the current query
   this.find({ active: { $ne: false } });
   next();

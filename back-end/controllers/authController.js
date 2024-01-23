@@ -86,14 +86,16 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
     "host"
   )}/api/users/confirmemail/${resetToken}`;
 
+  console.log(resetURL)
+
   const message = `Click on this link to confirm your email: ${resetURL}`;
 
   try {
-    await sendEmail({
-      email: req.user.email,
-      subject: "Your email confirmation token (valid for 10 min)",
-      message,
-    });
+    // await sendEmail({
+    //   email: req.user.email,
+    //   subject: "Your email confirmation token (valid for 10 min)",
+    //   message,
+    // });
 
     res.status(200).json({
       status: "success",
@@ -119,10 +121,14 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
 
   console.log(hashedToken);
 
+  // add an option to the query to avoid the pre find middleware
+
+
   const user = await User.findOne({
     // ! doesn't work
     emailConfirmToken: hashedToken,
     emailConfirmExpires: { $gt: Date.now() },
+    inactiveUser: true,
   });
 
   console.log(user);
