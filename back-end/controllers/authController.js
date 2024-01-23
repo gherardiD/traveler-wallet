@@ -69,9 +69,8 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   req.user = newUser;
+  // check user email
   next();
-  // send the response
-  // createSendToken(newUser, 201, res);
 });
 
 exports.checkUserEmail = catchAsync(async (req, res, next) => {
@@ -79,23 +78,20 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
   const resetToken = req.user.createEmailConfirmToken();
   await req.user.save({ validateBeforeSave: false });
 
-  console.log(req.user);
+  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/confirmemail/${resetToken}`;
 
-  // send it to user's email
-  const resetURL = `${req.protocol}://${req.get(
-    "host"
-  )}/api/users/confirmemail/${resetToken}`;
-
-  console.log(resetURL)
+  // * GET THE LINK FROM CONSOLE AT SCHOOL
+  console.log(resetURL);
 
   const message = `Click on this link to confirm your email: ${resetURL}`;
 
   try {
-    // await sendEmail({
-    //   email: req.user.email,
-    //   subject: "Your email confirmation token (valid for 10 min)",
-    //   message,
-    // });
+    // TODO: sendEmail is not working AT SCHOOL find a solution
+    await sendEmail({
+      email: req.user.email,
+      subject: "Your email confirmation token (valid for 10 min)",
+      message,
+    });
 
     res.status(200).json({
       status: "success",
@@ -119,29 +115,25 @@ exports.confirmEmail = catchAsync(async (req, res, next) => {
     .update(req.params.token)
     .digest("hex");
 
-  console.log(hashedToken);
-
-  // add an option to the query to avoid the pre find middleware
-
-
-  const user = await User.findOne({
-    // ! doesn't work
-    emailConfirmToken: hashedToken,
-    emailConfirmExpires: { $gt: Date.now() },
-    inactiveUser: true,
-  });
-
-  console.log(user);
+  const user = await User.findOneAndUpdate(
+    {
+      emailConfirmToken: hashedToken,
+      emailConfirmExpires: { $gt: Date.now() },
+    },
+    {
+      $set: {
+        active: true,
+        emailConfirmToken: null,
+        emailConfirmExpires: null,
+      },
+    },
+    { new: true, runValidators: true }
+  );
 
   // if token has not expired and there is user, set the new password
   if (!user) {
     return next(new AppError("Token is invalid or has expired", 400));
   }
-
-  user.active = true;
-  user.emailConfirmToken = undefined;
-  user.emailConfirmExpires = undefined;
-  await user.save({ validateBeforeSave: false });
 
   // log the user in, send JWT
   sendResponseWithToken(user, 200, res);
@@ -239,7 +231,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // send it to user's email
-  // const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/api/users/resetpassword/${resetToken}`;
   const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/resetpassword/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;

@@ -35,7 +35,8 @@ function Home() {
   useEffect(() => {
     // Check if the user is logged in
     const accessToken = sessionStorage.getItem("accessToken");
-    console.log(accessToken);
+    // TODO use cookies instead of sessionStorage
+    console.log("access token " + accessToken);
     if (!accessToken) {
       window.location.href = "/login";
     }
@@ -48,8 +49,8 @@ function Home() {
           "Content-Type": "application/json",
         },
       });
+      // TODO check the response.data before setting the state
       console.log(response.data);
-      // ! check the response.data
       // setMovements(response.data.movements);
     };
     getMovements();

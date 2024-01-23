@@ -34,15 +34,12 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Set submitting to true
     setSubmitting(true);
+    setError(null);
 
     try {
       // Make a POST request to the back-end endpoint
-      const response = await axios.post(
-        "/users/signup",
-        formData
-      );
+      const response = await axios.post("/users/signup", formData);
 
       // Handle successful submission
       console.log("Success:", response.data);

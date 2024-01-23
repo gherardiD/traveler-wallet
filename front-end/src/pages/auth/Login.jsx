@@ -26,24 +26,21 @@ function Login() {
     e.preventDefault();
 
     setSubmitting(true);
+    setError(null);
 
     try {
-      const response = await axios.post(
-        "/users/login",
-        formData
-      );
+      const response = await axios.post("/users/login", formData);
 
       const token = response.data.token;
 
       // Store the token in document.cookie or localStorage
       // document.cookie = `userToken=${token}; path=/app`;
-      sessionStorage.setItem('accessToken', token);
-      
+      sessionStorage.setItem("accessToken", token);
+
       setSubmitting(false);
 
       // redirect the user to the home page
       window.location.href = "/app/home";
-
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);

@@ -11,6 +11,7 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
+// ! hosted database doesn't work at school
 // DB is the connection string to the MongoDB database
 // const DB = process.env.DATABASE.replace(
 //   "<PASSWORD>",
@@ -32,7 +33,7 @@ const server = app.listen(port, () => {
 // Handle unhandled rejections
 process.on("unhandledRejection", (err) => {
   console.log("UNHANDLED REJECTION! Shutting down...");
-  console.log(err.name, err.message, err);
+  console.log(err.name, err.message);
   server.close(() => {
     process.exit(1);
   });
