@@ -90,7 +90,8 @@ Start server
 
 ## Schema ER
 
-![ER_definitivo](https://github.com/gherardiD/project/assets/101709520/3383e288-40c7-4d9e-a000-abf8364b779b)
+![SchemaER](https://github.com/gherardiD/traveler-wallet/assets/101709520/d45207cb-9619-4860-bf38-4ac01dcf5e77)
+
 
 ## Screenshots
 
