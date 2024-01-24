@@ -5,7 +5,9 @@ const AppError = require('../utils/appError');
 
 exports.getAllMovements = catchAsync(async (req, res, next) => {
   const userId = req.user.id;
+  // ! check user id
   const movements = await Movement.find({ user: userId });
+  console.log(movements);
 
   res.status(200).json({
     status: 'success',

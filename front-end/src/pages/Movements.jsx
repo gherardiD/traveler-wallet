@@ -1,45 +1,59 @@
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Movement from "../components/Movement";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "../api/Axios";
 
-const movements = [
-  {
-    id: 1,
-    amount: 1000,
-    sign: "+",
-    date: "2021-07-01",
-    type: "deposit",
-  },
-  {
-    id: 2,
-    amount: 500,
-    sign: "+",
-    date: "2021-07-02",
-    type: "deposit",
-  },
-  {
-    id: 3,
-    amount: 200,
-    sign: "-",
-    date: "2021-07-03",
-    type: "withdrawal",
-  },
-];
+// const mov = [
+//   {
+//     id: 1,
+//     amount: 1000,
+//     sign: "+",
+//     date: "2021-07-01",
+//     type: "deposit",
+//   },
+//   {
+//     id: 2,
+//     amount: 500,
+//     sign: "+",
+//     date: "2021-07-02",
+//     type: "deposit",
+//   },
+//   {
+//     id: 3,
+//     amount: 200,
+//     sign: "-",
+//     date: "2021-07-03",
+//     type: "withdrawal",
+//   },
+// ];
 
 function Movements() {
-  // const [movements, setMovements] = useState(movements);
+  const [movements, setMovements] = useState([]);
 
-  // useEffect(() => {
-  //   const getMovements = async function fetchData() {
-  //     const response = await axios.get("/user/movements");
-  //     const data = await response.json();
-  //     setMovements(data);
-  //     console.log(data);
-  //   };
-  //   getMovements();
-  // }, []);
+  useEffect(() => {
+    // Check if the user is logged in
+    const accessToken = sessionStorage.getItem("accessToken");
+    // TODO use cookies instead of sessionStorage
+    if (!accessToken) {
+      window.location.href = "/login";
+    }
+
+    // fetch the movements
+    const getMovements = async function fetchData() {
+      const response = await axios.get("/user/movements", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+          "Content-Type": "application/json",
+        },
+      });
+      // const data = await response.json();
+      console.log(response.data.data);
+      const movements = response.data.data.movements;
+      setMovements(movements);
+    };
+    getMovements();
+  }, []);
 
   const totalMoney = movements.reduce((acc, movement) => {
     if (movement.sign === "+") {
@@ -66,7 +80,7 @@ function Movements() {
           <h1 className="text-2xl font-bold mb-4">Movements</h1>
           <ul>
             {movements.map((movement) => (
-              <Movement key={movement.id} movement={movement} />
+              <Movement key={movement._id} movement={movement} setMovements={setMovements} />
             ))}
           </ul>
         </div>

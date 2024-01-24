@@ -1,4 +1,25 @@
 const mongoose = require("mongoose");
+// const movementExample = [{
+//   name: "Salary",
+//   description: "Monthly salary",
+//   type: "Income",
+//   amount: 1000,
+//   sign: "+",
+//   user: "65b0fc7da429692516eb0cc4",
+//   currency: "5f8b2a6f4d4c8d2c7c4b1d0f",
+//   date: "2020-10-17",
+// },
+// {
+//   name: "Rent",
+//   description: "Monthly rent",
+//   type: "Expense",
+//   amount: 500,
+//   sign: "-",
+//   user: "65b0fc7da429692516eb0cc4",
+//   currency: "5f8b2a6f4d4c8d2c7c4b1d0f",
+//   date: "2020-10-17",
+// },
+// ];
 
 const movementSchema = new mongoose.Schema({
   name: {
@@ -27,9 +48,12 @@ const movementSchema = new mongoose.Schema({
     trim: true,
   },
   user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
+    // ! prova
+    type: String,
+    // type: mongoose.Schema.ObjectId,
+    // ref: "User",
     required: [true, "Please tell us the movement user!"],
+    trim: true,
   },
   currency: {
     type: mongoose.Schema.ObjectId,

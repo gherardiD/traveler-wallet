@@ -87,11 +87,11 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
 
   try {
     // TODO: sendEmail is not working AT SCHOOL find a solution
-    await sendEmail({
-      email: req.user.email,
-      subject: "Your email confirmation token (valid for 10 min)",
-      message,
-    });
+    // await sendEmail({
+    //   email: req.user.email,
+    //   subject: "Your email confirmation token (valid for 10 min)",
+    //   message,
+    // });
 
     res.status(200).json({
       status: "success",
