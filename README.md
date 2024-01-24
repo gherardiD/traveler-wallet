@@ -56,24 +56,37 @@ Start server
 
 ## Schema logico
 
-- utente/account
-  - pk id
-  - email
-  - password
-  - nome
-  - cognome
-  - data nascita
-- valuta/currencies
-  - pk codice/code
-  - simbolo
-  - ?stati?
-- operazione/transaction
-  - pk id
-  - ammontare/amount (+-)
-  - data
-  - tipo
-  - fk utente_id
-  - fk valuta_cod
+**User**
+
+- \_id (Primary Key)
+- firstName
+- lastName
+- email
+- dateOfBirth
+- phone
+- password
+- passwordConfirm
+- active
+
+**Currency**
+
+- \_id (Primary Key)
+- name
+- code
+- symbol
+
+**Movement**
+
+- \_id (Primary Key)
+- name
+- description
+- type
+- amount
+- sign
+- user_id (Foreign Key referencing User)
+- currency_id (Foreign Key referencing Currency)
+- date
+- createdAt
 
 ## Schema ER
 

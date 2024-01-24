@@ -4,39 +4,14 @@ import Footer from "../components/Footer";
 import Movement from "../components/Movement";
 import axios from "../api/Axios";
 
-// const movements = [
-//   {
-//     id: 1,
-//     amount: 1000,
-//     sign: "+",
-//     date: "2021-07-01",
-//     type: "deposit",
-//   },
-//   {
-//     id: 2,
-//     amount: 500,
-//     sign: "+",
-//     date: "2021-07-02",
-//     type: "deposit",
-//   },
-//   {
-//     id: 3,
-//     amount: 200,
-//     sign: "-",
-//     date: "2021-07-03",
-//     type: "withdrawal",
-//   },
-// ];
-
 function Home() {
-  // eslint-disable-next-line no-unused-vars
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
     // Check if the user is logged in
     const accessToken = sessionStorage.getItem("accessToken");
     // TODO use cookies instead of sessionStorage
-    console.log("access token " + accessToken);
+    // console.log("access token " + accessToken);
     if (!accessToken) {
       window.location.href = "/login";
     }
@@ -49,9 +24,9 @@ function Home() {
           "Content-Type": "application/json",
         },
       });
-      // TODO check the response.data before setting the state
-      console.log(response.data);
-      // setMovements(response.data.movements);
+      if (response.data.status === "success") {
+        setMovements(response.data.data.movements);
+      }
     };
     getMovements();
   }, []);
@@ -104,7 +79,7 @@ function Home() {
           <div className="mt-10">
             <ul>
               {movements.map((movement) => (
-                <Movement key={movement.id} movement={movement} />
+                <Movement key={movement._id} movement={movement} />
               ))}
             </ul>
           </div>

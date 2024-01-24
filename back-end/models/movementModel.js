@@ -56,9 +56,12 @@ const movementSchema = new mongoose.Schema({
     trim: true,
   },
   currency: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Currency",
+    // ! prova
+    // type: mongoose.Schema.ObjectId,
+    type: String,
+    // ref: "Currency",
     required: [true, "Please tell us the movement currency!"],
+    trim: true,
   },
   date: {
     type: Date,

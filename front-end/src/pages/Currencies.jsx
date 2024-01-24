@@ -4,51 +4,24 @@ import Currency from "../components/Currency";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const currencies = [
-  {
-    id: 1,
-    name: 'Euro',
-    cod: 'EUR',
-  },
-  {
-    id: 2,
-    name: 'Dollaro',
-    cod: 'USD',
-  },
-  {
-    id: 3,
-    name: 'Sterlina',
-    cod: 'GBP',
-  },
-  {
-    id: 4,
-    name: 'Yen',
-    cod: 'JPY',
-  },
-  {
-    id: 5,
-    name: 'Rublo',
-    cod: 'RUB',
-  },
- ];
-
 function Currencies() {
-  // const [currencies, setCurrencies] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
 
-  // useEffect(
-  //   () =>
-  //     async function fetchCurrencies() {
-  //       const res = await axios.get("/user/currencies");
+  useEffect(
+    () =>
+      async function fetchCurrencies() {
+        // TODO separate all currencies from the user's currencies
+        const res = await axios.get("/user/currencies");
 
-  //       const data = res.data;
-  //       if (data.results) {
-  //         setCurrencies(data.data.currencies);
-  //       }
-  //       console.log(data);
-  //       // setCurrencies(res.data.currencies);
-  //     },
-  //   []
-  // );
+        const data = res.data;
+        if (data.results) {
+          setCurrencies(data.data.currencies);
+        }
+        console.log(data);
+        setCurrencies(res.data.data.currencies);
+      },
+    []
+  );
 
   return (
     <div className="w-full h-screen flex flex-col bg-gray-100">
@@ -69,17 +42,20 @@ function Currencies() {
         <div className="w-full bg-white p-8">
           <div>
             <h2 className="text-3xl font-bold mb-4">Change Currency</h2>
-            {/* Add your main content here */}
+            {/* Add main content here */}
             <p className="text-lg mb-5">Your main content goes here...</p>
-            <ul>
+            {
+              // TODO implement the Currency component in the right way
+            }
+            {/* <ul>
               {currencies.map((currency) => (
                 <span className="flex">
-                <Currency key={currency.id} currency={currency} />
-                -
-                <Currency key={currency.id} currency={currency} />
+                  <Currency key={currency._id} currency={currency} />
+                  -
+                  <Currency key={currency._id * 10} currency={currency} />
                 </span>
               ))}
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>
