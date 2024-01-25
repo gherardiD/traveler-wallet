@@ -17,13 +17,14 @@ router
   .get(protect, getAllMovements)
   .post(protect, createMovement);
 
-// router.route("/expenses").get(protect, getAllMovements);
-// router.route("/incomes").get(protect, getAllMovements);
-// router.route("/expensiest-movements").get(protect, getAllMovements);
-// router.route("/cheapest-movements").get(protect, getAllMovements);
+  // TODO: IMPLEMENT ALL ROUTES
+  // router.route("/expenses").get(protect, getAllMovements);
+  // router.route("/incomes").get(protect, getAllMovements);
+  // router.route("/expensiest-movements").get(protect, getAllMovements);
+  // router.route("/cheapest-movements").get(protect, getAllMovements);
 
-// movements specific month
-// router.route("/year/:year").get(protect, getAllMovements);
+  // movements specific month
+  // router.route("/year/:year").get(protect, getAllMovements);
 
 router
   .route("/:id")

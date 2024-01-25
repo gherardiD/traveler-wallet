@@ -15,16 +15,14 @@ function App() {
     <div className="bg-gray-200 w-full flex h-screen ">
       <Router>
         <Routes>
+          {/* AUTH */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/confirmemail/:token" element={<ConfirmEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          {/* <Route
-            path="api/users/resetpassword/:token"
-            element={<ResetPassword />}
-          /> */}
           <Route path="/resetpassword/:token" element={<ResetPassword />} />
+          {/* APP */}
           <Route path="/app/home" element={<Home />} />
           <Route path="/app/movements" element={<Movements />} />
           <Route path="/app/currencies" element={<Currencies />} />
