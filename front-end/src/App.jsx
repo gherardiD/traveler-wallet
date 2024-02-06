@@ -12,7 +12,7 @@ import ConfirmEmail from "./pages/auth/ConfirmEmail";
 
 function App() {
   return (
-    <div className="bg-gray-200 w-full flex h-screen ">
+    <div className=" w-full flex h-screen ">
       <Router>
         <Routes>
           {/* AUTH */}
