@@ -80,7 +80,7 @@ function Login() {
               Sign up
             </Link>
           </div>
-          <Link to="/forgotpassword" className="mt-2 text-blue-500">
+          <Link to="forgot-password" className="mt-2 text-blue-500">
             Forgot password?
           </Link>
         </div>

@@ -13,7 +13,7 @@ function ConfirmEmail() {
   useEffect(() => {
     const confirmEmail = async () => {
       try {
-        const response = await axios.get(`/users/confirmemail/${token}`);
+        const response = await axios.get(`/users/confirm-email/${token}`);
         console.log("Success:", response.data);
         sessionStorage.setItem("accessToken", response.data.token);
         setIsLoading(false);

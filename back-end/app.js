@@ -24,11 +24,10 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 app.use("/api/users", userRouter);
-app.use("/api/user/currencies", currencyRouter);
-app.use("/api/user/movements", movementRouter);
+app.use("/api/currencies", currencyRouter);
+app.use("/api/movements", movementRouter);
 
-
-// admin routes 
+// admin routes
 // app.use("/api/currencies", currencyRouter);
 // app.use("/api/movements", movementRouter);
 

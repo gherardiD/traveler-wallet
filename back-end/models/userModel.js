@@ -90,6 +90,13 @@ userSchema.pre("find", function (next) {
 });
 
 // * INSTANCE METHODS * //
+userSchema.methods.correctPassword = async function (
+  candidatePassword, // password that the user enters
+  userPassword // password stored in the database (cryptographic hash)
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
 userSchema.methods.comparePassword = async function (
   candidatePassword,
   userPassword

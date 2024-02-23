@@ -32,7 +32,7 @@ function ResetPassword() {
 
     try {
       const response = await axios.patch(
-        `/users/resetpassword/${token}`,
+        `/usersreset-password/${token}`,
         formData
       );
 

@@ -26,7 +26,7 @@ function ForgotPassword() {
     setError(null);
 
     try {
-      const response = await axios.post("/users/forgotpassword", formData);
+      const response = await axios.post("/usersforgot-password", formData);
 
       console.log("Success:", response.data);
 

@@ -78,7 +78,7 @@ exports.checkUserEmail = catchAsync(async (req, res, next) => {
   const resetToken = req.user.createEmailConfirmToken();
   await req.user.save({ validateBeforeSave: false });
 
-  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/confirmemail/${resetToken}`;
+  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/confirm-email/${resetToken}`;
 
   // * GET THE LINK FROM CONSOLE AT SCHOOL
   console.log(resetURL);
@@ -201,6 +201,8 @@ exports.protect = catchAsync(async (req, res, next) => {
   // grant access to the protected route
   req.user = freshUser;
 
+  console.log(req.user);
+
   next();
 });
 
@@ -231,7 +233,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // send it to user's email
-  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/resetpassword/${resetToken}`;
+  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}reset-password/${resetToken}`;
 
   const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
 
@@ -285,5 +287,23 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   // log the user in, send JWT
+  sendResponseWithToken(user, 200, res);
+});
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // get the user from the collection
+  const user = await User.findById(req.user._id).select("+password");
+
+  // check if the POSTed password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError("Your current password is wrong.", 401));
+  }
+
+  // if the password is correct, update the password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  // send the response
   sendResponseWithToken(user, 200, res);
 });
