@@ -9,7 +9,7 @@ function FormField({ label, type, id, name, onChange }) {
         type={type}
         id={id}
         name={name}
-        className="w-full px-4 py-1 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        className=""
         onChange={onChange}
         required
       />

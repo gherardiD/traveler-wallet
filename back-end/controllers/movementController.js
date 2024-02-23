@@ -4,7 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
 exports.getAllMovements = catchAsync(async (req, res, next) => {
-  const userId = req.user.id;
+  const userId = req.user._id;
   const movements = await Movement.find({ user: userId });
   // console.log(movements);
 
