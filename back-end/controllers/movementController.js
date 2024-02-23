@@ -18,7 +18,7 @@ exports.getAllMovements = catchAsync(async (req, res, next) => {
 });
 
 exports.getMovement = catchAsync(async (req, res, next) => {
-  const movement = await Movement.findOne({ _id: req.params.id });
+  const movement = await Movement.findById(req.params.id);
 
   if (!movement) {
     return next(new AppError("No movement found with that ID", 404));
