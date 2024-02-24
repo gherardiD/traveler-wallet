@@ -5,7 +5,7 @@ function Movement({ movement, setMovements = null }) {
   const handleDelete = async () => {
     const accessToken = sessionStorage.getItem("accessToken");
     try {
-      const response = await axios.delete(`/user/movements/${movement._id}`, {
+      const response = await axios.delete(`/movements/${movement._id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",

@@ -4,7 +4,7 @@ const APIFeature = require("../utils/apiFeatures.js");
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    // To allow for nested GET movements on user (hack)
+    // To allow for nested GET movements on specific user
     let filter = {};
     if (req.params.userId) filter = { user: req.params.userId };
 

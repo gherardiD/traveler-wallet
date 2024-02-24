@@ -11,7 +11,7 @@ function Currencies() {
     () =>
       async function fetchCurrencies() {
         // TODO separate all currencies from the user's currencies
-        const res = await axios.get("/user/currencies");
+        const res = await axios.get("/currencies");
 
         const data = res.data;
         if (data.results) {

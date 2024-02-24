@@ -54,7 +54,12 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
   // set active to false
-  await User.findByIdAndUpdate(req.user._id, { active: false });
+  console.log(req.user._id);
+  await User.findByIdAndUpdate(req.user._id, {
+    $set: {
+      active: false,
+    },
+  });
 
   // send the response
   res.status(204).json({

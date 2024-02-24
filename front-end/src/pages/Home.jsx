@@ -18,14 +18,14 @@ function Home() {
 
     // Fetch the movements
     const getMovements = async function fetchData() {
-      const response = await axios.get("/user/movements", {
+      const response = await axios.get("/movements", {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
           "Content-Type": "application/json",
         },
       });
       if (response.data.status === "success") {
-        setMovements(response.data.data.movements);
+        setMovements(response.data.data.document);
       }
     };
     getMovements();

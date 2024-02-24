@@ -1,14 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
-import ForgotPassword from "./pages/authforgot-password";
-import ResetPassword from "./pages/authreset-password";
+import ForgotPassword from "./pages/auth/forgotPassword";
+import ResetPassword from "./pages/auth/resetPassword";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Movements from "./pages/Movements";
 import Currencies from "./pages/Currencies";
 import Account from "./pages/Account";
-import ConfirmEmail from "./pages/auth/confirm-email";
+import ConfirmEmail from "./pages/auth/confirmEmail";
 
 function App() {
   return (

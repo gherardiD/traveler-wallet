@@ -1,6 +1,7 @@
 const express = require("express");
 
 const {
+  setUserId,
   getAllMovements,
   getMovement,
   createMovement,
@@ -8,28 +9,34 @@ const {
   deleteMovement,
 } = require("../controllers/movementController.js");
 
-const { protect } = require("../controllers/authController.js");
+const { protect, restrictTo } = require("../controllers/authController.js");
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(protect, getAllMovements)
-  .post(protect, createMovement);
+// * Protect all routes after this middleware
+router.use(protect);
 
-  // TODO: IMPLEMENT ALL ROUTES
-  // router.route("/expenses").get(protect, getAllMovements);
-  // router.route("/incomes").get(protect, getAllMovements);
-  // router.route("/expensiest-movements").get(protect, getAllMovements);
-  // router.route("/cheapest-movements").get(protect, getAllMovements);
+router.route("/").get(setUserId, getAllMovements).post(createMovement);
 
-  // movements specific month
-  // router.route("/year/:year").get(protect, getAllMovements);
+// TODO: IMPLEMENT ALL ROUTES
+// router.route("/expenses").get( getAllMovements);
+// router.route("/incomes").get( getAllMovements);
+// router.route("/expensiest-movements").get( getAllMovements);
+// router.route("/cheapest-movements").get( getAllMovements);
+
+// movements specific month
+// router.route("/year/:year").get( getAllMovements);
 
 router
   .route("/:id")
-  .get(protect, getMovement)
-  .patch(protect, updateMovement)
-  .delete(protect, deleteMovement);
+  .get(getMovement)
+  .patch(updateMovement)
+  .delete(deleteMovement);
+
+// * Protect all routes after this middleware
+// router.use(restrictTo("admin"));
+
+router.route("/").get(getAllMovements);
+router.route("/:id").delete(deleteMovement);
 
 module.exports = router;

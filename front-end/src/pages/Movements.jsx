@@ -41,7 +41,7 @@ function Movements() {
 
     // fetch the movements
     const getMovements = async function fetchData() {
-      const response = await axios.get("/user/movements", {
+      const response = await axios.get("/movements", {
         headers: {
           Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function Movements() {
       });
       // const data = await response.json();
       console.log(response.data.data);
-      const movements = response.data.data.movements;
+      const movements = response.data.data.document;
       setMovements(movements);
     };
     getMovements();
@@ -80,11 +80,14 @@ function Movements() {
           <h1 className="text-2xl font-bold mb-4">Movements</h1>
           <ul>
             {movements.map((movement) => (
-              <Movement key={movement._id} movement={movement} setMovements={setMovements} />
+              <Movement
+                key={movement._id}
+                movement={movement}
+                setMovements={setMovements}
+              />
             ))}
           </ul>
         </div>
-
       </div>
 
       {/* Footer */}

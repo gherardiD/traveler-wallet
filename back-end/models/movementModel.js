@@ -27,20 +27,14 @@ const movementSchema = new mongoose.Schema({
     trim: true,
   },
   user: {
-    // ! prova
-    // type: String,
     type: mongoose.Schema.ObjectId,
     ref: "User",
     required: [true, "Please tell us the movement user!"],
-    // trim: true,
   },
   currency: {
-    // ! prova
-    // type: String,
     type: mongoose.Schema.ObjectId,
     ref: "Currency",
     required: [true, "Please tell us the movement currency!"],
-    // trim: true,
   },
   date: {
     type: Date,
@@ -52,6 +46,19 @@ const movementSchema = new mongoose.Schema({
     default: Date.now(),
     select: false,
   },
+});
+
+// * INDEXES * //
+movementSchema.index({ user: 1, createdAt: -1 });
+movementSchema.index({ user: 1, amount: 1 });
+
+// * PRE MIDDLEWARE * //
+movementSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "-__v",
+  });
+  next();
 });
 
 const Movement = mongoose.model("Movement", movementSchema);

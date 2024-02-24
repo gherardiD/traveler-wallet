@@ -14,7 +14,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(getAllCurrencies) // protect
+  .get(getAllCurrencies)
   .post(protect, restrictTo("admin"), createCurrency);
 router
   .route("/:id")

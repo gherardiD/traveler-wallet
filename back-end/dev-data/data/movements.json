@@ -31,5 +31,16 @@
     "user": "5c88fa8cf4afda39709c2959",
     "currency": "currency_id_2",
     "date": "2024-01-10T00:00:00.000Z"
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2954",
+    "name": "Gym",
+    "description": "Monthly gym membership",
+    "type": "Expense",
+    "amount": 50,
+    "sign": "-",
+    "user": "5c88fa8cf4afab39709c2959",
+    "currency": "currency_id_2",
+    "date": "2021-01-10T00:00:00.000Z"
   }
 ]

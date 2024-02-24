@@ -1,12 +1,74 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import axios from "../api/Axios";
+import { useState } from "react";
+
+// eslint-disable-next-line react/prop-types
+const DeletePopUp = ({ toggleDeletePopUp, handleDelete }) => {
+  return (
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+      <div className="bg-white p-4 rounded-lg">
+        <p>Are you sure you want to delete your account?</p>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={toggleDeletePopUp}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleDelete}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Account = () => {
+  const [showDeletePopUp, setShowDeletePopUp] = useState(false);
+
+  const toggleDeletePopUp = () => {
+    setShowDeletePopUp(!showDeletePopUp);
+  };
+
+  const handleDelete = async () => {
+    try {
+      const accessToken = sessionStorage.getItem("accessToken");
+      // TODO use cookies instead of sessionStorage
+      if (!accessToken) {
+        window.location.href = "/login";
+      }
+      const res = await axios.delete("/users/delete-me", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.status === 204) {
+        window.location.href = "/login";
+        console.log("Account deleted");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="w-full h-screen flex flex-col">
       {/* Header */}
       <Header />
-
+      {showDeletePopUp && (
+        <DeletePopUp
+          toggleDeletePopUp={toggleDeletePopUp}
+          handleDelete={handleDelete}
+        />
+      )}
+      {/* Main */}
       <div className="container mx-auto flex-grow flex ">
         {/* Account Section */}
         <div className="w-1/3 bg-white p-8 rounded-lg shadow-md animate__animated animate__fadeIn animate__delay-1s">
@@ -36,7 +98,10 @@ const Account = () => {
               Delete Account
             </h3>
             {/* Replace text with a button/link */}
-            <button className="bg-red-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-red-600 transition duration-300">
+            <button
+              onClick={toggleDeletePopUp}
+              className="bg-red-500 text-white py-2 px-4 rounded-full font-semibold hover:bg-red-600 transition duration-300"
+            >
               Delete Account
             </button>
           </div>
@@ -58,12 +123,10 @@ const Account = () => {
           <div>
             <h2 className="text-3xl font-bold mb-4">User Stats</h2>
             {/* Add your main content here */}
-            <p className="text-lg mb-5">vari grafici</p>
-            
+            <p className="text-lg mb-5">different graphics</p>
           </div>
         </div>
       </div>
-
       {/* Footer */}
       <footer className="bg-blue-700 text-white py-8">
         <div className="container mx-auto text-center">

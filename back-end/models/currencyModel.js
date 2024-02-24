@@ -1,11 +1,4 @@
 const mongoose = require("mongoose");
-// const currencyExample = {
-//   id: 1,
-//   name: 'Euro',
-//   cod: 'EUR',
-//   symbol: '€',
-// }
-
 
 const currencySchema = new mongoose.Schema({
   name: {
