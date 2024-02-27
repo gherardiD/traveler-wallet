@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import FormField from "./FormField";
+import FormField from "../../components/FormField";
 
 // eslint-disable-next-line react/prop-types
 function ResetPassword() {
@@ -32,7 +32,7 @@ function ResetPassword() {
 
     try {
       const response = await axios.patch(
-        `/usersreset-password/${token}`,
+        `/users/reset-password/${token}`,
         formData
       );
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
-import FormField from "./FormField";
+import FormField from "../../components/FormField";
 
 // eslint-disable-next-line react/prop-types
 const SignUp = () => {

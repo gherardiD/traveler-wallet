@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
-import FormField from "./FormField";
+import FormField from "../../components/FormField";
 import { Link } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -26,7 +26,7 @@ function ForgotPassword() {
     setError(null);
 
     try {
-      const response = await axios.post("/usersforgot-password", formData);
+      const response = await axios.post("/users/forgot-password", formData);
 
       console.log("Success:", response.data);
 
