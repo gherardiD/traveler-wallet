@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
-import { redirect } from "react-router-dom";
 import axios from "../../api/Axios";
 import FormField from "../../components/FormField";
 import { Link } from "react-router-dom";
@@ -41,7 +40,7 @@ function Login() {
       setSubmitting(false);
 
       // redirect the user to the home page
-      redirect("/app/home")
+      window.location.href = "/app/home";
     } catch (err) {
       console.error(err.response.data);
       setError(err.response.data.message);

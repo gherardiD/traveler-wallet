@@ -7,7 +7,7 @@ import axios from "../api/Axios";
 function Home() {
   const [movements, setMovements] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
     // Check if the user is logged in
     const accessToken = sessionStorage.getItem("accessToken");
     // TODO use cookies instead of sessionStorage
