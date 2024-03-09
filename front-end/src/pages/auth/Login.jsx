@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "../../api/Axios";
 import FormField from "../../components/FormField";
 import { Link } from "react-router-dom";
+import SubmitButton from "../../components/SubmitButton";
+import SubmittingError from "../../components/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 function Login() {
@@ -31,22 +33,29 @@ function Login() {
     try {
       const response = await axios.post("/users/login", formData);
 
-      const token = response.data.token;
-
-      // Store the token in document.cookie or localStorage
-      // document.cookie = `userToken=${token}; path=/app`;
-      sessionStorage.setItem("accessToken", token);
-
-      setSubmitting(false);
-
-      // redirect the user to the home page
-      window.location.href = "/app/home";
+      handleSuccessfulLogin(response);
     } catch (err) {
-      console.error(err.response.data);
-      setError(err.response.data.message);
-      setSubmitting(false);
+      handleFailedLogin(err);
     }
   };
+
+  function handleSuccessfulLogin(response) {
+    storeUserToken(response);
+    setSubmitting(false);
+    window.location.href = "/app/home";
+  }
+
+  function storeUserToken(response) {
+    // TODO store the token in document.cookie
+    const token = response.data.token;
+    sessionStorage.setItem("accessToken", token);
+  }
+
+  function handleFailedLogin(error) {
+    console.error("Error:", error);
+    setError(error.response.data.message);
+    setSubmitting(false);
+  }
 
   return (
     <div className="container bg-white p-8 rounded shadow-md w-1/3 h-auto text-center m-auto">
@@ -70,12 +79,7 @@ function Login() {
 
         <div className="form-group animated flex justify-between content-center">
           <div>
-            <button
-              type="submit"
-              className="btn-animated bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-700"
-            >
-              {submitting ? "Submitting..." : "Log in"}
-            </button>
+            <SubmitButton text={submitting ? "Submitting..." : "Log In"} />
             <Link to="/signup" className="ml-4 text-blue-500">
               Sign up
             </Link>
@@ -85,7 +89,7 @@ function Login() {
           </Link>
         </div>
       </form>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      <SubmittingError error={error} />
     </div>
   );
 }

@@ -4,10 +4,11 @@ import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import FormField from "../../components/FormField";
+import SubmitButton from "../../components/SubmitButton";
+import SubmittingError from "../../components/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 const SignUp = () => {
-  // State to manage form data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -18,11 +19,9 @@ const SignUp = () => {
     dateOfBirth: "",
   });
 
-  // State to manage submission status
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Function to handle form input changes
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -30,7 +29,6 @@ const SignUp = () => {
     });
   };
 
-  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -38,40 +36,44 @@ const SignUp = () => {
     setError(null);
 
     try {
-      // Make a POST request to the back-end endpoint
       const response = await axios.post("/users/signup", formData);
 
-      // Handle successful submission
-      console.log("Success:", response.data);
-      // Reset form data
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-        phone: "",
-        dateOfBirth: "",
-      });
-
-      // Set submitting to false
-      setSubmitting(false);
+      handleSuccessfulSubmit(response);
     } catch (error) {
-      // Handle submission error
-      console.error(
-        "Error:",
-        error.response ? error.response.data : error.message
-      );
-
-      // Set error state
-      setError(
-        error.response ? error.response.data.message : "An error occurred"
-      );
-
-      // Set submitting to false
-      setSubmitting(false);
+      handleFailedSubmit(error);
     }
   };
+
+  function handleSuccessfulSubmit(response) {
+    console.log("Success:", response.data);
+    resetFormData();
+    setSubmitting(false);
+  }
+
+  function resetFormData() {
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      phone: "",
+      dateOfBirth: "",
+    });
+  }
+
+  function handleFailedSubmit(error) {
+    console.error(
+      "Error:",
+      error.response ? error.response.data : error.message
+    );
+
+    setError(
+      error.response ? error.response.data.message : "An error occurred"
+    );
+
+    setSubmitting(false);
+  }
 
   return (
     <div className="bg-white p-8 rounded shadow-md w-96 h-auto m-auto ">
@@ -141,18 +143,13 @@ const SignUp = () => {
         />
 
         <div className="flex items-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-700"
-          >
-            {submitting ? "Submitting..." : "Register"}
-          </button>
+          <SubmitButton text={submitting ? "submitting" : "Register"} />
           <Link to="/login" className="ml-4 text-gray-700">
             Login
           </Link>
         </div>
       </form>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      <SubmittingError error={error} />
     </div>
   );
 };

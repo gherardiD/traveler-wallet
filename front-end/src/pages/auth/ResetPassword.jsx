@@ -3,6 +3,7 @@ import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FormField from "../../components/FormField";
+import SubmittingError from "../../components/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 function ResetPassword() {
@@ -85,7 +86,7 @@ function ResetPassword() {
           </Link>
         </div>
       </form>
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+      <SubmittingError error={error} />
     </div>
   );
 }
