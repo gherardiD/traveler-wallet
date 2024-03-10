@@ -32,40 +32,66 @@ function Movements() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
-    // Check if the user is logged in
-    const accessToken = sessionStorage.getItem("accessToken");
-    // TODO use cookies instead of sessionStorage
+    function fetchMovements() {
+      async function fetchData(accessToken) {
+        try {
+          const response = await sendData(accessToken);
+          handleSuccessfulMovementsFetch(response);
+        } catch (error) {
+          handleFailedMovementsFetch(error);
+        }
+      }
+
+      const accessToken = getAccessToken();
+      checkIfUserIsLoggedIn(accessToken);
+      fetchData(accessToken);
+    }
+
+    fetchMovements();
+  }, []);
+
+  function getAccessToken() {
+    // TODO do it using cookies
+    return localStorage.getItem("accessToken");
+  }
+
+  function checkIfUserIsLoggedIn(accessToken) {
     if (!accessToken) {
       window.location.href = "/login";
     }
+  }
 
-    // fetch the movements
-    const getMovements = async function fetchData() {
-      const response = await axios.get("/movements", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-          "Content-Type": "application/json",
-        },
-      });
-      // const data = await response.json();
-      console.log(response.data.data);
-      const movements = response.data.data.document;
-      setMovements(movements);
-    };
-    getMovements();
-  }, []);
+  function sendData(accessToken) {
+    return axios.get("/movements", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
-  const totalMoney = movements.reduce((acc, movement) => {
-    if (movement.sign === "+") {
-      return acc + movement.amount;
-    } else {
-      return acc - movement.amount;
-    }
-  }, 0);
+  function handleSuccessfulMovementsFetch(response) {
+    setMovements(response.data.data.document);
+  }
+
+  function handleFailedMovementsFetch(error) {
+    console.error("Error fetching data:", error);
+  }
+
+  const totalMoney = getTotalMoney();
+  
+  function getTotalMoney() {
+    return movements.reduce((acc, movement) => {
+      if (movement.sign === "+") {
+        return acc + movement.amount;
+      } else {
+        return acc - movement.amount;
+      }
+    }, 0);
+  }
 
   return (
     <div className="w-full h-screen flex flex-col bg-gray-100">
-      {/* Header */}
       <Header />
 
       <div className="flex-grow flex justify-around mt-8">
@@ -90,7 +116,6 @@ function Movements() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

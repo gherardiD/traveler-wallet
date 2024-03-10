@@ -7,49 +7,79 @@ import axios from "../api/Axios";
 function Home() {
   const [movements, setMovements] = useState([]);
 
-  useEffect(() => { 
-    // Check if the user is logged in
-    const accessToken = sessionStorage.getItem("accessToken");
-    // TODO use cookies instead of sessionStorage
-    // console.log("access token " + accessToken);
+  useEffect(() => {
+    function fetchMovements() {
+      async function fetchData(accessToken) {
+        try {
+          const response = await sendData(accessToken);
+          handleSuccessfulMovementsFetch(response);
+        } catch (error) {
+          handleFailedMovementsFetch(error);
+        }
+      }
+
+      const accessToken = getAccessToken();
+      checkIfUserIsLoggedIn(accessToken);
+      fetchData(accessToken);
+    }
+
+    fetchMovements();
+  }, []);
+
+  function getAccessToken() {
+    // TODO do it using cookies
+    return localStorage.getItem("accessToken");
+  }
+
+  function checkIfUserIsLoggedIn(accessToken) {
     if (!accessToken) {
       window.location.href = "/login";
     }
+  }
 
-    // Fetch the movements
-    const getMovements = async function fetchData() {
-      const response = await axios.get("/movements", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.data.status === "success") {
-        setMovements(response.data.data.document);
+  function sendData(accessToken) {
+    return axios.get("/movements", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  function handleSuccessfulMovementsFetch(response) {
+    setMovements(response.data.data.document);
+  }
+
+  function handleFailedMovementsFetch(error) {
+    console.error("Error fetching data:", error);
+  }
+
+  const totalIncome = getTotalIncome();
+  
+  function getTotalIncome() {
+    return movements.reduce((acc, movement) => {
+      if (movement.sign === "+") {
+        return acc + movement.amount;
+      } else {
+        return acc;
       }
-    };
-    getMovements();
-  }, []);
+    }, 0);
+  }
 
-  const totalIncome = movements.reduce((acc, movement) => {
-    if (movement.sign === "+") {
-      return acc + movement.amount;
-    } else {
-      return acc;
-    }
-  }, 0);
-
-  const totalExpenses = movements.reduce((acc, movement) => {
-    if (movement.sign === "-") {
-      return acc + movement.amount;
-    } else {
-      return acc;
-    }
-  }, 0);
+  const totalExpenses = getTotalExpenses();
+  
+  function getTotalExpenses() {
+    return movements.reduce((acc, movement) => {
+      if (movement.sign === "-") {
+        return acc + movement.amount;
+      } else {
+        return acc;
+      }
+    }, 0);
+  }
 
   return (
     <div className="w-full h-screen flex flex-col">
-      {/* Header */}
       <Header />
 
       {/* Content */}
@@ -78,6 +108,7 @@ function Home() {
           </div>
           <div className="mt-10">
             <ul>
+              {/* TODO: Limit the number of movements to 5 */}
               {movements.map((movement) => (
                 <Movement key={movement._id} movement={movement} />
               ))}
@@ -86,7 +117,6 @@ function Home() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

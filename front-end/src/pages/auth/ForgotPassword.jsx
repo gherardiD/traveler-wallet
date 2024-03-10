@@ -23,22 +23,21 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setSubmitting(true);
     setError(null);
 
     try {
       const response = await axios.post("/users/forgot-password", formData);
-      handleSuccessfullSubmit(response);
+      handleSuccessfulSubmit(response);
     } catch (err) {
       handleFailedSubmit(err);
     }
   };
 
-  function handleSuccessfullSubmit(response) {
+  function handleSuccessfulSubmit(response) {
     console.log("Success:", response.data);
-    resetFormData();
     setSubmitting(false);
+    resetFormData();
   }
 
   function resetFormData() {

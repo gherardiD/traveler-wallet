@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="bg-blue-700 text-white py-4">
       <div className="container mx-auto px-10 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Financial Hub</h1>
+        <h1 className="text-2xl font-bold">Traveler Wallet</h1>
         <nav>
           <Link to="/login" className="text-white hover:underline mx-2">
             Login
@@ -27,7 +27,7 @@ function Hero() {
           Take control of your finances
         </h1>
         <p className="text-lg mb-8">
-          Financial Hub is a digital platform that allows you to manage your
+          Traveler Wallet is a digital platform that allows you to manage your
           finances in a simple and efficient way.
         </p>
         <Link

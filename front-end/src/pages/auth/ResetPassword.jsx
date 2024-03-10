@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FormField from "../../components/FormField";
 import SubmittingError from "../../components/SubmittingError";
+import SubmitButton from "../../components/SubmitButton";
 
 // eslint-disable-next-line react/prop-types
 function ResetPassword() {
@@ -11,12 +12,11 @@ function ResetPassword() {
     password: "",
     passwordConfirm: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
 
   const params = useParams();
   const token = params.token;
-
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
     setFormData({
@@ -29,30 +29,43 @@ function ResetPassword() {
     e.preventDefault();
 
     setSubmitting(true);
-    console.log(token);
 
     try {
-      const response = await axios.patch(
-        `/users/reset-password/${token}`,
-        formData
-      );
+      const response = await sendData();
 
-      console.log("Success:", response.data);
-
-      setFormData({
-        password: "",
-        passwordConfirm: "",
-      });
-
-      setSubmitting(false);
-
-      return (window.location.href = "/login");
+      handleSuccessfulSubmit(response);
+      return relocateToLogin();
     } catch (err) {
-      console.error(err.response.data);
-      setError(err.response.data.message);
-      setSubmitting(false);
+      handleFailedSubmit(err);
     }
   };
+
+  function sendData() {
+    return axios.patch(`/users/reset-password/${token}`, formData);
+  }
+
+  function handleSuccessfulSubmit(response) {
+    console.log("Success:", response.data);
+    setSubmitting(false);
+    resetFormData();
+  }
+
+  function resetFormData() {
+    setFormData({
+      password: "",
+      passwordConfirm: "",
+    });
+  }
+
+  function relocateToLogin() {
+    return (window.location.href = "/login");
+  }
+
+  function handleFailedSubmit(err) {
+    console.error(err.response.data);
+    setError(err.response.data.message);
+    setSubmitting(false);
+  }
 
   return (
     <div className="container bg-white p-8 rounded shadow-md w-1/3 h-auto text-center m-auto">
@@ -75,12 +88,7 @@ function ResetPassword() {
         />
 
         <div className="form-group animated flex justify-between">
-          <button
-            type="submit"
-            className="btn-animated bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-700"
-          >
-            {submitting ? "Submitting..." : "Reset password"}
-          </button>
+          <SubmitButton text={submitting ? "Loading..." : "Reset Password"} />
           <Link to="/login" className="mt-2 text-blue-500">
             Annul
           </Link>

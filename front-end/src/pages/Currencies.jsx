@@ -10,22 +10,31 @@ function Currencies() {
   useEffect(
     () =>
       async function fetchCurrencies() {
-        // TODO separate all currencies from the user's currencies
-        const res = await axios.get("/currencies");
-
-        const data = res.data;
-        if (data.results) {
-          setCurrencies(data.data.currencies);
+        // TODO obtain them from the API
+        try {
+          const response = await axios.get("/currencies");
+          
+          handleSuccessfulCurrenciesFetch(response);
+        } catch (error) {
+          handleFailedCurrenciesFetch(error);
         }
-        console.log(data);
-        setCurrencies(res.data.data.currencies);
       },
     []
   );
+  
+  function handleSuccessfulCurrenciesFetch(response) {
+    const data = response.data;
+      if (data.results) {
+        setCurrencies(response.data.data.currencies);
+      }
+  }
+  
+  function handleFailedCurrenciesFetch(error) {
+    console.error("Error fetching data:", error);
+  }
 
   return (
     <div className="w-full h-screen flex flex-col bg-gray-100">
-      {/* Header */}
       <Header />
 
       {/* Main */}
@@ -60,7 +69,6 @@ function Currencies() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
