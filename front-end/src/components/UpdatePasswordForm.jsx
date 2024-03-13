@@ -1,6 +1,7 @@
 import FormField from "../components/FormField";
 import { useState } from "react";
 import axios from "../api/Axios";
+import SubmittingError from "./SubmittingError";
 
 const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
   const [formData, setFormData] = useState({

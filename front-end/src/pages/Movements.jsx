@@ -32,24 +32,34 @@ function Movements() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
-    function fetchMovements() {
-      async function fetchData(accessToken) {
-        try {
-          const response = await sendData(accessToken);
-          handleSuccessfulMovementsFetch(response);
-        } catch (error) {
-          handleFailedMovementsFetch(error);
-        }
-      }
-
-      const accessToken = getAccessToken();
-      checkIfUserIsLoggedIn(accessToken);
-      fetchData(accessToken);
+    // Check if the user is logged in
+    const accessToken = sessionStorage.getItem("accessToken");
+    // TODO use cookies instead of sessionStorage
+    if (!accessToken) {
+      window.location.href = "/login";
     }
 
-    fetchMovements();
+    try {
+      // fetch the movements
+      const getMovements = async function fetchData() {
+        const response = await axios.get("/movements", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
+            "Content-Type": "application/json",
+          },
+        });
+        // const data = await response.json();
+        console.log(response.data.data);
+        const movements = response.data.data.document;
+        setMovements(movements);
+      };
+      
+      getMovements();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   }, []);
-
+    
   function getAccessToken() {
     // TODO do it using cookies
     return localStorage.getItem("accessToken");

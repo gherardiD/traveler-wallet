@@ -2,7 +2,7 @@
 function SubmittingError({ error }) {
   return (
     <>
-      <SubmittingError error={error} />
+      {error && <p className="text-red-500 mt-4">{error}</p>}
     </>
   );
 }
