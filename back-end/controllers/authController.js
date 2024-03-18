@@ -291,8 +291,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  console.log("passo")
-
   // get the user from the collection
   const user = await User.findById(req.user._id).select("+password");
 

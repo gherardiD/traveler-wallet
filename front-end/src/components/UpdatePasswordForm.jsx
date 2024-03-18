@@ -23,8 +23,7 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
-
+    setError(null);
     setSubmitting(true);
 
     try {
@@ -36,23 +35,31 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
         },
       });
 
-      console.log("Success:", response.data);
-
-      setFormData({
-        passwordCurrent: "",
-        password: "",
-        passwordConfirm: "",
-      });
-
-      setSubmitting(false);
+      handleSuccessfulLogin(response);
 
       return toggleUpdatePasswordForm();
     } catch (err) {
-      // console.error(err.response);
-      setError(err.response);
-      setSubmitting(false);
+      handleFailedLogin(err);
     }
   };
+
+  function handleSuccessfulLogin(response) {
+    setSubmitting(false);
+    console.log("Success:", response.data);
+
+    setFormData({
+      passwordCurrent: "",
+      password: "",
+      passwordConfirm: "",
+    });
+
+  }
+
+  function handleFailedLogin(error) {
+    console.error("Error:", error);
+    setError(error.response.data.message);
+    setSubmitting(false);
+  }
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
@@ -60,7 +67,7 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
         <p>Change your password</p>
         <form onSubmit={handleSubmit} method="post">
           <FormField
-            label="Old Password"
+            label="Current Password"
             type="password"
             id="passwordCurrent"
             name="passwordCurrent"

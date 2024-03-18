@@ -85,7 +85,7 @@ const Account = () => {
           handleDelete={handleDelete}
         />
       )}
-      {showOtherOptions && <AccountOptions />}
+      {showOtherOptions && <AccountOptions toggleShowOtherOptions={toggleOtherOptions} />}
       
       {/* Main */}
       <div className="container mx-auto flex-grow flex ">

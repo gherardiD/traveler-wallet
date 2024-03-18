@@ -24,12 +24,17 @@ const {
   deleteUser,
 } = require("../controllers/userController.js");
 
+const APIMovementsRoutes = require("./APIMovementsRoutes.js");
+
 const router = express.Router();
+
+router.use("/users/:userId/movements", APIMovementsRoutes);
 
 router
   .route("/currencies/")
   .get(getAllCurrencies)
   .post(createCurrency);
+
 router
   .route("/currencies/:id")
   .get(getCurrency)
@@ -40,6 +45,7 @@ router
   .route("/movements/")
   .get(getAllMovements)
   .post(createMovement);
+
 router
   .route("/movements/:id")
   .get(getMovement)
@@ -50,10 +56,13 @@ router
   .route("/users/")
   .get(getAllUsers)
   .post(createUser);
+
 router
   .route("/users/:id")
   .get(getUser)
   .patch(updateUser)
   .delete(deleteUser);
+
+
 
 module.exports = router;
