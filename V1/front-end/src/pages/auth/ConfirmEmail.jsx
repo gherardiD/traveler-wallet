@@ -3,15 +3,15 @@ import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-function Loading(isLoading) {
+function Loading({isLoading}) {
   return <>{isLoading && <p className="text-blue-500">Loading...</p>}</>;
 }
 
-function Error(error) {
+function Error({error}) {
   return <>{error && <p className="text-red-500">{error}</p>}</>;
 }
 
-function Success(isLoading, error) {
+function Success({isLoading, error}) {
   return (
     <>
       {!isLoading && !error && (
