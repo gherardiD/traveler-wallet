@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please confirm your password!"],
     validate: {
-      // This only works on CREATE and SAVE!!!
+      // This only works on CREATE and SAVE!
       validator: function (el) {
         return el === this.password;
       },
@@ -69,23 +69,20 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.index({ bank: 1});
-
+userSchema.index({ bank: 1 });
 
 // * DOCUMENT MIDDLEWARES * //
 // Encrypt password
 userSchema.pre("save", async function (next) {
-  // only run this function if password was actually modified
   if (!this.isModified("password")) return next();
 
   // hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  // delete the passwordConfirm field
   this.passwordConfirm = undefined;
 
   // if the document isn't new, set passwordChangedAt to current time
-  if (!this.isNew) this.passwordChangedAt = Date.now() - 1000; // subtract 1 second to make sure token is created after passwordChangedAt (in case of slow connection
+  if (!this.isNew) this.passwordChangedAt = Date.now() - 1000; // subtract 1 second to make sure token is created after passwordChangedAt
   next();
 });
 
@@ -98,7 +95,6 @@ userSchema.pre("save", async function (next) {
 //   next();
 // });
 
-
 // find and findOne
 userSchema.pre("find", function (next) {
   // this points to the current query
@@ -107,14 +103,14 @@ userSchema.pre("find", function (next) {
 });
 
 // * INSTANCE METHODS * //
-userSchema.methods.correctPassword = async function (
+userSchema.methods.isPasswordCorrected = async function (
   candidatePassword, // password that the user enters
   userPassword // password stored in the database (cryptographic hash)
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.comparePassword = async function (
+userSchema.methods.isPasswordCorrected = async function (
   candidatePassword,
   userPassword
 ) {
@@ -122,7 +118,7 @@ userSchema.methods.comparePassword = async function (
 };
 
 // check if user changed password after the token was issued
-userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+userSchema.methods.userChangedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,

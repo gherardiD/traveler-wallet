@@ -9,6 +9,7 @@ import Movements from "./pages/Movements";
 import Currencies from "./pages/Currencies";
 import Account from "./pages/Account";
 import ConfirmEmail from "./pages/auth/confirmEmail";
+import ChooseBank from "./pages/ChooseBank";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Routes>
           {/* AUTH */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signup/:bankId" element={<SignUp />} />
+          <Route path="/signup" element={<ChooseBank />} />
+          <Route path="/signup/:bankName" element={<SignUp />} />
           <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

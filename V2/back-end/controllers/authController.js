@@ -6,6 +6,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
+
 // * RESPONSE TOOKEN GENERATION METHODS * //
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -41,9 +42,8 @@ const sendResponseWithToken = (user, statusCode, res) => {
   });
 };
 
-// * USER SIGN UP AND EMAIL CONFIRMATION METHODS * //
+
 exports.signup = catchAsync(async (req, res, next) => {
-  const bank = req.params.bankId;
 
   const {
     firstName,
@@ -53,9 +53,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm,
     dateOfBirth,
     phone,
+    bank,
   } = req.body;
 
-  // create new user
   const newUser = await User.create({
     firstName,
     lastName,
@@ -68,12 +68,11 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   req.user = newUser;
-  // check user email
-  next();
+  
+  next(); // check user email
 });
 
 exports.checkUserEmail = catchAsync(async (req, res, next) => {
-  // generate the random reset token
   const resetToken = req.user.createEmailConfirmToken();
   await req.user.save({ validateBeforeSave: false });
 
@@ -150,7 +149,7 @@ exports.login = catchAsync(async (req, res, next) => {
   // check if user exists && password is correct
   const user = await User.findOne({ email }).select("+password");
 
-  if (!user || !(await user.comparePassword(password, user.password))) {
+  if (!user || !(await user.isPasswordCorrected(password, user.password))) {
     return next(new AppError("Incorrect email or password", 401));
   }
 
@@ -191,7 +190,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // check if the user changed the password after the token was issued
-  if (freshUser.changedPasswordAfter(decoded.iat)) {
+  if (freshUser.userChangedPasswordAfter(decoded.iat)) {
     return next(
       new AppError("User recently changed password! Please log in again.", 401)
     );
@@ -294,10 +293,11 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id).select("+password");
 
   // check if the POSTed password is correct
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+  if (
+    !(await user.isPasswordCorrected(req.body.passwordCurrent, user.password))
+  ) {
     return next(new AppError("Your current password is wrong.", 401));
   }
-
 
   // if the password is correct, update the password
   user.password = req.body.password;

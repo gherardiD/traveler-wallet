@@ -6,6 +6,7 @@ const bankSchema = new mongoose.Schema({
     required: [true, "Please tell us the bank name!"],
     trim: true,
   },
+  slug: String,
 });
 
 const Bank = mongoose.model("Bank", bankSchema);

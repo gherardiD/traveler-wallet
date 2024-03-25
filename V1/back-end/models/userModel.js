@@ -90,22 +90,22 @@ userSchema.pre("find", function (next) {
 });
 
 // * INSTANCE METHODS * //
-userSchema.methods.correctPassword = async function (
+userSchema.methods.isPasswordCorrected = async function (
   candidatePassword, // password that the user enters
   userPassword // password stored in the database (cryptographic hash)
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.comparePassword = async function (
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
+// userSchema.methods.isPasswordCorrected = async function (
+//   candidatePassword,
+//   userPassword
+// ) {
+//   return await bcrypt.compare(candidatePassword, userPassword);
+// };
 
 // check if user changed password after the token was issued
-userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+userSchema.methods.userChangedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -120,7 +120,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 
 userSchema.methods.createEmailConfirmToken = function () {
-  // create random token
   const confirmToken = crypto.randomBytes(32).toString("hex");
 
   // encrypt token
@@ -129,14 +128,12 @@ userSchema.methods.createEmailConfirmToken = function () {
     .update(confirmToken)
     .digest("hex");
 
-  // set token expiration time
   this.emailConfirmExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
 
   return confirmToken;
 };
 
 userSchema.methods.createPasswordResetToken = function () {
-  // create random token
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   // encrypt token
@@ -145,7 +142,6 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  // set token expiration time
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
 
   return resetToken;

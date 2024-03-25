@@ -1,14 +1,17 @@
 [
   {
     "_id": "5c88fa8cf4afda39789c3059",
-    "name": "Intesa Sanpaolo"
+    "name": "Intesa Sanpaolo",
+    "slug": "intesa-sanpaolo"
   },
   {
     "_id": "5c99fa8cf4afda39709c2950",
-    "name": "Bper Banca"
+    "name": "Bper Banca",
+    "slug": "bper-banca"
   },
   {
     "_id": "5c88ga8cf4dfda39709c2959",
-    "name": "Banca Sella"
+    "name": "Banca Sella",
+    "slug": "banca-sella"
   }
 ]

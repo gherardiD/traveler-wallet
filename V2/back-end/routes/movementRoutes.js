@@ -13,7 +13,6 @@ const { protect, restrictTo } = require("../controllers/authController.js");
 
 const router = express.Router();
 
-// * Protect all routes after this middleware
 router.use(protect);
 
 router.route("/").get(setUserId, getAllMovements).post(createMovement);
@@ -33,7 +32,6 @@ router
   .patch(updateMovement)
   .delete(deleteMovement);
 
-// * Protect all routes after this middleware
 // router.use(restrictTo("admin"));
 
 router.route("/").get(getAllMovements);

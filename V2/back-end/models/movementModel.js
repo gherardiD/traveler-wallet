@@ -48,11 +48,9 @@ const movementSchema = new mongoose.Schema({
   },
 });
 
-// * INDEXES * //
 movementSchema.index({ user: 1, createdAt: -1 });
 movementSchema.index({ user: 1, amount: 1 });
 
-// * PRE MIDDLEWARE * //
 movementSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user",

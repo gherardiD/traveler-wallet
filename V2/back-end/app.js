@@ -1,15 +1,14 @@
 const express = require("express");
 const morgan = require("morgan");
-
 const cors = require("cors");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorHandler");
 
-// routers
 const userRouter = require("./routes/userRoutes");
 const currencyRouter = require("./routes/currencyRoutes");
 const movementRouter = require("./routes/movementRoutes");
+const bankRouter = require("./routes/bankRoutes");
 const APIRouter = require("./routes/APIRoutes")
 
 const app = express();
@@ -27,6 +26,8 @@ app.use(express.static(`${__dirname}/public`));
 app.use("/api/users", userRouter);
 app.use("/api/currencies", currencyRouter);
 app.use("/api/movements", movementRouter);
+app.use("/api/banks", bankRouter);
+
 
 app.use("/api/v1", APIRouter);
 
