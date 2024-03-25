@@ -62,7 +62,15 @@ const userSchema = new mongoose.Schema({
     default: false,
     select: false,
   },
+  bank: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Bank",
+    required: [true, "User must belong to a bank!"],
+  },
 });
+
+userSchema.index({ bank: 1});
+
 
 // * DOCUMENT MIDDLEWARES * //
 // Encrypt password
@@ -82,6 +90,15 @@ userSchema.pre("save", async function (next) {
 });
 
 // * QUERY MIDDLEWARES * //
+// userSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: "bank",
+//     select: "-__v",
+//   });
+//   next();
+// });
+
+
 // find and findOne
 userSchema.pre("find", function (next) {
   // this points to the current query

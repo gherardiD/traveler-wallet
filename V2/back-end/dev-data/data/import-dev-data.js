@@ -9,6 +9,7 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
+const Bank = require("../../models/bankModel");
 const User = require("../../models/userModel");
 const Currency = require("../../models/currencyModel");
 const Movement = require("../../models/movementModel");
@@ -29,6 +30,8 @@ mongoose.connect(DB).then(() => {
 });
 
 // Read JSON file
+const banks = JSON.parse(fs.readFileSync(`${__dirname}/banks.json`, "utf-8"));
+
 const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 
 const currencies = JSON.parse(
@@ -39,9 +42,9 @@ const movements = JSON.parse(
   fs.readFileSync(`${__dirname}/movements.json`, "utf-8")
 );
 
-// Import data into database
 const importData = async () => {
   try {
+    await Bank.create(banks, { validateBeforeSave: false });
     await User.create(users, { validateBeforeSave: false });
     await Currency.create(currencies);
     await Movement.create(movements, { validateBeforeSave: false });
@@ -52,7 +55,6 @@ const importData = async () => {
   process.exit();
 };
 
-// Delete all data from database
 const deleteData = async () => {
   try {
     await User.deleteMany();
@@ -65,7 +67,6 @@ const deleteData = async () => {
   process.exit();
 };
 
-// console.log(process.argv);
 
 if (process.argv[2] === "--import") {
   importData();

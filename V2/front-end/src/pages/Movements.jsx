@@ -4,40 +4,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "../api/Axios";
 
-// const mov = [
-//   {
-//     id: 1,
-//     amount: 1000,
-//     sign: "+",
-//     date: "2021-07-01",
-//     type: "deposit",
-//   },
-//   {
-//     id: 2,
-//     amount: 500,
-//     sign: "+",
-//     date: "2021-07-02",
-//     type: "deposit",
-//   },
-//   {
-//     id: 3,
-//     amount: 200,
-//     sign: "-",
-//     date: "2021-07-03",
-//     type: "withdrawal",
-//   },
-// ];
-
 function Movements() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => {
     // Check if the user is logged in
     const accessToken = sessionStorage.getItem("accessToken");
-    // TODO use cookies instead of sessionStorage
-    if (!accessToken) {
-      window.location.href = "/login";
-    }
+    checkIfUserIsLoggedIn(accessToken)
 
     try {
       // fetch the movements
@@ -48,22 +21,14 @@ function Movements() {
             "Content-Type": "application/json",
           },
         });
-        // const data = await response.json();
-        console.log(response.data.data);
-        const movements = response.data.data.document;
-        setMovements(movements);
+        handleSuccessfulMovementsFetch(response);
       };
       
       getMovements();
     } catch (error) {
-      console.error("Error fetching data:", error);
+      handleFailedMovementsFetch(error)
     }
   }, []);
-    
-  function getAccessToken() {
-    // TODO do it using cookies
-    return localStorage.getItem("accessToken");
-  }
 
   function checkIfUserIsLoggedIn(accessToken) {
     if (!accessToken) {
@@ -71,16 +36,8 @@ function Movements() {
     }
   }
 
-  function sendData(accessToken) {
-    return axios.get("/movements", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
   function handleSuccessfulMovementsFetch(response) {
+    console.log(response.data.data);
     setMovements(response.data.data.document);
   }
 

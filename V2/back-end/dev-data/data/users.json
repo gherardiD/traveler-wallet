@@ -7,7 +7,8 @@
     "dateOfBirth": "1990-01-15T00:00:00.000Z",
     "phone": "123-456-7890",
     "password": "$2a$12$3QjB0nYcyktgaQMdf0nhE.i.3wQJ0oIioTyJjGXgyMWRjSKJcVZki",
-    "active": true
+    "active": true,
+    "bank": "5c88fa8cf4afda39789c3059"
   },
   {
     "_id": "5c88fa8cf4afda39709c2979",
@@ -17,7 +18,8 @@
     "dateOfBirth": "1990-01-15T00:00:00.000Z",
     "phone": "123-456-7890",
     "password": "$2a$12$3QjB0nYcyktgaQMdf0nhE.i.3wQJ0oIioTyJjGXgyMWRjSKJcVZki",
-    "active": true
+    "active": true,
+    "bank": "5c88fa8cf4afda39789c3059"
   },
   {
     "_id": "5c88fa8cf4afab39709c2959",
@@ -27,6 +29,7 @@
     "dateOfBirth": "1985-05-20T00:00:00.000Z",
     "phone": "987-654-3210",
     "password": "$2a$12$3QjB0nYcyktgaQMdf0nhE.i.3wQJ0oIioTyJjGXgyMWRjSKJcVZki",
-    "active": true
+    "active": true,
+    "bank": "5c88ga8cf4dfda39709c2959"
   }
 ]

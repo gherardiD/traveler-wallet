@@ -42,7 +42,7 @@ router
   .delete(deleteCurrency);
 
 router
-  .route("/movements/")
+  .route("/movements")
   .get(getAllMovements)
   .post(createMovement);
 
@@ -62,7 +62,6 @@ router
   .get(getUser)
   .patch(updateUser)
   .delete(deleteUser);
-
 
 
 module.exports = router;

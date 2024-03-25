@@ -25,7 +25,7 @@ const {
 
 const router = express.Router();
 
-router.post("/signup", signup, checkUserEmail);
+router.post("/signup/:bankId", signup, checkUserEmail);
 router.get("/confirm-email/:token", confirmEmail);
 router.post("/login", login);
 router.post("/forgot-password", forgotPassword);

@@ -17,7 +17,7 @@ function App() {
         <Routes>
           {/* AUTH */}
           <Route path="/" element={<LandingPage />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup/:bankId" element={<SignUp />} />
           <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

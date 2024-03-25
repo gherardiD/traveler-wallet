@@ -1,14 +1,19 @@
 /* eslint-disable no-unused-vars */
 
+
 import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import FormField from "../../components/FormField";
 import SubmitButton from "../../components/SubmitButton";
 import SubmittingError from "../../components/SubmittingError";
+import { useParams } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SignUp = () => {
+  const params = useParams();
+  const bankId = params.bankId;
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -36,7 +41,7 @@ const SignUp = () => {
     setError(null);
 
     try {
-      const response = await axios.post("/users/signup", formData);
+      const response = await axios.post(`/users/signup/${bankId}`, formData);
 
       handleSuccessfulSubmit(response);
     } catch (error) {

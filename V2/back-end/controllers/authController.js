@@ -43,6 +43,8 @@ const sendResponseWithToken = (user, statusCode, res) => {
 
 // * USER SIGN UP AND EMAIL CONFIRMATION METHODS * //
 exports.signup = catchAsync(async (req, res, next) => {
+  const bank = req.params.bankId;
+
   const {
     firstName,
     lastName,
@@ -51,8 +53,6 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm,
     dateOfBirth,
     phone,
-    // prova
-    // role,
   } = req.body;
 
   // create new user
@@ -64,8 +64,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm,
     dateOfBirth,
     phone,
-    // prova
-    // role,
+    bank,
   });
 
   req.user = newUser;
