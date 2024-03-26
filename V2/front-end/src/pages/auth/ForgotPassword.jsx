@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
-import FormField from "../../components/FormField";
+import FormField from "../../components/form/FormField";
 import { Link } from "react-router-dom";
-import SubmitButton from "../../components/SubmitButton";
-import SubmittingError from "../../components/SubmittingError";
+import SubmitButton from "../../components/form/SubmitButton";
+import SubmittingError from "../../components/form/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 function ForgotPassword() {

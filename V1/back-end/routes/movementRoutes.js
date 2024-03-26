@@ -2,6 +2,7 @@ const express = require("express");
 
 const {
   setUserId,
+  addUserIdIntoBodyReq,
   getAllMovements,
   getMovement,
   createMovement,
@@ -13,10 +14,21 @@ const { protect, restrictTo } = require("../controllers/authController.js");
 
 const router = express.Router();
 
-// * Protect all routes after this middleware
 router.use(protect);
 
-router.route("/").get(setUserId, getAllMovements).post(createMovement);
+router.route("/").get(setUserId, getAllMovements).post(addUserIdIntoBodyReq, createMovement);
+
+router
+  .route("/:id")
+  .get(getMovement)
+  .patch(updateMovement)
+  .delete(deleteMovement);
+
+router.use(restrictTo("admin"));
+
+router.route("/admin").get(getAllMovements).post(createMovement);
+
+
 
 // TODO: IMPLEMENT ALL ROUTES
 // router.route("/expenses").get( getAllMovements);
@@ -27,16 +39,5 @@ router.route("/").get(setUserId, getAllMovements).post(createMovement);
 // movements specific month
 // router.route("/year/:year").get( getAllMovements);
 
-router
-  .route("/:id")
-  .get(getMovement)
-  .patch(updateMovement)
-  .delete(deleteMovement);
-
-// * Protect all routes after this middleware
-// router.use(restrictTo("admin"));
-
-router.route("/").get(getAllMovements);
-router.route("/:id").delete(deleteMovement);
 
 module.exports = router;

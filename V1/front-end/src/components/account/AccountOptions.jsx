@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../api/Axios";
+import axios from "../../api/Axios";
 
 const AccountOptions = ({toggleShowOtherOptions}) => {
   const [userData, setUserData] = useState({})

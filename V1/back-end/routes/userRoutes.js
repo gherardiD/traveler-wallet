@@ -31,7 +31,6 @@ router.post("/login", login);
 router.post("/forgot-password", forgotPassword);
 router.patch("/reset-password/:token", resetPassword);
 
-// * Protect all routes after this middleware
 router.use(protect);
 
 router.patch("/update-password", updatePassword);
@@ -39,7 +38,6 @@ router.get("/me", getMe, getUser);
 router.patch("/update-me", updateMe);
 router.delete("/delete-me", deleteMe);
 
-// * Restrict all routes after this middleware to admin only
 router.use(restrictTo("admin"));
 
 router.route("/").get(getAllUsers).post(createUser);

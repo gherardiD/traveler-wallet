@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import axios from "../api/Axios";
+import axios from "../../api/Axios";
 
 function Movement({ movement, setMovements = null }) {
   const handleDelete = async () => {

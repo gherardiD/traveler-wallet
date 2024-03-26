@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Movement from "../components/Movement";
+import Header from "../components/general/Header";
+import Footer from "../components/general/Footer";
+import Movement from "../components/movements/Movement";
 import axios from "../api/Axios";
 
 function Home() {

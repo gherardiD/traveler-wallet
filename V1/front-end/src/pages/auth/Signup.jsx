@@ -3,9 +3,9 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
-import FormField from "../../components/FormField";
-import SubmitButton from "../../components/SubmitButton";
-import SubmittingError from "../../components/SubmittingError";
+import FormField from "../../components/form/FormField";
+import SubmitButton from "../../components/form/SubmitButton";
+import SubmittingError from "../../components/form/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 const SignUp = () => {

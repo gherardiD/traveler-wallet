@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "../api/Axios";
-import Currency from "../components/Currency";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Currency from "../components/currencies/Currency";
+import Header from "../components/general/Header";
+import Footer from "../components/general/Footer";
 
 function Currencies() {
   const [currencies, setCurrencies] = useState([]);

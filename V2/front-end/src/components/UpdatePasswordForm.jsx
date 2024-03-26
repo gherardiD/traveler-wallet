@@ -1,4 +1,4 @@
-import FormField from "../components/FormField";
+import FormField from "../components/form/FormField";
 import { useState } from "react";
 import axios from "../api/Axios";
 import SubmittingError from "./SubmittingError";

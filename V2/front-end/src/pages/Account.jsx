@@ -2,11 +2,11 @@
 import { useState } from "react";
 import axios from "../api/Axios";
 
-import Header from "../components/Header";
-import DeletePopUp from "../components/DeletePopUp";
-import UpdatePasswordForm from "../components/UpdatePasswordForm";
-import AccountOptions from "../components/AccountOptions";
-import Footer from "../components/Footer";
+import Header from "../components/general/Header";
+import DeletePopUp from "../components/account/DeletePopUp";
+import UpdatePasswordForm from "../components/account/UpdatePasswordForm";
+import AccountOptions from "../components/account/AccountOptions";
+import Footer from "../components/general/Footer";
 
 const Account = () => {
   const [showUpdatePasswordForm, setShowUpdatePasswordForm] = useState(false);

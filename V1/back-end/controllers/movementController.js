@@ -9,6 +9,11 @@ exports.setUserId = (req, res, next) => {
   next();
 };
 
+exports.addUserIdIntoBodyReq = (req, res, next) => {
+  req.body.user = req.user._id
+  next();
+}
+
 exports.getAllMovements = factory.getAll(Movement);
 exports.getMovement = factory.getOne(Movement);
 exports.createMovement = factory.createOne(Movement);
