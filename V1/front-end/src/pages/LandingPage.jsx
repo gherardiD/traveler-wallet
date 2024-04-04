@@ -96,10 +96,9 @@ function CallToAction() {
 
 function LandingPage() {
   return (
-    // <div className="w-full h-auto">
+    <div className="w-full h-auto">
 
-    <div className="w-full h-screen flex items-center justify-center bg-white">
-      {/* <Header />
+      <Header />
 
       <Hero />
 
@@ -107,8 +106,9 @@ function LandingPage() {
 
       <CallToAction />
 
-      <Footer /> */}
-      <div className="max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+      <Footer />
+    {/* <div className="w-full h-screen flex items-center justify-center bg-white">
+       <div className="max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
         <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
           <svg
             viewBox="0 0 1024 1024"
@@ -145,8 +145,8 @@ function LandingPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </div> 
   );
 }
 
