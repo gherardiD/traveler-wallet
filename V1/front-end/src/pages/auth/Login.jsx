@@ -3,12 +3,14 @@
 import { useState } from "react";
 import axios from "../../api/Axios";
 import FormField from "../../components/form/FormField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SubmitButton from "../../components/form/SubmitButton";
 import SubmittingError from "../../components/form/SubmittingError";
 
 // eslint-disable-next-line react/prop-types
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,7 +44,8 @@ function Login() {
   function handleSuccessfulLogin(response) {
     storeUserToken(response);
     setSubmitting(false);
-    window.location.href = "/app/home";
+    navigate("/app/home");
+    // window.location.href = "/app/home";
   }
 
   function storeUserToken(response) {
