@@ -5,11 +5,11 @@ const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorHandler");
 
-const userRouter = require("./routes/userRoutes");
+const userRouter = require("./routes/app/userRoutes");
 const currencyRouter = require("./routes/currencyRoutes");
 const movementRouter = require("./routes/movementRoutes");
 const bankRouter = require("./routes/bankRoutes");
-const APIRouter = require("./routes/APIRoutes")
+const APIRouter = require("./routes/APIRoutes");
 
 const app = express();
 
@@ -27,7 +27,6 @@ app.use("/api/users", userRouter);
 app.use("/api/currencies", currencyRouter);
 app.use("/api/movements", movementRouter);
 app.use("/api/banks", bankRouter);
-
 
 app.use("/api/v1", APIRouter);
 
