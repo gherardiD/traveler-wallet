@@ -1,7 +1,6 @@
-const Currency = require("../../models/currencyModel");
-
 const catchAsync = require("../../utils/catchAsync");
 const AppError = require("../../utils/appError");
+const Currency = require("../../models/currencyModel");
 
 exports.getAllCurrencies = catchAsync(async (req, res, next) => {
   const currencies = await Currency.find();
