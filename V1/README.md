@@ -99,13 +99,3 @@ Start server
 ![mokcup_landing](https://github.com/gherardiD/project/assets/101709520/57c89275-844f-4efc-84a9-134853f7dec0)
 ![mockup_currencies](https://github.com/gherardiD/project/assets/101709520/5ed7eb2c-afb6-4ee8-9a55-71d80baadf09)
 ![mockuo_transactions](https://github.com/gherardiD/project/assets/101709520/de52459c-e763-492c-b7a3-59d4fd90c448)
-
-## FAQ
-
-#### Posso gestire soldi reali?
-
-Attualmente no, è solo possibile tenere traccia manualmente dei propri soldi e vedere l'andamento del proprio portafoglio virtuale nelle varie valute di riferimento.
-
-#### Si puo avere uno storico dei movimenti?
-
-Si, sono i movimenti sono registrati con una data quindi è possibile avere un resoconto.
