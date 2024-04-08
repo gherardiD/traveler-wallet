@@ -8,62 +8,32 @@ function Home() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => { 
-    // Check if the user is logged in
-    const accessToken = sessionStorage.getItem("accessToken");
     // TODO use cookies instead of sessionStorage
-    // console.log("access token " + accessToken);
+    const accessToken = sessionStorage.getItem("accessToken");
+
+    // TODO using useNavigate hook
     if (!accessToken) {
       window.location.href = "/login";
     }
 
-    try {
-      // Fetch the movements
-      const getMovements = async function fetchData() {
+    const fetchMovements = async function fetchData() {
+      try {
         const response = await axios.get("/movements", {
           headers: {
             Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
             "Content-Type": "application/json",
           },
         });
-        if (response.data.status === "success") {
-          setMovements(response.data.data.document);
+        // console.log(response.data.movements)
+        if(response.data.movements){
+          setMovements(response.data.movements);
         }
-      };
-      getMovements();
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchMovements();
   }, []);
-
-  function getAccessToken() {
-    // TODO do it using cookies
-    const accesstoken = localStorage.getItem("accessToken");
-    alert(accesstoken)
-    return accesstoken;
-  }
-
-  function checkIfUserIsLoggedIn(accessToken) {
-    if (!accessToken) {
-      window.location.href = "/login";
-    }
-  }
-
-  function sendData(accessToken) {
-    return axios.get("/movements", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-        "Content-Type": "application/json",
-      },
-    });
-  }
-
-  function handleSuccessfulMovementsFetch(response) {
-    setMovements(response.data.data.document);
-  }
-
-  function handleFailedMovementsFetch(error) {
-    console.error("Error fetching data:", error);
-  }
 
   const totalIncome = getTotalIncome();
   

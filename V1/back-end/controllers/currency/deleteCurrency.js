@@ -9,7 +9,7 @@ const deleteCurrency = catchAsync(async (req, res, next) => {
     return next(new AppError("No currency found with that ID", 404));
   }
 
-  res.status(204).json({ data: null });
+  res.status(204).json({status: "success"});
 });
 
 module.exports = deleteCurrency;

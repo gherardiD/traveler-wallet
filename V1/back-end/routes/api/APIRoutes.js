@@ -6,13 +6,11 @@ const createCurrency = require("../../controllers/currency/createCurrency");
 const updateCurrency = require("../../controllers/currency/updateCurrency");
 const deleteCurrency = require("../../controllers/currency/deleteCurrency");
 
-// const {
-//   getAllMovements,
-//   getMovement,
-//   createMovement,
-//   updateMovement,
-//   deleteMovement,
-// } = require("../controllers/movementController.js");
+const getAllMovements = require("../../controllers/movement/every/getAllMovements");
+const getMovement = require("../../controllers/movement/every/getMovement");
+const createMovement = require("../../controllers/movement/every/createMovement");
+const updateMovement = require("../../controllers/movement/every/updateMovement");
+const deleteMovement = require("../../controllers/movement/every/deleteMovement");
 
 const getAllUsers = require("../../controllers/user/every/getAllUsers");
 const getUser = require("../../controllers/user/every/getUser");
@@ -20,11 +18,11 @@ const createUser = require("../../controllers/user/every/createUser");
 const updateUser = require("../../controllers/user/every/updateUser");
 const deleteUser = require("../../controllers/user/every/deleteUser");
 
-// const APIMovementsRoutes = require("./APIMovementsRoutes.js");
+const APIMovementsRoutes = require("./APIMovementsRoutes.js");
 
 const router = express.Router();
 
-// router.use("/users/:userId/movements", APIMovementsRoutes);
+router.use("/users/:userId/movements", APIMovementsRoutes);
 
 router
   .route("/currencies/")
@@ -37,16 +35,16 @@ router
   .patch(updateCurrency)
   .delete(deleteCurrency);
 
-// router
-//   .route("/movements/")
-//   .get(getAllMovements)
-//   .post(createMovement);
+router
+  .route("/movements/")
+  .get(getAllMovements)
+  .post(createMovement);
 
-// router
-//   .route("/movements/:id")
-//   .get(getMovement)
-//   .patch(updateMovement)
-//   .delete(deleteMovement);
+router
+  .route("/movements/:id")
+  .get(getMovement)
+  .patch(updateMovement)
+  .delete(deleteMovement);
 
 router
   .route("/users/")

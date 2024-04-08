@@ -1,14 +1,15 @@
 const express = require("express");
 
-const {
-  getAllCurrencies,
-  getCurrency,
-  createCurrency,
-  updateCurrency,
-  deleteCurrency,
-} = require("../controllers/currencyController.js");
+// CURRENCY
+const getAllCurrencies = require("../../controllers/currency/getAllCurrencies");
+const getCurrency = require("../../controllers/currency/getCurrency");
+const createCurrency = require("../../controllers/currency/createCurrency");
+const updateCurrency = require("../../controllers/currency/updateCurrency");
+const deleteCurrency = require("../../controllers/currency/deleteCurrency");
 
-const { protect, restrictTo } = require("../controllers/authController.js");
+// AUTH
+const protect = require("../../controllers/auth/protect");
+const restrictTo = require("../../controllers/auth/restrictTo");
 
 const router = express.Router();
 

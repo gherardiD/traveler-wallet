@@ -1,32 +1,45 @@
 const express = require("express");
 
-const {
-  setUserId,
-  addUserIdIntoBodyReq,
-  getAllMovements,
-  getMovement,
-  createMovement,
-  updateMovement,
-  deleteMovement,
-} = require("../controllers/movementController.js");
+// USER
+const getAllMyMovements = require("../../controllers/movement/current/getAllMyMovements");
+const getMyMovement = require("../../controllers/movement/current/getMyMovement");
+const createMyMovement = require("../../controllers/movement/current/createMyMovement");
+const updateMyMovement = require("../../controllers/movement/current/updateMyMovement");
+const deleteMyMovement = require("../../controllers/movement/current/deleteMyMovement");
 
-const { protect, restrictTo } = require("../controllers/authController.js");
+// ADMIN
+const getAllMovements = require("../../controllers/movement/every/getAllMovements");
+const getMovement = require("../../controllers/movement/every/getMovement");
+const createMovement = require("../../controllers/movement/every/createMovement");
+const updateMovement = require("../../controllers/movement/every/updateMovement");
+const deleteMovement = require("../../controllers/movement/every/deleteMovement");
+
+// AUTH
+const protect = require("../../controllers/auth/protect");
+const restrictTo = require("../../controllers/auth/restrictTo");
+
 
 const router = express.Router();
 
 router.use(protect);
 
-router.route("/").get(setUserId, getAllMovements).post(addUserIdIntoBodyReq, createMovement);
+router.route("/").get(getAllMyMovements).post(createMyMovement);
+
+router
+  .route("/:id")
+  .get(getMyMovement)
+  .patch(updateMyMovement)
+  .delete(deleteMyMovement);
+
+router.use(restrictTo("admin"));
+
+router.route("/admin").get(getAllMovements).post(createMovement);
 
 router
   .route("/:id")
   .get(getMovement)
   .patch(updateMovement)
   .delete(deleteMovement);
-
-router.use(restrictTo("admin"));
-
-router.route("/admin").get(getAllMovements).post(createMovement);
 
 
 

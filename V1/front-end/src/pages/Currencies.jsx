@@ -7,25 +7,20 @@ import Footer from "../components/general/Footer";
 function Currencies() {
   const [currencies, setCurrencies] = useState([]);
 
-  useEffect(
-    () =>
-      async function fetchCurrencies() {
+  useEffect(() => {
+      const fetchCurrencies = async function fetchData() {
         try {
           // TODO separate all currencies from the user's currencies
-        const res = await axios.get("/currencies");
-
-        const data = res.data;
-        if (data.results) {
-          setCurrencies(data.data.currencies);
-        }
-        console.log(data);
-        setCurrencies(res.data.data.currencies);
+          const response = await axios.get("/currencies");
+          if (response.data.currencies) {
+            setCurrencies(response.data.currencies);
+          }
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      },
-    []
-  );
+      }
+      fetchCurrencies();
+  }, []);
   
 
   return (
