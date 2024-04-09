@@ -1,6 +1,7 @@
 const User = require("../../models/userModel");
 const AppError = require("../../utils/appError");
 const catchAsync = require("../../utils/catchAsync");
+const sendEmail = require("../../utils/sendEmail");
 
 const forgotPassword = catchAsync(async (req, res, next) => {
   // get user based on POSTed email
@@ -22,12 +23,12 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   console.log(resetURL);
 
   try {
-    // TODO: send email doesn't work at school
-    // await sendEmail({
-    //   email: user.email,
-    //   subject: "Your password reset token (valid for 10 min)",
-    //   message,
-    // });
+    // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
+    await sendEmail({
+      email: req.body.email,
+      subject: "Your password reset token (valid for 10 min)",
+      message,
+    });
 
     res.status(200).json({
       status: "success",

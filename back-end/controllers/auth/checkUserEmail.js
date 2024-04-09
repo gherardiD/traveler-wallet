@@ -14,12 +14,12 @@ const checkUserEmail = catchAsync(async (req, res, next) => {
   const message = `Click on this link to confirm your email: ${resetURL}`;
 
   try {
-    // TODO: sendEmail is not working AT SCHOOL find a solution
-    // await sendEmail({
-    //   email: req.user.email,
-    //   subject: "Your email confirmation token (valid for 10 min)",
-    //   message,
-    // });
+    // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
+    await sendEmail({
+      email: req.user.email,
+      subject: "Your email confirmation token (valid for 10 min)",
+      message,
+    });
 
     res.status(200).json({
       status: "success",
