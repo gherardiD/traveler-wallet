@@ -13,11 +13,11 @@ const app = require("./app");
 
 // ! hosted database doesn't work at school
 // DB is the connection string to the MongoDB database
-// const DB = process.env.DATABASE.replace(
-//   "<PASSWORD>",
-//   process.env.DATABASE_PASSWORD
-// );
-const DB = process.env.DATABASE_LOCAL;
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
+// const DB = process.env.DATABASE_LOCAL;
 
 // Connect to MongoDB database
 mongoose.connect(DB).then(() => {

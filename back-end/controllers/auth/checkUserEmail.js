@@ -1,5 +1,6 @@
 const catchAsync = require("../../utils/catchAsync");
 const AppError = require("../../utils/appError");
+const sendEmail = require("../../utils/sendEmail");
 
 const checkUserEmail = catchAsync(async (req, res, next) => {
   // generate the random reset token

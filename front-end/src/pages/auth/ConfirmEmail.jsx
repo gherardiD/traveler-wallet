@@ -1,17 +1,18 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-function Loading({isLoading}) {
+function Loading({ isLoading }) {
   return <>{isLoading && <p className="text-blue-500">Loading...</p>}</>;
 }
 
-function Error({error}) {
+function Error({ error }) {
   return <>{error && <p className="text-red-500">{error}</p>}</>;
 }
 
-function Success({isLoading, error}) {
+function Success({ isLoading, error }) {
   return (
     <>
       {!isLoading && !error && (
@@ -38,7 +39,13 @@ function ConfirmEmail() {
     async function sendTokenToConfirmEmail() {
       try {
         const response = await axios.get(`/users/confirm-email/${token}`);
-        handleSuccessfulEmailConfirmed(response);
+        
+        console.log("Success:", response.data);
+        setIsLoading(false);
+        sessionStorage.setItem("accessToken", response.data.token);
+        
+        // ! use navigate hook
+        window.location.href = "/app/home";
       } catch (err) {
         handleFailedEmailConfirmed(err);
       }
@@ -48,18 +55,7 @@ function ConfirmEmail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  function handleSuccessfulEmailConfirmed(response) {
-    console.log("Success:", response.data);
-    setIsLoading(false);
-    storeUserToken(response);
-    return (window.location.href = "/app/home");
-  }
 
-  function storeUserToken(response) {
-    // TODO store the token in document.cookie
-    const token = response.data.token;
-    sessionStorage.setItem("accessToken", token);
-  }
 
   function handleFailedEmailConfirmed(error) {
     console.error("Error:", error);

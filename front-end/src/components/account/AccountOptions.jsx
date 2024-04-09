@@ -1,43 +1,50 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import axios from "../../api/Axios";
 
-const AccountOptions = ({toggleShowOtherOptions}) => {
-  const [userData, setUserData] = useState({})
+const AccountOptions = ({ toggleShowOtherOptions }) => {
+  const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const accessToken = sessionStorage.getItem("accessToken");
     if (!accessToken) {
       window.location.href = "/login";
     }
-
-    try {
-      const getUserData = async function fetchData() {
-        setLoading(true);
+    
+    const getUserData = async function fetchData() {
+      try {
         const response = await axios.get("/users/me", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",
           },
         });
-        const userData = response.data.data.document;
-        setUserData(userData);
-      };
+        setUserData(response.data.user);
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-      getUserData();
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    getUserData();
+    
   }, []);
 
   return (
     // shows firstName lastName email dateOfBirth phone
-    
+
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-blue-600">Account Options</h2>
-          <button onClick={toggleShowOtherOptions} className="text-gray-600 hover:text-gray-800">X</button>
+          <button
+            onClick={toggleShowOtherOptions}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            X
+          </button>
         </div>
         <div>
           <h3 className="text-xl font-semibold mb-4">User Information</h3>
@@ -67,6 +74,6 @@ const AccountOptions = ({toggleShowOtherOptions}) => {
       </div>
     </div>
   );
-}
+};
 
 export default AccountOptions;
