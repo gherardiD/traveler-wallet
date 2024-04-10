@@ -25,12 +25,34 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
 - visualizzazione utenti (per numero di movimenti, per saldo totale...)
 - visualizzazione delle valute più usate
 
-## Run Locally
+## Prerequisites
 
-**Prerequisiti**:
-
-- node & npm
+- avere nodejs > v18.0 e npm installato localmente
 - environment variables in config.env
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file in the server side code
+
+`NODE_ENV`
+
+`PORT`
+
+`DATABASE`
+
+`DATABASE_PASSWORD`
+
+`JWT_SECRET`
+
+`JWT_EXPIRES_IN`
+
+`JWT_COOKIE_EXPIRES_IN`
+
+`SALT`
+
+`EMAIL_API_KEY`
+
+## Run Locally
 
 Clone the project
 
@@ -53,6 +75,8 @@ Start server
   npm i
   node server.js {or npm start}
 ```
+
+a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utilizzare il programma
 
 ## Schema logico
 
