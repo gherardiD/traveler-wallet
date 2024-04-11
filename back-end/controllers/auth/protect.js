@@ -5,7 +5,6 @@ const User = require("../../models/userModel");
 const jwt = require("jsonwebtoken");
 
 const protect = catchAsync(async (req, res, next) => {
-  /*
   // get the token from headers
   let token;
   if (
@@ -15,10 +14,6 @@ const protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
-*/
-  // TODO with cookies
-  const token = req.cookies.jwt;
-  console.log(req.cookies)
 
   if (!token) {
     return next(

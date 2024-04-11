@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const handleLogout = () => {
-    sessionStorage.removeItem("accessToken");
+    localStorage.removeItem("accessToken");
     window.location.href = "/login";
   };
 

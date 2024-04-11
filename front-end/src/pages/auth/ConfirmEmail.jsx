@@ -42,7 +42,7 @@ function ConfirmEmail() {
         
         console.log("Success:", response.data);
         setIsLoading(false);
-        sessionStorage.setItem("accessToken", response.data.token);
+        localStorage.setItem("accessToken", response.data.token);
         
         // ! use navigate hook
         window.location.href = "/app/home";

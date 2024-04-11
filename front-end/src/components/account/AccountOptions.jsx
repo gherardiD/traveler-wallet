@@ -10,11 +10,11 @@ const AccountOptions = ({ toggleShowOtherOptions }) => {
 
   useEffect(() => {
     setLoading(true);
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/login");
     }
-    
+
     const getUserData = async function fetchData() {
       try {
         const response = await axios.get("/users/me", {
@@ -24,14 +24,13 @@ const AccountOptions = ({ toggleShowOtherOptions }) => {
           },
         });
         setUserData(response.data.user);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     getUserData();
-    
   }, []);
 
   return (

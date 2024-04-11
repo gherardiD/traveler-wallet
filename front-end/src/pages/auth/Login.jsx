@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Cookie from "js-cookie";
 import axios from "../../api/Axios";
 import FormField from "../../components/form/FormField";
 import SubmitButton from "../../components/form/SubmitButton";
@@ -35,7 +34,6 @@ function Login() {
 
     try {
       const response = await axios.post("/users/login", formData);
-
       handleSuccessfulLogin(response);
     } catch (err) {
       handleFailedLogin(err);
@@ -49,10 +47,8 @@ function Login() {
   }
 
   function storeUserToken(response) {
-    // TODO store the token in document.cookie
     const token = response.data.token;
-    Cookie.set("accessToken", token);
-    // sessionStorage.setItem("accessToken", token);
+    localStorage.setItem("accessToken", token);
   }
 
   function handleFailedLogin(error) {

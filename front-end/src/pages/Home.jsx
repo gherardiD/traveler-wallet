@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookie from "js-cookie";
 
 import Header from "../components/general/Header";
 import Footer from "../components/general/Footer";
@@ -12,28 +11,20 @@ function Home() {
   const [movements, setMovements] = useState([]);
 
   useEffect(() => { 
-    // TODO use cookies instead of sessionStorage
-    // const accessToken = sessionStorage.getItem("accessToken");
-    const accessToken = Cookie.get("accessToken");
-    // TODO using useNavigate hook
+    const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
       navigate("/login");
-      // window.location.href = "/login";
     }
 
     const fetchMovements = async function fetchData() {
       try {
-        // const response = await axios.get("/movements", {
-        //   headers: {
-        //     Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
-        //     "Content-Type": "application/json",
-        //   },
         const response = await axios.get("/movements", {
           headers: {
+            Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
             "Content-Type": "application/json",
           },
         });
-
+        
         if(response.data.movements){
           setMovements(response.data.movements);
         }

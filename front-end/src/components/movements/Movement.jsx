@@ -3,7 +3,7 @@ import axios from "../../api/Axios";
 
 function Movement({ movement, setMovements = null }) {
   const handleDelete = async () => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
     try {
       const response = await axios.delete(`/movements/${movement._id}`, {
         headers: {

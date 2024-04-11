@@ -27,7 +27,7 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
     setSubmitting(true);
 
     try {
-      const accessToken = sessionStorage.getItem("accessToken");
+      const accessToken = localStorage.getItem("accessToken");
       const response = await axios.patch("/users/update-password", formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -52,7 +52,6 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
       password: "",
       passwordConfirm: "",
     });
-
   }
 
   function handleFailedLogin(error) {

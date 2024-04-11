@@ -7,11 +7,9 @@ import axios from "../api/Axios";
 function Movements() {
   const [movements, setMovements] = useState([]);
 
-  useEffect(() => { 
-    // TODO use cookies instead of sessionStorage
-    const accessToken = sessionStorage.getItem("accessToken");
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
 
-    // TODO using useNavigate hook
     if (!accessToken) {
       window.location.href = "/login";
     }
@@ -25,7 +23,7 @@ function Movements() {
           },
         });
         // console.log(response.data.movements)
-        if(response.data.movements){
+        if (response.data.movements) {
           setMovements(response.data.movements);
         }
       } catch (error) {
@@ -36,7 +34,7 @@ function Movements() {
   }, []);
 
   const totalMoney = getTotalMoney();
-  
+
   function getTotalMoney() {
     return movements.reduce((acc, movement) => {
       if (movement.sign === "+") {
