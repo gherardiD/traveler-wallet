@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookie from "js-cookie";
 import axios from "../../api/Axios";
 import FormField from "../../components/form/FormField";
-import { Link, useNavigate } from "react-router-dom";
 import SubmitButton from "../../components/form/SubmitButton";
 import SubmittingError from "../../components/form/SubmittingError";
 
@@ -45,13 +46,13 @@ function Login() {
     storeUserToken(response);
     setSubmitting(false);
     navigate("/app/home");
-    // window.location.href = "/app/home";
   }
 
   function storeUserToken(response) {
     // TODO store the token in document.cookie
     const token = response.data.token;
-    sessionStorage.setItem("accessToken", token);
+    Cookie.set("accessToken", token);
+    // sessionStorage.setItem("accessToken", token);
   }
 
   function handleFailedLogin(error) {

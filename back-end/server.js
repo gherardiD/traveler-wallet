@@ -11,7 +11,6 @@ process.on("uncaughtException", (err) => {
 dotenv.config({ path: "./config.env" });
 const app = require("./app");
 
-// ! hosted database doesn't work at school
 // DB is the connection string to the MongoDB database
 const DB = process.env.DATABASE.replace(
   "<PASSWORD>",
@@ -19,7 +18,6 @@ const DB = process.env.DATABASE.replace(
 );
 // const DB = process.env.DATABASE_LOCAL;
 
-// Connect to MongoDB database
 mongoose.connect(DB).then(() => {
   console.log("DB connection successful!");
 });

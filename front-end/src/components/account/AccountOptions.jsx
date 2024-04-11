@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "../../api/Axios";
 
 const AccountOptions = ({ toggleShowOtherOptions }) => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -10,7 +12,7 @@ const AccountOptions = ({ toggleShowOtherOptions }) => {
     setLoading(true);
     const accessToken = sessionStorage.getItem("accessToken");
     if (!accessToken) {
-      window.location.href = "/login";
+      navigate("/login");
     }
     
     const getUserData = async function fetchData() {
