@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 
 const AccountOptions = ({ toggleShowOtherOptions }) => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const AccountOptions = ({ toggleShowOtherOptions }) => {
 
     const getUserData = async function fetchData() {
       try {
-        const response = await axios.get("/users/me", {
+        const response = await Axios.get("/users/me", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
             "Content-Type": "application/json",

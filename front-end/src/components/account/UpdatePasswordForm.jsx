@@ -1,6 +1,6 @@
 import FormField from "../form/FormField";
 import { useState } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import SubmittingError from "../form/SubmittingError";
 
 const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
@@ -28,7 +28,7 @@ const UpdatePasswordForm = ({ toggleUpdatePasswordForm }) => {
 
     try {
       const accessToken = localStorage.getItem("accessToken");
-      const response = await axios.patch("/users/update-password", formData, {
+      const response = await Axios.patch("/users/update-password", formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/general/Header";
 import Footer from "../components/general/Footer";
 import Movement from "../components/movements/Movement";
-import axios from "../api/Axios";
+import Axios from "../api/Axios";
 
 function Home() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Home() {
 
     const fetchMovements = async function fetchData() {
       try {
-        const response = await axios.get("/movements", {
+        const response = await Axios.get("/movements", {
           headers: {
             Authorization: `Bearer ${accessToken}`, // Include the token in the Authorization header
             "Content-Type": "application/json",

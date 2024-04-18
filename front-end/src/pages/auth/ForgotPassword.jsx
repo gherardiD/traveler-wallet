@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import FormField from "../../components/form/FormField";
 import { Link } from "react-router-dom";
 import SubmitButton from "../../components/form/SubmitButton";
@@ -27,7 +27,7 @@ function ForgotPassword() {
     setError(null);
 
     try {
-      const response = await axios.post("/users/forgot-password", formData);
+      const response = await Axios.post("/users/forgot-password", formData);
       handleSuccessfulSubmit(response);
     } catch (err) {
       handleFailedSubmit(err);

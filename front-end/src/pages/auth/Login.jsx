@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import FormField from "../../components/form/FormField";
 import SubmitButton from "../../components/form/SubmitButton";
 import SubmittingError from "../../components/form/SubmittingError";
@@ -33,7 +33,7 @@ function Login() {
     setError(null);
 
     try {
-      const response = await axios.post("/users/login", formData);
+      const response = await Axios.post("/users/login", formData);
       handleSuccessfulLogin(response);
     } catch (err) {
       handleFailedLogin(err);

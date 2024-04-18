@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useState } from "react";
-import axios from "../api/Axios";
+import Axios from "../api/Axios";
 
 import Header from "../components/general/Header";
 import DeletePopUp from "../components/account/DeletePopUp";

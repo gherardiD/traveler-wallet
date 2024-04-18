@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../api/Axios";
+import Axios from "../api/Axios";
 import Currency from "../components/currencies/Currency";
 import Header from "../components/general/Header";
 import Footer from "../components/general/Footer";
@@ -11,7 +11,7 @@ function Currencies() {
       const fetchCurrencies = async function fetchData() {
         try {
           // TODO separate all currencies from the user's currencies
-          const response = await axios.get("/currencies");
+          const response = await Axios.get("/currencies");
           if (response.data.currencies) {
             setCurrencies(response.data.currencies);
           }

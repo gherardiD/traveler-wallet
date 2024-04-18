@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FormField from "../../components/form/FormField";

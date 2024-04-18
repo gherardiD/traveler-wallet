@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import FormField from "../../components/form/FormField";
 import SubmitButton from "../../components/form/SubmitButton";
@@ -36,7 +36,7 @@ const SignUp = () => {
     setError(null);
 
     try {
-      const response = await axios.post("/users/signup", formData);
+      const response = await Axios.post("/users/signup", formData);
 
       handleSuccessfulSubmit(response);
     } catch (error) {

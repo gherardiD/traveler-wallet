@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import axios from "../../api/Axios";
+import Axios from "../../api/Axios";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -38,7 +38,7 @@ function ConfirmEmail() {
   useEffect(() => {
     async function sendTokenToConfirmEmail() {
       try {
-        const response = await axios.get(`/users/confirm-email/${token}`);
+        const response = await Axios.get(`/users/confirm-email/${token}`);
         
         console.log("Success:", response.data);
         setIsLoading(false);
