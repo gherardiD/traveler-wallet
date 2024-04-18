@@ -48,8 +48,6 @@ To run this project, you will need to add the following environment variables to
 
 `JWT_COOKIE_EXPIRES_IN`
 
-`SALT`
-
 `EMAIL_API_KEY`
 
 ## Run Locally
