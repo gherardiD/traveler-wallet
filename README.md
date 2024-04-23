@@ -1,10 +1,10 @@
 # Traveler Wallet
 
-Progetto per gestire un portaglio in diverse valute in modo da evitare commissioni di cambio valuta quando visiti paesi diversi molto spesso, inoltre offre la possibilita di tenere traccia delle spese e di impostare un budget di un determinato viaggio
+Traveler Wallet permette di tenere traccia delle città e degli stati in cui si viaggia e inoltre fornisce uno storico delle spese per ogni città.
 
 ## Target
 
-L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semplicemente di persone che amano viaggiare.
+L'app è stata creata per soddisfare alcuni bisogni di chi ama viaggiare e che vuole avere un occhio di riguardo alle spese.
 
 ## Funzionalità
 
@@ -12,18 +12,15 @@ L'app è stata creata per soddisfiare alcune necessita di nomadi digitali o semp
 
 - creazione account
 - eliminazione account
-- aggiunta soldi
-- cambio password (con invio di email)
-- cambio valuta
-- tracciamento movimenti
-- resoconto movimenti
+- cambio password 
+- tracciamento spese
+- tracciamento città (e stati)
 
 **amministratore**
 
-- gestiscione valute (visualizzazione. modifica, aggiunta)
 - gestione utenti
-- visualizzazione utenti (per numero di movimenti, per saldo totale...)
-- visualizzazione delle valute più usate
+- gestione spese
+- gestione delle citta
 
 ## Prerequisites
 
@@ -90,21 +87,23 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 - passwordConfirm
 - active
 
-**Currency**
+**City**
 
 - \_id (Primary Key)
-- name
-- code
-- symbol
+- cityName
+- country
+- emojy
+- date
+- notes
+- position
+- user_id (Foreign Key referencing User)
 
-**Movement**
+**Expense**
 
 - \_id (Primary Key)
-- name
 - description
 - type
 - amount
-- sign
 - user_id (Foreign Key referencing User)
 - currency_id (Foreign Key referencing Currency)
 - date
@@ -112,13 +111,14 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 
 ## Schema ER
 
-![SchemaER](https://github.com/gherardiD/traveler-wallet/assets/101709520/d45207cb-9619-4860-bf38-4ac01dcf5e77)
+![schemaER](https://github.com/gherardiD/traveler-wallet/assets/101709520/17dcf6f1-890f-41ea-b9e8-38e236402eee)
 
 
 ## Screenshots
 
-![mockup_login](https://github.com/gherardiD/project/assets/101709520/0d1b4c94-5221-4926-9f4b-a25968067771)
-![mokcup_landing](https://github.com/gherardiD/project/assets/101709520/57c89275-844f-4efc-84a9-134853f7dec0)
-![mockup_currencies](https://github.com/gherardiD/project/assets/101709520/5ed7eb2c-afb6-4ee8-9a55-71d80baadf09)
-![mockuo_transactions](https://github.com/gherardiD/project/assets/101709520/de52459c-e763-492c-b7a3-59d4fd90c448)
+![landingPage](https://github.com/gherardiD/traveler-wallet/assets/101709520/73621e6d-3b3d-40ff-bb89-d5859feebdec)
+![product](https://github.com/gherardiD/traveler-wallet/assets/101709520/d9d0e9b0-4b8e-42bb-b48f-bafa5d36a247)
+![login](https://github.com/gherardiD/traveler-wallet/assets/101709520/1dd550dd-ca23-4bb3-8efd-0c7999d3b86c)
+![cities](https://github.com/gherardiD/traveler-wallet/assets/101709520/dcb2639d-414e-4e05-b8cf-1812e889b0c6)
+
 
