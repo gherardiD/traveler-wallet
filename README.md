@@ -33,7 +33,9 @@ To run this project, you will need to add the following environment variables to
 
 `NODE_ENV`
 
-`PORT`
+`SERVER_PORT`
+
+`FRONT_END_PORT`
 
 `DATABASE`
 
