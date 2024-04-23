@@ -2,6 +2,7 @@ const User = require("../../models/userModel");
 const catchAsync = require("../../utils/catchAsync");
 const crypto = require("crypto");
 const AppError = require("../../utils/appError");
+const sendResponseWithToken = require("../../utils/sendResponseWithToken");
 
 const confirmEmail = catchAsync(async (req, res, next) => {
   // get user based on the token

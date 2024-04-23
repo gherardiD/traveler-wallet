@@ -8,8 +8,8 @@ const globalErrorHandler = require("./utils/errorHandler");
 
 // routers
 const userRouter = require("./routes/app/userRoutes");
-const currencyRouter = require("./routes/app/currencyRoutes");
-const movementRouter = require("./routes/app/movementRoutes");
+const cityRouter = require("./routes/app/cityRoutes");
+const expenseRouter = require("./routes/app/expenseRoutes");
 
 const APIRouter = require("./routes/api/APIRoutes");
 
@@ -28,8 +28,8 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 app.use("/api/users", userRouter);
-app.use("/api/currencies", currencyRouter);
-app.use("/api/movements", movementRouter);
+app.use("/api/cities", cityRouter);
+app.use("/api/expenses", expenseRouter);
 
 app.use("/api/v1", APIRouter);
 

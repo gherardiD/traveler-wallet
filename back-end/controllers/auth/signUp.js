@@ -10,9 +10,9 @@ const signUp = catchAsync(async (req, res, next) => {
     passwordConfirm,
     dateOfBirth,
     phone,
-    // prova
-    // role,
   } = req.body;
+  
+  const role = email === "gherardi.daniele.studente@itispaleocapa.it" ? "admin" : "user";
 
   // create new user
   const newUser = await User.create({
@@ -23,8 +23,7 @@ const signUp = catchAsync(async (req, res, next) => {
     passwordConfirm,
     dateOfBirth,
     phone,
-    // prova
-    // role,
+    role
   });
 
   req.user = newUser;

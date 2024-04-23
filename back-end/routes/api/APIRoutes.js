@@ -1,16 +1,16 @@
 const express = require("express");
 
-const getAllCurrencies = require("../../controllers/currency/getAllCurrencies");
-const getCurrency = require("../../controllers/currency/getCurrency");
-const createCurrency = require("../../controllers/currency/createCurrency");
-const updateCurrency = require("../../controllers/currency/updateCurrency");
-const deleteCurrency = require("../../controllers/currency/deleteCurrency");
+const getAllCities = require("../../controllers/city/every/getAllCities");
+const getCity = require("../../controllers/city/every/getCity");
+const createCity = require("../../controllers/city/every/createCity");
+const updateCity = require("../../controllers/city/every/updateCity");
+const deleteCity = require("../../controllers/city/every/deleteCity");
 
-const getAllMovements = require("../../controllers/movement/every/getAllMovements");
-const getMovement = require("../../controllers/movement/every/getMovement");
-const createMovement = require("../../controllers/movement/every/createMovement");
-const updateMovement = require("../../controllers/movement/every/updateMovement");
-const deleteMovement = require("../../controllers/movement/every/deleteMovement");
+const getAllExpenses = require("../../controllers/expense/every/getAllExpenses");
+const getExpense = require("../../controllers/expense/every/getExpense");
+const createExpense = require("../../controllers/expense/every/createExpense");
+const updateExpense = require("../../controllers/expense/every/updateExpense");
+const deleteExpense = require("../../controllers/expense/every/deleteExpense");
 
 const getAllUsers = require("../../controllers/user/every/getAllUsers");
 const getUser = require("../../controllers/user/every/getUser");
@@ -18,33 +18,33 @@ const createUser = require("../../controllers/user/every/createUser");
 const updateUser = require("../../controllers/user/every/updateUser");
 const deleteUser = require("../../controllers/user/every/deleteUser");
 
-const APIMovementsRoutes = require("./APIMovementsRoutes.js");
+const APIExpensesRouter = require("./APIExpensesRoutes.js");
 
 const router = express.Router();
 
-router.use("/users/:userId/movements", APIMovementsRoutes);
+router.use("/users/:userId/expenses", APIExpensesRouter);
 
 router
-  .route("/currencies/")
-  .get(getAllCurrencies)
-  .post(createCurrency);
+  .route("/cities/")
+  .get(getAllCities)
+  .post(createCity);
 
 router
-  .route("/currencies/:id")
-  .get(getCurrency)
-  .patch(updateCurrency)
-  .delete(deleteCurrency);
+  .route("/cities/:id")
+  .get(getCity)
+  .patch(updateCity)
+  .delete(deleteCity);
 
 router
-  .route("/movements/")
-  .get(getAllMovements)
-  .post(createMovement);
+  .route("/expenses/")
+  .get(getAllExpenses)
+  .post(createExpense);
 
 router
-  .route("/movements/:id")
-  .get(getMovement)
-  .patch(updateMovement)
-  .delete(deleteMovement);
+  .route("/expenses/:id")
+  .get(getExpense)
+  .patch(updateExpense)
+  .delete(deleteExpense);
 
 router
   .route("/users/")

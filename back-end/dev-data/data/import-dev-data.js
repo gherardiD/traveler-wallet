@@ -10,8 +10,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const User = require("../../models/userModel");
-const Currency = require("../../models/currencyModel");
-const Movement = require("../../models/movementModel");
+const City = require("../../models/cityModel");
+const Expense = require("../../models/expenseModel");
 
 dotenv.config({ path: `${__dirname}/../../config.env` });
 
@@ -31,20 +31,18 @@ mongoose.connect(DB).then(() => {
 // Read JSON file
 const users = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, "utf-8"));
 
-const currencies = JSON.parse(
-  fs.readFileSync(`${__dirname}/currencies.json`, "utf-8")
+const expenses = JSON.parse(
+  fs.readFileSync(`${__dirname}/expenses.json`, "utf-8")
 );
 
-const movements = JSON.parse(
-  fs.readFileSync(`${__dirname}/movements.json`, "utf-8")
-);
+const cities = JSON.parse(fs.readFileSync(`${__dirname}/cities.json`, "utf-8"));
 
 // Import data into database
 const importData = async () => {
   try {
     await User.create(users, { validateBeforeSave: false });
-    await Currency.create(currencies);
-    await Movement.create(movements, { validateBeforeSave: false });
+    await City.create(cities, { validateBeforeSave: false });
+    await Expense.create(expenses);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);
@@ -56,8 +54,8 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await User.deleteMany();
-    await Currency.deleteMany();
-    await Movement.deleteMany();
+    await City.deleteMany();
+    await Expense.deleteMany();
     console.log("Data successfully deleted!");
   } catch (err) {
     console.log(err);

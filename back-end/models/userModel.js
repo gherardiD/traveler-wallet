@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["user", "admin"],
-    // default: "user",
+    default: "user",
   },
   passwordChangedAt: Date,
   passwordResetToken: String,
@@ -67,17 +67,15 @@ const userSchema = new mongoose.Schema({
 // * DOCUMENT MIDDLEWARES * //
 // Encrypt password
 userSchema.pre("save", async function (next) {
-  // only run this function if password was actually modified
   if (!this.isModified("password")) return next();
 
-  // hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  // delete the passwordConfirm field
   this.passwordConfirm = undefined;
 
-  // if the document isn't new, set passwordChangedAt to current time
-  if (!this.isNew) this.passwordChangedAt = Date.now() - 1000; // subtract 1 second to make sure token is created after passwordChangedAt (in case of slow connection
+  // subtract 1 second to make sure token is created passwordChangedAt (in case of slow connection)
+  if (!this.isNew) this.passwordChangedAt = Date.now() - 1000; 
+  
   next();
 });
 
@@ -97,20 +95,13 @@ userSchema.methods.isPasswordCorrected = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-// userSchema.methods.isPasswordCorrected = async function (
-//   candidatePassword,
-//   userPassword
-// ) {
-//   return await bcrypt.compare(candidatePassword, userPassword);
-// };
-
 // check if user changed password after the token was issued
 userSchema.methods.userChangedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
       10
-    ); // 10 is radix parameter
+    );
 
     return JWTTimestamp < changedTimestamp;
   }
