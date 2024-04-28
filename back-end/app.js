@@ -15,7 +15,7 @@ const APIRouter = require("./routes/api/APIRoutes");
 
 const app = express();
 
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors());
 
 app.use(cookieParser());
 
