@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
   dateOfBirth: {
     type: Date,
     required: [true, "Please provide your date of birth!"],
+    default: Date.now(),
   },
   phone: {
     type: String,

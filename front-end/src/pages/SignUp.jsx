@@ -8,7 +8,7 @@ import BackButton from "../components/BackButton";
 
 function SignUp() {
   const navigate = useNavigate();
-  const { signUp, isAuthenticated } = useAuth();
+  const { signUp, isAuthenticated, isLoading } = useAuth();
   // PRE-FILL FOR DEV PURPOSES
   const [formData, setFormData] = useState({
     firstName: "Daniele",
@@ -17,7 +17,7 @@ function SignUp() {
     password: "danieleg",
     passwordConfirm: "danieleg",
     phone: "3207256463",
-    dateOfBirth: "26/04/2005",
+    dateOfBirth: "2003-05-05",
   });
 
   useEffect(() => {
@@ -67,6 +67,7 @@ function SignUp() {
           <input
             type="email"
             id="email"
+            name="email"
             onChange={(e) => handleInputChange(e)}
             value={formData.email}
           />
@@ -76,6 +77,7 @@ function SignUp() {
           <input
             type="password"
             id="password"
+            name="password"
             onChange={(e) => handleInputChange(e)}
             value={formData.passwordConfirm}
           />
@@ -85,6 +87,7 @@ function SignUp() {
           <input
             type="password"
             id="passwordConfirm"
+            name="passwordConfirm"
             onChange={(e) => handleInputChange(e)}
             value={formData.passwordConfirm}
           />
@@ -94,6 +97,7 @@ function SignUp() {
           <input
             type="tel"
             id="phone"
+            name="phone"
             onChange={(e) => handleInputChange(e)}
             value={formData.phone}
           />
@@ -103,12 +107,13 @@ function SignUp() {
           <input
             type="date"
             id="dateOfBirth"
+            name="dateOfBirth"
             onChange={(e) => handleInputChange(e)}
             value={formData.dateOfBirth}
           />
         </div>
         <div className={styles.buttons}>
-          <Button type="primary">SignUp</Button>
+          <Button type="primary">{isLoading ? "Loading" : "SignUp"}</Button>
           <BackButton />
         </div>
       </form>

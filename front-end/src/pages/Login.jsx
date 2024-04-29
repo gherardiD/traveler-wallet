@@ -54,7 +54,7 @@ export default function Login() {
 
           <div className={styles.buttons}>
             <Button type="primary">Login</Button>
-            <Button type="back">
+            <Button type="back" onClick={e => e.preventDefault}>
               <Link to="/signup">Register</Link>
             </Button>
           </div>

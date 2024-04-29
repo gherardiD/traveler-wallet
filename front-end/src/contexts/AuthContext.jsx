@@ -23,6 +23,8 @@ function reducer(state, action) {
         isLoading: false,
         user: action.payload.user,
       };
+    case "SIGNUP":
+      return { ...state, isLoading: false };
     case "LOGOUT":
       localStorage.removeItem("token");
       return { ...state, isAuthenticated: false, user: null };
@@ -53,10 +55,33 @@ function AuthProvider({ children }) {
     dispatch({ type: "LOGOUT" });
   }
 
+  async function signUp(formData) {
+    dispatch({ type: "LOADING" });
+    try {
+      const response = await Axios.post("/users/signup", formData);
+      console.log("response", response);
+      dispatch({ type: "SIGNUP"});
+    } catch (error) {
+      dispatch({ type: "REJECTED", payload: error.message });
+    }
+  }
+
+  async function confirmEmail(token) {
+    dispatch({ type: "LOADING" });
+    try {
+      const response = await Axios.get(`/users/confirm-email/${token}`);
+      console.log("response", response);
+      const payload = { token: response.data.token, user: response.data.user };
+      dispatch({ type: "LOGIN", payload: payload });
+    } catch (error) {
+      dispatch({ type: "REJECTED", payload: error.message });
+    }
+  }
+
   return (
     // <AuthContext.Provider value={{ isAuthenticated, user, dispatch }}>
     <AuthContext.Provider
-      value={{ isAuthenticated, user, isLoading, error, login, logout }}
+      value={{ isAuthenticated, user, isLoading, error, login, logout, signUp, confirmEmail }}
     >
       {children}
     </AuthContext.Provider>

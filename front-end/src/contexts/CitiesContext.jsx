@@ -5,6 +5,7 @@ import {
   useEffect,
   useReducer,
 } from "react";
+import Axios from "../api/Axios";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -35,7 +36,7 @@ function reducer(state, action) {
     case "CITY/DELETED":
       return {
         ...state,
-        cities: state.cities.filter((city) => city.id !== action.payload),
+        cities: state.cities.filter((city) => city._id !== action.payload),
         isLoading: false,
         currentCity: {},
       };
@@ -52,14 +53,21 @@ function CitiesProvider({ children }) {
   // const [cities, setCities] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [currentCity, setCurrentCity] = useState({});
+  const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     async function fetchCities() {
       dispatch({ type: "LOADING" });
       try {
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
-        dispatch({ type: "CITIES/LOADED", payload: data });
+        // const res = await fetch(`${BASE_URL}/cities`);
+        const response = await Axios.get("/cities", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log("response", response);
+        dispatch({ type: "CITIES/LOADED", payload: response.data.cities });
       } catch {
         dispatch({
           type: "REJECTED",
@@ -72,12 +80,15 @@ function CitiesProvider({ children }) {
   }, []);
 
   async function getCityById(id) {
-    if (id == currentCity.id) return;
+    if (id == currentCity._id) return;
     dispatch({ type: "LOADING" });
     try {
-      const res = await fetch(`${BASE_URL}/cities/${id}`);
-      const data = await res.json();
-      dispatch({ type: "CITY/LOADED", payload: data });
+      const response = await Axios.get(`/cities/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: "CITY/LOADED", payload: response.data.city });
     } catch {
       dispatch({
         type: "REJECTED",
@@ -89,15 +100,12 @@ function CitiesProvider({ children }) {
   async function createCity(newCity) {
     dispatch({ type: "LOADING" });
     try {
-      const res = await fetch(`${BASE_URL}/cities`, {
-        method: "POST",
+      const response = await Axios.post("/cities", newCity, {
         headers: {
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(newCity),
       });
-      const data = await res.json();
-      dispatch({ type: "CITY/CREATED", payload: data });
+      dispatch({ type: "CITY/CREATED", payload: response.data.newCity });
     } catch {
       dispatch({
         type: "REJECTED",
@@ -109,8 +117,10 @@ function CitiesProvider({ children }) {
   async function deleteCity(id) {
     dispatch({ type: "LOADING" });
     try {
-      await fetch(`${BASE_URL}/cities/${id}`, {
-        method: "DELETE",
+      await Axios.delete(`/cities/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       dispatch({ type: "CITY/DELETED", payload: id });
     } catch {
