@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import Axios from "../api/Axios";
 const AuthContext = createContext();
 
 const initialState = {
   // todo add error state
-  isAuthenticated: false,
-  user: {},
+  isAuthenticated: sessionStorage.getItem("isAuthenticated") || false,
+  user: null,
   isLoading: false,
   error: null,
 };
@@ -14,20 +14,23 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "LOADING":
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, error: null };
     case "LOGIN":
+      sessionStorage.setItem("isAuthenticated", true);
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
         user: action.payload.user,
+        error: null,
       };
     case "SIGNUP":
       return { ...state, isLoading: false };
     case "LOGOUT":
+      sessionStorage.removeItem("isAuthenticated");
       localStorage.removeItem("token");
-      return { ...state, isAuthenticated: false, user: null };
+      return { ...state, isAuthenticated: false, user: null, error: null };
     case "REJECTED":
       return { ...state, error: action.payload, isLoading: false };
     default:
@@ -38,6 +41,28 @@ function reducer(state, action) {
 function AuthProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { isAuthenticated, user, isLoading, error } = state;
+
+  // useEffect(() => {
+  //   if (!isAuthenticated) dispatch({ type: "LOGOUT" });
+    
+  //   const token = localStorage.getItem("token");
+  //   if (!token) dispatch({ type: "LOGOUT" });
+    
+  //   if(user) return;
+
+  //   dispatch({ type: "LOADING" });
+  //   Axios.get("/users/me", {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       dispatch({ type: "LOGIN", payload: { token, user: response.data.user } });
+  //     })
+  //     .catch((error) => {
+  //       dispatch({ type: "REJECTED", payload: error.message });
+  //     });
+  // }, []);
 
   async function login(formData) {
     dispatch({ type: "LOADING" });
@@ -60,7 +85,7 @@ function AuthProvider({ children }) {
     try {
       const response = await Axios.post("/users/signup", formData);
       console.log("response", response);
-      dispatch({ type: "SIGNUP"});
+      dispatch({ type: "SIGNUP" });
     } catch (error) {
       dispatch({ type: "REJECTED", payload: error.message });
     }
@@ -81,7 +106,16 @@ function AuthProvider({ children }) {
   return (
     // <AuthContext.Provider value={{ isAuthenticated, user, dispatch }}>
     <AuthContext.Provider
-      value={{ isAuthenticated, user, isLoading, error, login, logout, signUp, confirmEmail }}
+      value={{
+        isAuthenticated,
+        user,
+        isLoading,
+        error,
+        login,
+        logout,
+        signUp,
+        confirmEmail,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -1,22 +1,34 @@
-/* eslint-disable react/prop-types */
-import {useEffect } from "react";
-import { useParams } from "react-router-dom";
+import styles from './ConfirmEmail.module.css'
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-
+import Message from "../components/Message";
+import Button from "../components/Button";
 
 function ConfirmEmail() {
-  const { ConfirmEmail, isAuthenticated } = useAuth();
+  const { confirmEmail, isAuthenticated } = useAuth();
   const params = useParams();
   const token = params.emailToken;
 
   // ! FIND A WAY TO RUN USEEFFECT JUST ONCE
   useEffect(() => {
-    ConfirmEmail(token);
+    confirmEmail(token);
   }, [token]);
 
   return (
-    <div className="container bg-white p-8 rounded shadow-md w-1/3 h-auto text-center m-auto">
-      {isAuthenticated ? "Email confirmed" : "Email not confirmed"}
+    <div >
+      {isAuthenticated ? (
+        <div className={styles.container}>
+          <Message message={"Email confirmed"} className={styles.message} />
+          <Button type="primary" className={styles.button}>
+            <Link to="/app" className="text-blue-500">
+              Go to app
+            </Link>
+          </Button>
+        </div>
+      ) : (
+        <Message message={"Email not confirmed"} />
+      )}
     </div>
   );
 }

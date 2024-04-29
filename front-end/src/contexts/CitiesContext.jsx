@@ -7,8 +7,6 @@ import {
 } from "react";
 import Axios from "../api/Axios";
 
-const BASE_URL = "http://localhost:3000";
-
 const CitiesContext = createContext();
 
 const initialState = {
@@ -50,14 +48,13 @@ function reducer(state, action) {
 function CitiesProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { cities, isLoading, currentCity, error } = state;
-  // const [cities, setCities] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [currentCity, setCurrentCity] = useState({});
+  
   const token = localStorage.getItem("token");
 
 
   useEffect(() => {
     async function fetchCities() {
+      if (!token) return;
       dispatch({ type: "LOADING" });
       try {
         // const res = await fetch(`${BASE_URL}/cities`);
