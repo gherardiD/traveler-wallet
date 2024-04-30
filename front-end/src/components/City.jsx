@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 import styles from "./City.module.css";
 import { useCities } from "../contexts/CitiesContext";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
+import Button from "./Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -15,7 +16,7 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { id } = useParams();
+  const { id } = useParams()
   const { currentCity, isLoading, getCityById } = useCities();
 
   useEffect(() => {
@@ -58,7 +59,10 @@ function City() {
         </a>
       </div>
 
-      <div>
+      <div className={styles.buttons}>
+        <Button type={"primary"} >
+          <Link to={`/app/cities/${id}/edit`}>Edit</Link>
+        </Button>
         <BackButton />
       </div>
     </div>

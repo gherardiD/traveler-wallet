@@ -20,6 +20,12 @@
   justify-content: space-between;
 }
 
+.flag {
+  position: absolute;
+  right: 1rem;
+  top: 2.7rem;
+  font-size: 2.8rem;
+}
 
 .form.loading {
   opacity: 0.3;

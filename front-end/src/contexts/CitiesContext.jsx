@@ -1,10 +1,5 @@
 /* eslint-disable react/prop-types */
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import Axios from "../api/Axios";
 
 const CitiesContext = createContext();
@@ -31,6 +26,15 @@ function reducer(state, action) {
         isLoading: false,
         currentCity: action.payload,
       };
+    case "CITY/UPDATED":
+      return {
+        ...state,
+        cities: state.cities.map((city) =>
+          city._id === action.payload._id ? action.payload : city
+        ),
+        isLoading: false,
+        currentCity: action.payload,
+      };
     case "CITY/DELETED":
       return {
         ...state,
@@ -48,9 +52,8 @@ function reducer(state, action) {
 function CitiesProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { cities, isLoading, currentCity, error } = state;
-  
-  const token = localStorage.getItem("token");
 
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchCities() {
@@ -111,6 +114,23 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function updateCity(city) {
+    dispatch({ type: "LOADING" });
+    try {
+      const response = await Axios.patch(`/cities/${currentCity._id}`, city, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: "CITY/UPDATED", payload: response.data.updatedCity });
+    } catch {
+      dispatch({
+        type: "REJECTED",
+        payload: "There was an error updating data...",
+      });
+    }
+  }
+
   async function deleteCity(id) {
     dispatch({ type: "LOADING" });
     try {
@@ -136,6 +156,7 @@ function CitiesProvider({ children }) {
         currentCity,
         getCityById,
         createCity,
+        updateCity,
         deleteCity,
         error,
       }}

@@ -87,7 +87,7 @@ function Form() {
     
     console.log(newCity);
     await createCity(newCity);
-    navigate("/app");
+    navigate("/app/cities");
   }
 
   if (geocodeIsLoading) {

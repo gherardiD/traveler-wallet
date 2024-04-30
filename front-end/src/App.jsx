@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { CitiesProvider } from "./contexts/CitiesContext";
+import { ExpensesProvider } from "./contexts/ExpensesContext";
 import { AuthProvider } from "./contexts/AuthContext";
 
 // import HomePage from "./pages/HomePage";
@@ -28,59 +29,61 @@ import ConfirmEmail from "./pages/ConfirmEmail";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import ExpenseList from "./components/ExpenseList";
+import CityLayout from "./components/CityLayout";
+import EditCity from "./components/EditCity";
+import ExpenseForm from "./components/ExpenseForm";
 
 function App() {
   return (
-    <AuthProvider>
-        <BrowserRouter>
-          <Suspense fallback={<SpinnerFullPage />}>
-            <Routes>
-              <Route index element={<HomePage />} />
-              <Route path="/product" element={<Product />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+    <BrowserRouter>
+      <AuthProvider>
+        <Suspense fallback={<SpinnerFullPage />}>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/confirm-email/:emailToken"
+              element={<ConfirmEmail />}
+            />
+            <Route
+              path="/app"
+              element={
+                <ProtectedRoute>
+                  <CitiesProvider>
+                    <AppLayout />
+                  </CitiesProvider>
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate replace to={"cities"} />} />
+              <Route path="cities" element={<CityList />} />
               <Route
-                path="/confirm-email/:emailToken"
-                element={<ConfirmEmail />}
-              />
-              <Route
-                path="/app"
+                path="cities/:id"
                 element={
-                  <ProtectedRoute>
-                    <CitiesProvider>
-                      <AppLayout />
-                    </CitiesProvider>
-                  </ProtectedRoute>
+                  <ExpensesProvider>
+                    <CityLayout />
+                  </ExpensesProvider>
                 }
               >
-                <Route index element={<Navigate replace to={"cities"} />} />
-                <Route path="cities" element={<CityList />} />
-                <Route path="cities/:id" element={<City />} />
-                {/* <Route
-                      path="cities/:id"
-                      element={
-                          <ExpensesProvider>
-                            <AppLayout />
-                          </ExpensesProvider>
-                      }
-                    > */}
-                {/* <Route index element={<Navigate replace to={"info"} />} /> */}
-                {/* <Route path="info" element={<City />} /> */}
-                {/* <Route path="modifica" element={<ModificaCity />} /> */}
-                {/* <Route path="expenses" element={<ExpensesList />} /> */}
-                {/* <Route path="expenses/form" element={<ExpensesForm />} /> */}
+                <Route index element={<Navigate replace to={"info"} />} />
+                <Route path="info" element={<City />} />
+                <Route path="edit" element={<EditCity />} />
+                <Route path="expenses" element={<ExpenseList />} />
+                <Route path="expenses/form" element={<ExpenseForm />} />
                 {/* <Route path="expenses/:id" element={<Expense />} /> */}
                 {/* <Route path="expenses/:id/modifica" element={<ExpenseForm />} /> */}
-
-                <Route path="countries" element={<CountryList />} />
-                <Route path="form" element={<Form />} />
               </Route>
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-    </AuthProvider>
+              <Route path="countries" element={<CountryList />} />
+              <Route path="form" element={<Form />} />
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
