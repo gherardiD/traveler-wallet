@@ -27,6 +27,7 @@ import Form from "./components/Form";
 import ConfirmEmail from "./pages/ConfirmEmail";
 import SpinnerFullPage from "./components/SpinnerFullPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import ExpenseList from "./components/ExpenseList";
 
 function App() {
   return (
@@ -56,6 +57,22 @@ function App() {
                 <Route index element={<Navigate replace to={"cities"} />} />
                 <Route path="cities" element={<CityList />} />
                 <Route path="cities/:id" element={<City />} />
+                {/* <Route
+                      path="cities/:id"
+                      element={
+                          <ExpensesProvider>
+                            <AppLayout />
+                          </ExpensesProvider>
+                      }
+                    > */}
+                {/* <Route index element={<Navigate replace to={"info"} />} /> */}
+                {/* <Route path="info" element={<City />} /> */}
+                {/* <Route path="modifica" element={<ModificaCity />} /> */}
+                {/* <Route path="expenses" element={<ExpensesList />} /> */}
+                {/* <Route path="expenses/form" element={<ExpensesForm />} /> */}
+                {/* <Route path="expenses/:id" element={<Expense />} /> */}
+                {/* <Route path="expenses/:id/modifica" element={<ExpenseForm />} /> */}
+
                 <Route path="countries" element={<CountryList />} />
                 <Route path="form" element={<Form />} />
               </Route>
