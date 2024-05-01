@@ -16,8 +16,8 @@
 }
 
 .expenseItem--active {
-  border: 2px solid var(--color-brand--2);
-  border-left: 5px solid var(--color-brand--2);
+  border: 2px solid var(--color-expense--1);
+  border-left: 5px solid var(--color-expense--1);
 }
 
 .emoji {

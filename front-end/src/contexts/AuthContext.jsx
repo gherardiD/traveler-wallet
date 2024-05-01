@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import Axios from "../api/Axios";
+
 const AuthContext = createContext();
 
 const initialState = {
   // todo add error state
   isAuthenticated: sessionStorage.getItem("isAuthenticated") || false,
-  user: null,
+  user: {},
   isLoading: false,
   error: null,
 };
@@ -17,6 +18,8 @@ function reducer(state, action) {
       return { ...state, isLoading: true, error: null };
     case "LOGIN":
       sessionStorage.setItem("isAuthenticated", true);
+      sessionStorage.setItem("firstName", action.payload.user.firstName);
+
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,

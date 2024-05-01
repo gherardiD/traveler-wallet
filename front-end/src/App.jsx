@@ -5,22 +5,6 @@ import { CitiesProvider } from "./contexts/CitiesContext";
 import { ExpensesProvider } from "./contexts/ExpensesContext";
 import { AuthProvider } from "./contexts/AuthContext";
 
-// import HomePage from "./pages/HomePage";
-// import Product from "./pages/Product";
-// import Pricing from "./pages/Pricing";
-// import AppLayout from "./pages/AppLayout";
-// import PageNotFound from "./pages/PageNotFound";
-// import Login from "./pages/Login";
-// import SignUp from "./pages/SignUp";
-
-const HomePage = lazy(() => import("./pages/HomePage"));
-const Product = lazy(() => import("./pages/Product"));
-const Pricing = lazy(() => import("./pages/Pricing"));
-const AppLayout = lazy(() => import("./pages/AppLayout"));
-const PageNotFound = lazy(() => import("./pages/PageNotFound"));
-const Login = lazy(() => import("./pages/Login"));
-const SignUp = lazy(() => import("./pages/SignUp"));
-
 import CityList from "./components/CityList";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
@@ -30,8 +14,19 @@ import SpinnerFullPage from "./components/SpinnerFullPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import ExpenseList from "./components/ExpenseList";
 import CityLayout from "./components/CityLayout";
-import EditCity from "./components/EditCity";
+import EditCityForm from "./components/EditCityForm";
 import ExpenseForm from "./components/ExpenseForm";
+import Expense from "./components/Expense";
+import EditExpenseForm from "./components/EditExpenseForm";
+
+const HomePage = lazy(() => import("./pages/HomePage"));
+const Product = lazy(() => import("./pages/Product"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const AppLayout = lazy(() => import("./pages/AppLayout"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const Login = lazy(() => import("./pages/Login"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+
 
 function App() {
   return (
@@ -70,11 +65,11 @@ function App() {
               >
                 <Route index element={<Navigate replace to={"info"} />} />
                 <Route path="info" element={<City />} />
-                <Route path="edit" element={<EditCity />} />
+                <Route path="edit" element={<EditCityForm />} />
                 <Route path="expenses" element={<ExpenseList />} />
                 <Route path="expenses/form" element={<ExpenseForm />} />
-                {/* <Route path="expenses/:id" element={<Expense />} /> */}
-                {/* <Route path="expenses/:id/modifica" element={<ExpenseForm />} /> */}
+                <Route path="expenses/:expenseId" element={<Expense />} />
+                <Route path="expenses/:expenseId/edit" element={<EditExpenseForm />} />
               </Route>
               <Route path="countries" element={<CountryList />} />
               <Route path="form" element={<Form />} />

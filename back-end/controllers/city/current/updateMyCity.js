@@ -2,7 +2,7 @@ const catchAsync = require("../../../utils/catchAsync");
 const AppError = require("../../../utils/appError");
 const City = require("../../../models/cityModel");
 
-const updateCity = catchAsync(async (req, res, next) => {
+const updateMyCity = catchAsync(async (req, res, next) => {
   const updatedCity = await City.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -19,4 +19,4 @@ const updateCity = catchAsync(async (req, res, next) => {
   res.status(200).json({ updatedCity });
 });
 
-module.exports = updateCity;
+module.exports = updateMyCity;

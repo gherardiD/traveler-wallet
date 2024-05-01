@@ -3,8 +3,9 @@ import { useAuth } from "../contexts/AuthContext";
 import styles from "./User.module.css";
 
 function User() {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
+  const firstName = sessionStorage.getItem("firstName");
 
   function handleClick() {
     logout();
@@ -14,7 +15,7 @@ function User() {
   return (
     <div className={styles.user}>
       {/* <img src={user.avatar} alt={user.name} /> */}
-      {/* <span>Welcome, {user.firstName}</span> */}
+      <span>Welcome, {firstName}</span>
       <button onClick={handleClick}>Logout</button>
     </div>
   );

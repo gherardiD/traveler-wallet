@@ -42,6 +42,8 @@ function reducer(state, action) {
         isLoading: false,
         currentExpense: {},
       };
+    case "EXPENSE/SET_CURRENT":
+      return { ...state, currentExpense: action.payload };
     case "REJECTED":
       return { ...state, error: action.payload, isLoading: false };
     default:
@@ -52,7 +54,7 @@ function reducer(state, action) {
 // eslint-disable-next-line react/prop-types
 function ExpensesProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { expenses, isLoading, error } = state;
+  const { expenses, isLoading, error, currentExpense } = state;
   const { id } = useParams();
 
   const token = localStorage.getItem("token");
@@ -93,8 +95,8 @@ function ExpensesProvider({ children }) {
   async function updateExpense(expense) {
     dispatch({ type: "LOADING" });
     try {
-      const response = await Axios.put(
-        `/cities/${id}/expenses/${expense._id}`,
+      const response = await Axios.patch(
+        `/cities/${id}/expenses/${currentExpense._id}`,
         expense,
         {
           headers: {
@@ -102,7 +104,10 @@ function ExpensesProvider({ children }) {
           },
         }
       );
-      dispatch({ type: "EXPENSE/UPDATED", payload: response.data.updatedExpense });
+      dispatch({
+        type: "EXPENSE/UPDATED",
+        payload: response.data.updatedExpense,
+      });
     } catch (error) {
       dispatch({ type: "REJECTED", payload: error });
     }
@@ -122,12 +127,19 @@ function ExpensesProvider({ children }) {
     }
   }
 
+  function setCurrentExpense(id) {
+    const currentExpense = expenses.find((expense) => expense._id === id);
+    dispatch({ type: "EXPENSE/SET_CURRENT", payload: currentExpense });
+  }
+
   return (
     <ExpensesContext.Provider
       value={{
         expenses,
         isLoading,
         error,
+        currentExpense,
+        setCurrentExpense,
         createExpense,
         updateExpense,
         deleteExpense,
@@ -146,4 +158,5 @@ function useExpenses() {
   return context;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { ExpensesProvider, useExpenses };

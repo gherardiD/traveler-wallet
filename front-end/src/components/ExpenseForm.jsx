@@ -17,9 +17,6 @@ function ExpenseForm() {
     amount: '',
   });
   
-  console.log(currentCity._id);
-  console.log(currentCity.date);
-
   async function handleSubmit(e) {
     e.preventDefault();
     

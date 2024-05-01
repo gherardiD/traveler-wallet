@@ -7,7 +7,8 @@ const checkUserEmail = catchAsync(async (req, res, next) => {
   const resetToken = req.user.createEmailConfirmToken();
   await req.user.save({ validateBeforeSave: false });
 
-  const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/confirm-email/${resetToken}`;
+  // const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/confirm-email/${resetToken}`;
+  const resetURL = `${process.env.FRONT_END_URL}/confirm-email/${resetToken}`;
 
   // * GET THE LINK FROM CONSOLE AT SCHOOL
   console.log(resetURL);

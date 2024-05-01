@@ -78,6 +78,7 @@ function CitiesProvider({ children }) {
 
     fetchCities();
   }, []);
+  
 
   async function getCityById(id) {
     if (id == currentCity._id) return;

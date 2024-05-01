@@ -3,7 +3,7 @@ const AppError = require("../../../utils/appError");
 const catchAsync = require("../../../utils/catchAsync");
 
 const updateMyExpense = catchAsync(async (req, res, next) => {
-  const expenseUpdated = await Expense.findByIdAndUpdate(
+  const updatedExpense = await Expense.findByIdAndUpdate(
     req.params.id,
     req.body,
     {
@@ -12,11 +12,11 @@ const updateMyExpense = catchAsync(async (req, res, next) => {
     }
   );
 
-  if (!expenseUpdated) {
+  if (!updatedExpense) {
     return next(new AppError("No expense found with that ID", 404));
   }
 
-  res.status(200).json({ expenseUpdated });
+  res.status(200).json({ updatedExpense });
 });
 
 module.exports = updateMyExpense;

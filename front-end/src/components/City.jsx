@@ -6,6 +6,7 @@ import { useCities } from "../contexts/CitiesContext";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
 import Button from "./Button";
+// import Message from "./Message";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -16,13 +17,14 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  const { id } = useParams()
+  const { id } = useParams();
   const { currentCity, isLoading, getCityById } = useCities();
 
   useEffect(() => {
     getCityById(id);
   }, [id]);
 
+  // if () return <Message message="City not found" />;
   const { cityName, emoji, date, notes } = currentCity;
 
   if (isLoading) return <Spinner />;
@@ -60,7 +62,7 @@ function City() {
       </div>
 
       <div className={styles.buttons}>
-        <Button type={"primary"} >
+        <Button type={"primary"}>
           <Link to={`/app/cities/${id}/edit`}>Edit</Link>
         </Button>
         <BackButton />
