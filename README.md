@@ -78,7 +78,6 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 ## Schema logico
 
 **User**
-
 - \_id (Primary Key)
 - firstName
 - lastName
@@ -91,22 +90,23 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 - role
 
 **City**
-
 - \_id (Primary Key)
 - cityName
-- country
-- emojy
 - position
 
+**Country**
+- _id (Primary Key)
+- countryName
+- flag
+
 **Visita**
-- _id
+- _id (Primary Key)
 - date
 - notes
 - user_id
 - city_id
 
 **Expense**
-
 - \_id (Primary Key)
 - description
 - type
