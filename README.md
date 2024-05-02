@@ -88,6 +88,7 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 - password
 - passwordConfirm
 - active
+- role
 
 **City**
 
@@ -95,10 +96,14 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 - cityName
 - country
 - emojy
+- position
+
+**Visita**
+- _id
 - date
 - notes
-- position
-- user_id (Foreign Key referencing User)
+- user_id
+- city_id
 
 **Expense**
 
@@ -106,9 +111,6 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 - description
 - type
 - amount
-- user_id (Foreign Key referencing User)
-- currency_id (Foreign Key referencing Currency)
-- date
 - createdAt
 
 ## Schema ER
