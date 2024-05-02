@@ -12,7 +12,12 @@ function ExpensesList() {
 
   if (isLoading) return <Spinner />;
 
-  if (!expenses.length) return <Message message={"Add your first expense"} />;
+  if (!expenses.length) return (<>
+  <Message message={"Add your first expense"} />
+  <Button type="primary">
+    <Link to='form'>Add expense</Link>
+  </Button>
+</>)
 
   return (
     <>
