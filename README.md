@@ -115,7 +115,7 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 
 ## Schema ER
 
-![schemaER](https://github.com/gherardiD/traveler-wallet/assets/101709520/17dcf6f1-890f-41ea-b9e8-38e236402eee)
+![Cattura](https://github.com/gherardiD/traveler-wallet/assets/101709520/0368e94e-551a-46f7-95ff-997e723149d2)
 
 
 ## Screenshots
