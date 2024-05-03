@@ -27,7 +27,6 @@ const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 const Login = lazy(() => import("./pages/Login"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -69,9 +68,13 @@ function App() {
                 <Route path="expenses" element={<ExpenseList />} />
                 <Route path="expenses/form" element={<ExpenseForm />} />
                 <Route path="expenses/:expenseId" element={<Expense />} />
-                <Route path="expenses/:expenseId/edit" element={<EditExpenseForm />} />
+                <Route
+                  path="expenses/:expenseId/edit"
+                  element={<EditExpenseForm />}
+                />
               </Route>
               <Route path="countries" element={<CountryList />} />
+              <Route path="countries/:countryName" element={<CityList />} />
               <Route path="form" element={<Form />} />
             </Route>
             <Route path="*" element={<PageNotFound />} />

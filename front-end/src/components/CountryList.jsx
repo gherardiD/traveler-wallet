@@ -7,7 +7,7 @@ import { useCities } from "../contexts/CitiesContext";
 
 function CountryList() {
   const { cities, isLoading } = useCities();
-  
+
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
@@ -17,8 +17,8 @@ function CountryList() {
 
   const countries = cities.reduce((arr, city) => {
     // if array do not already include the current country
-    if (!arr.map((el) => el.country).includes(city.country)) {
-      return [...arr, { country: city.country, emoji: city.emoji }];
+    if (!arr.map((country) => country.name).includes(city.country.name)) {
+      return [...arr, city.country];
     } else {
       return arr;
     }

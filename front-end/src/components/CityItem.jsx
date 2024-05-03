@@ -2,18 +2,13 @@
 import { Link } from "react-router-dom";
 import styles from "./CityItem.module.css";
 import { useCities } from "../contexts/CitiesContext";
-
-const formatDate = (date) =>
-  new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    weekday: "long",
-  }).format(new Date(date));
+import { formatDate } from "../utils/date";
+import { convertToFlag } from "../utils/flag";
 
 function CityItem({ city }) {
   const { currentCity, deleteCity } = useCities();
-  const { cityName, emoji, date, _id, position } = city;
+  const { cityName, country, date, _id, position } = city;
+  const flag = country?.flag;
 
   function handleClick(e) {
     e.preventDefault();
@@ -26,9 +21,9 @@ function CityItem({ city }) {
         className={`${styles.cityItem} ${
           currentCity._id === _id ? styles["cityItem--active"] : ""
         }`}
-        to={`${_id}?lat=${position.lat}&lng=${position.lng}`}
+        to={`/app/cities/${_id}?lat=${position.lat}&lng=${position.lng}`}
       >
-        <span className={styles.emoji}>{emoji}</span>
+        <span className={styles.flag}>{convertToFlag(flag)}</span>
         <h3 className={styles.name}>{cityName}</h3>
         <time className={styles.date}>{formatDate(date)}</time>
         <button className={styles.deleteBtn} onClick={handleClick}>

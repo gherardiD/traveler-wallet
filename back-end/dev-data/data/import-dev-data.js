@@ -40,9 +40,9 @@ const cities = JSON.parse(fs.readFileSync(`${__dirname}/cities.json`, "utf-8"));
 // Import data into database
 const importData = async () => {
   try {
-    await User.create(users, { validateBeforeSave: false });
+    // await User.create(users, { validateBeforeSave: false });
     await City.create(cities, { validateBeforeSave: false });
-    await Expense.create(expenses);
+    // await Expense.create(expenses);
     console.log("Data successfully loaded!");
   } catch (err) {
     console.log(err);
@@ -53,9 +53,9 @@ const importData = async () => {
 // Delete all data from database
 const deleteData = async () => {
   try {
-    await User.deleteMany();
+    // await User.deleteMany();
     await City.deleteMany();
-    await Expense.deleteMany();
+    // await Expense.deleteMany();
     console.log("Data successfully deleted!");
   } catch (err) {
     console.log(err);

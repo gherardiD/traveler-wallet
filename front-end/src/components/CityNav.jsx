@@ -1,13 +1,17 @@
-import {  NavLink } from "react-router-dom"
-import styles from './CityNav.module.css'
+import { NavLink } from "react-router-dom";
+import styles from "./CityNav.module.css";
 
 function CityNav() {
   return (
     <div className={styles.container}>
-      <NavLink to="info">Info</NavLink>
-      <NavLink to="expenses">Expenses</NavLink>
+      <NavLink to="info" replace>
+        Info
+      </NavLink>
+      <NavLink to="expenses" replace>
+        Expenses
+      </NavLink>
     </div>
-  )
+  );
 }
 
-export default CityNav
+export default CityNav;

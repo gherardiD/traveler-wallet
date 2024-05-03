@@ -6,15 +6,7 @@ import { useCities } from "../contexts/CitiesContext";
 import Spinner from "./Spinner";
 import BackButton from "./BackButton";
 import Button from "./Button";
-// import Message from "./Message";
-
-const formatDate = (date) =>
-  new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    weekday: "long",
-  }).format(new Date(date));
+import { formatDate } from "../utils/date";
 
 function City() {
   const { id } = useParams();
@@ -25,7 +17,8 @@ function City() {
   }, [id]);
 
   // if () return <Message message="City not found" />;
-  const { cityName, emoji, date, notes } = currentCity;
+  const { cityName, country, date, notes } = currentCity;
+  const flag = country?.flag;
 
   if (isLoading) return <Spinner />;
 
@@ -34,7 +27,7 @@ function City() {
       <div className={styles.row}>
         <h6>City name</h6>
         <h3>
-          <span>{emoji}</span> {cityName}
+          <span>{flag}</span> {cityName}
         </h3>
       </div>
 

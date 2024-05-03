@@ -7,6 +7,7 @@ const expenseSchema = new mongoose.Schema({
   },
   type: {
     type: String,
+    enum: ["food", "transport", "accommodation", "leisure", "other"],
     required: [true, "Please tell us the expense type!"],
     trim: true,
   },

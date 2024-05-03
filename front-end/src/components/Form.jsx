@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useCities } from "../contexts/CitiesContext";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
@@ -11,16 +12,7 @@ import Message from "./Message";
 import Spinner from "./Spinner";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useCities } from "../contexts/CitiesContext";
 
-// eslint-disable-next-line react-refresh/only-export-components
-export function convertToEmoji(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-}
 
 const BASE_URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
 
@@ -31,10 +23,9 @@ function Form() {
   
   const [geocodeIsLoading, setGeocodeIsLoading] = useState(false);
   const [cityName, setCityName] = useState("");
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState({});
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
-  const [emoji, setEmoji] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -56,8 +47,8 @@ function Form() {
             throw new Error("This is not a city, please click on a city.");
           }
           setCityName(data.city || data.locality || "unknown city");
-          setCountry(data.countryName);
-          setEmoji(convertToEmoji(data.countryCode));
+          const newCountry = {name: data.countryName, flag: data.countryCode};
+          setCountry(newCountry);
         }
       } catch (error) {
         setError(error.message);
@@ -79,7 +70,6 @@ function Form() {
     const newCity = {
       cityName,
       country,
-      emoji,
       date,
       notes,
       position: { lat, lng }
@@ -111,7 +101,7 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        <span className={styles.flag}>{emoji}</span>
+        <span className={styles.flag}>{country.flag}</span>
       </div>
 
       <div className={styles.row}>

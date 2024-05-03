@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useExpenses } from '../contexts/ExpensesContext'
-import { useCities } from '../contexts/CitiesContext'
-import styles from './ExpenseForm.module.css'
-import BackButton from './BackButton'
-import Button from './Button'
-import Message from './Message'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useExpenses } from "../contexts/ExpensesContext";
+import { useCities } from "../contexts/CitiesContext";
+import styles from "./ExpenseForm.module.css";
+import BackButton from "./BackButton";
+import Button from "./Button";
+import Message from "./Message";
 
 function ExpenseForm() {
-  const navigate = useNavigate()
-  const { createExpense, isLoading, error } = useExpenses()
-  const { currentCity } = useCities()
+  const navigate = useNavigate();
+  const { createExpense, isLoading, error } = useExpenses();
+  const { currentCity } = useCities();
   const [formData, setFormData] = useState({
-    description: '',
-    type: '',
-    amount: '',
+    description: "",
+    type: "",
+    amount: "",
   });
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     const newExpense = {
       description: formData.description,
       type: formData.type,
       amount: formData.amount,
       date: currentCity.date || new Date(),
     };
-    
+
     await createExpense(newExpense);
     navigate(-1, { replace: true });
   }
@@ -37,11 +37,11 @@ function ExpenseForm() {
       [e.target.name]: e.target.value,
     });
   };
-  
+
   if (error) {
-    <Message message={error} />
+    <Message message={error} />;
   }
-  
+
   return (
     <form className={`${styles.form} ${isLoading ? "loading" : ""}`}>
       <div className={styles.row}>
@@ -55,19 +55,25 @@ function ExpenseForm() {
           required
         />
       </div>
-      
+
       <div className={styles.row}>
         <label htmlFor="type">Type</label>
-        <input
-          type="text"
+        <select
           id="type"
           name="type"
           onChange={(e) => handleInputChange(e)}
           value={formData.type}
           required
-        />
+        >
+          <option value="">Select a type</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="accommodation">Accommodation</option>
+          <option value="leisure">Leisure</option>
+          <option value="other">Other</option>
+        </select>
       </div>
-      
+
       <div className={styles.row}>
         <label htmlFor="amount">Amount</label>
         <input
@@ -81,13 +87,13 @@ function ExpenseForm() {
       </div>
 
       <div className={styles.buttons}>
-        <Button onClick={e => handleSubmit(e)} type={"primary"}>
+        <Button onClick={(e) => handleSubmit(e)} type={"primary"}>
           {isLoading ? "Loading..." : "Create"}
         </Button>
         <BackButton />
       </div>
     </form>
-  )
+  );
 }
 
-export default ExpenseForm
+export default ExpenseForm;

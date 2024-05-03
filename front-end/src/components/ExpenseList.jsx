@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import { useExpenses } from "../contexts/ExpensesContext";
 import styles from "./ExpenseList.module.css";
 import ExpenseItem from "./ExpenseItem";
 import Spinner from "./Spinner";
 import Message from "./Message";
 import Button from "./Button";
-import { Link } from "react-router-dom";
+import BackButton from "./BackButton";
 
 function ExpensesList() {
   const { expenses, isLoading } = useExpenses();
@@ -12,12 +13,18 @@ function ExpensesList() {
 
   if (isLoading) return <Spinner />;
 
-  if (!expenses.length) return (<>
-  <Message message={"Add your first expense"} />
-  <Button type="primary">
-    <Link to='form'>Add expense</Link>
-  </Button>
-</>)
+  if (!expenses.length)
+    return (
+      <>
+        <Message message={"Add your first expense"} />
+        <div className="buttons">
+          <Button type="primary">
+            <Link to="form">Add expense</Link>
+          </Button>
+          <BackButton />
+        </div>
+      </>
+    );
 
   return (
     <>
@@ -26,9 +33,12 @@ function ExpensesList() {
           <ExpenseItem expense={expense} key={expense._id} />
         ))}
       </ul>
-      <Button type="primary">
-        <Link to='form'>Add expense</Link>
-      </Button>
+      <div className={styles.buttons}>
+        <Button type="primary">
+          <Link to="form">Add expense</Link>
+        </Button>
+        <BackButton />
+      </div>
     </>
   );
 }

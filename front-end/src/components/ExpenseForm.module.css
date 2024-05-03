@@ -15,11 +15,11 @@
   position: relative;
 }
 
+
 .buttons {
   display: flex;
   justify-content: space-between;
 }
-
 
 .form.loading {
   opacity: 0.3;

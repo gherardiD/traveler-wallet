@@ -59,14 +59,20 @@ function EditExpenseForm() {
 
       <div className={styles.row}>
         <label htmlFor="type">Type</label>
-        <input
-          type="text"
+        <select
           id="type"
           name="type"
           onChange={(e) => handleInputChange(e)}
           value={formData.type}
           required
-        />
+        >
+          <option value="">Select a type</option>
+          <option value="food">Food</option>
+          <option value="transport">Transport</option>
+          <option value="accommodation">Accommodation</option>
+          <option value="leisure">Leisure</option>
+          <option value="other">Other</option>
+        </select>
       </div>
 
       <div className={styles.row}>

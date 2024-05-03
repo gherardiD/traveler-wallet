@@ -6,12 +6,14 @@ const citySchema = new mongoose.Schema({
     required: true,
   },
   country: {
-    type: String,
-    required: true,
-  },
-  emoji: {
-    type: String,
-    required: true,
+    name: {
+      type: String,
+      required: true,
+    },
+    flag: {
+      type: String,
+      required: true,
+    },
   },
   date: {
     type: Date,
@@ -19,7 +21,6 @@ const citySchema = new mongoose.Schema({
   },
   notes: {
     type: String,
-    required: true,
   },
   position: {
     lat: {
