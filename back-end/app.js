@@ -10,6 +10,7 @@ const globalErrorHandler = require("./utils/errorHandler");
 const userRouter = require("./routes/app/userRoutes");
 const cityRouter = require("./routes/app/cityRoutes");
 const expenseRouter = require("./routes/app/expenseRoutes");
+const adminRoutes = require("./routes/app/adminRoutes");
 
 const APIRouter = require("./routes/api/APIRoutes");
 
@@ -30,6 +31,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use("/api/users", userRouter);
 app.use("/api/cities", cityRouter);
 app.use("/api/expenses", expenseRouter);
+app.use("/api/admin", adminRoutes);
 
 app.use("/api/v1", APIRouter);
 

@@ -36,8 +36,5 @@ router.get("/me", getMe);
 router.patch("/update-me", updateMe);
 router.delete("/delete-me", deleteMe);
 
-router.use(restrictTo("admin"));
 
-router.route("/").get(getAllUsers).post(createUser);
-router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
 module.exports = router;
