@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "./User.module.css";
 
@@ -14,8 +14,10 @@ function User() {
 
   return (
     <div className={styles.user}>
-      {/* <img src={user.avatar} alt={user.name} /> */}
-      <span>Welcome, {firstName}</span>
+      <Link to="/app/account">
+        {/* <img src={user.avatar} alt={user.name} /> */}
+        <span>Welcome, {firstName}</span>
+      </Link>
       <button onClick={handleClick}>Logout</button>
     </div>
   );

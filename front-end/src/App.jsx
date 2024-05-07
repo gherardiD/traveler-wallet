@@ -18,6 +18,7 @@ import EditCityForm from "./components/EditCityForm";
 import ExpenseForm from "./components/ExpenseForm";
 import Expense from "./components/Expense";
 import EditExpenseForm from "./components/EditExpenseForm";
+import Account from "./pages/Account";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Product = lazy(() => import("./pages/Product"));
@@ -77,6 +78,7 @@ function App() {
               <Route path="countries/:countryName" element={<CityList />} />
               <Route path="form" element={<Form />} />
             </Route>
+            <Route path="/app/account" element={<Account />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>

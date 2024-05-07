@@ -28,6 +28,8 @@ function reducer(state, action) {
         user: action.payload.user,
         error: null,
       };
+    case "UPDATE/PASSWORD":
+      return { ...state, isLoading: false };
     case "SIGNUP":
       return { ...state, isLoading: false };
     case "LOGOUT":
@@ -105,6 +107,21 @@ function AuthProvider({ children }) {
       dispatch({ type: "REJECTED", payload: error.message });
     }
   }
+  
+  async function changePassword(formData) {
+    dispatch({ type: "LOADING" });
+    try {
+      const token = localStorage.getItem("token");
+      await Axios.patch("/users/update-password", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: "UPDATE/PASSWORD" });
+    } catch (error) {
+      dispatch({ type: "REJECTED", payload: error.message });
+    }
+  }
 
   return (
     // <AuthContext.Provider value={{ isAuthenticated, user, dispatch }}>
@@ -118,6 +135,7 @@ function AuthProvider({ children }) {
         logout,
         signUp,
         confirmEmail,
+        changePassword,
       }}
     >
       {children}
