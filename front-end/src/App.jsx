@@ -18,7 +18,7 @@ import EditCityForm from "./components/EditCityForm";
 import ExpenseForm from "./components/ExpenseForm";
 import Expense from "./components/Expense";
 import EditExpenseForm from "./components/EditExpenseForm";
-import Account from "./pages/Account";
+
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const Product = lazy(() => import("./pages/Product"));
@@ -27,6 +27,8 @@ const AppLayout = lazy(() => import("./pages/AppLayout"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 const Login = lazy(() => import("./pages/Login"));
 const SignUp = lazy(() => import("./pages/SignUp"));
+const Account = lazy(() => import("./pages/Account"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 function App() {
   return (
@@ -79,6 +81,7 @@ function App() {
               <Route path="form" element={<Form />} />
             </Route>
             <Route path="/app/account" element={<Account />} />
+            <Route path="/admin/home" element={<Admin />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>

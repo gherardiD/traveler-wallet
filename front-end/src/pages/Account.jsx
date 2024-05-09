@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "../api/Axios";
 import styles from "./Account.module.css";
 
 import DeleteAccountPopUp from "../components/DeleteAccountPopUp";
 import UpdatePasswordForm from "../components/UpdatePasswordForm";
+import BackButton from "../components/BackButton";
+import SpinnerFullPage from "../components/SpinnerFullPage";
 
 function Account() {
+  const navigate = useNavigate();
   const [showUpdatePasswordForm, setShowUpdatePasswordForm] = useState(false);
   const [showDeleteUserPopUp, setShowDeleteUserPopUp] = useState(false);
 
@@ -14,7 +18,17 @@ function Account() {
 
   const token = localStorage.getItem("token");
 
+
   useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
+
+  useEffect(() => {
+    if (!token) {
+      return;
+    }
     async function fetchCities() {
       try {
         const response = await Axios.get("/cities", {
@@ -32,6 +46,9 @@ function Account() {
   }, [token]);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     async function fetchExpenses() {
       try {
         const response = await Axios.get("/expenses", {
@@ -63,6 +80,11 @@ function Account() {
     0
   );
 
+
+  if (!token) {
+    return <SpinnerFullPage />
+  }
+  
   return (
     <div className={styles.container}>
       {showUpdatePasswordForm && (
@@ -90,6 +112,7 @@ function Account() {
             <p>total expenses: {totalExpenses}</p>
             <p>total expenses amount: {totalExpensesAmount}</p>
           </div>
+          <BackButton />
         </>
       )}
     </div>
