@@ -4,12 +4,16 @@ import { useAuth } from "../contexts/AuthContext";
 
 // eslint-disable-next-line react/prop-types
 function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(
     function () {
-      if (!isAuthenticated) navigate("/");
+      if (!isAuthenticated) {
+        navigate("/");
+      } else if (isAuthenticated && user.role === "admin") {
+        navigate("/admin/home");
+      }
     },
     [isAuthenticated, navigate]
   );
