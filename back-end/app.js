@@ -2,6 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./utils/errorHandler");
@@ -11,22 +14,27 @@ const userRouter = require("./routes/app/userRoutes");
 const cityRouter = require("./routes/app/cityRoutes");
 const expenseRouter = require("./routes/app/expenseRoutes");
 const adminRoutes = require("./routes/app/adminRoutes");
-
 const APIRouter = require("./routes/api/APIRoutes");
 
 const app = express();
 
 app.use(cors());
 
-app.use(cookieParser());
+// Set security HTTP headers
+app.use(helmet());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use(cookieParser());
 app.use(express.json());
 
-app.use(express.static(`${__dirname}/public`));
+// Data sanitization against NoSQL query injection
+app.use(mongoSanitize());
+
+// Data sanitization against XSS
+app.use(xss());
 
 app.use("/api/users", userRouter);
 app.use("/api/cities", cityRouter);
