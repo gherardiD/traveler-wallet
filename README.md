@@ -120,9 +120,12 @@ a questo punto recarsi all'indirizzo http://localhost:3000/ e iniziare ad utiliz
 
 ## Screenshots
 
-![landingPage](https://github.com/gherardiD/traveler-wallet/assets/101709520/73621e6d-3b3d-40ff-bb89-d5859feebdec)
-![product](https://github.com/gherardiD/traveler-wallet/assets/101709520/d9d0e9b0-4b8e-42bb-b48f-bafa5d36a247)
-![login](https://github.com/gherardiD/traveler-wallet/assets/101709520/1dd550dd-ca23-4bb3-8efd-0c7999d3b86c)
-![cities](https://github.com/gherardiD/traveler-wallet/assets/101709520/dcb2639d-414e-4e05-b8cf-1812e889b0c6)
+![landingPage](https://github.com/gherardiD/traveler-wallet/assets/101709520/4d03a08a-2978-4f09-9980-67e8f2620ecf)
+![login](https://github.com/gherardiD/traveler-wallet/assets/101709520/c07e6df2-c06c-4135-8d57-55e957611a3e)
+![register](https://github.com/gherardiD/traveler-wallet/assets/101709520/f37bffba-6b3b-4af0-a93b-e917a0a840da)
+![cities](https://github.com/gherardiD/traveler-wallet/assets/101709520/b743d5fe-3f6e-4a9c-9fd9-29a4afa7f094)
+![info](https://github.com/gherardiD/traveler-wallet/assets/101709520/8f212ed5-808f-46c0-8cdc-c34e2e9b8b14)
+![expenses](https://github.com/gherardiD/traveler-wallet/assets/101709520/315f4fe4-254e-4192-b8e6-668c0c2b56cb)
+
 
 
