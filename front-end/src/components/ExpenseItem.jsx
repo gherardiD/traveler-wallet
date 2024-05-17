@@ -20,7 +20,6 @@ function ExpenseItem({ expense }) {
         }`}
         to={`${_id}`}
       >
-        <span className={styles}>{}</span>
         <h3 className={styles.amount}>{amount}</h3>
         <time className={styles.type}>{type}</time>
         <button className={styles.deleteBtn} onClick={handleClick}>

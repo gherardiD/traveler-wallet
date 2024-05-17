@@ -99,20 +99,20 @@ function Account() {
 
       {!showDeleteUserPopUp && !showUpdatePasswordForm && (
         <>
-          <h1>Account</h1>
-          <p>Here you can update your password or delete your account.</p>
+          <h1 className={styles.title}>Account</h1>
+          <p className={styles.paragraph}>Here you can update your password or delete your account.</p>
           <div>
-            <button onClick={toggleUpdatePasswordForm}>Update Password</button>
-            <button onClick={toggleDeletePopUp}>Delete Account</button>
+            <button className={styles.toggle} onClick={toggleUpdatePasswordForm}>Update Password</button>
+            <button className={styles.toggle} onClick={toggleDeletePopUp}>Delete Account</button>
           </div>
 
-          <div>
+          <div className={styles.listContainer}>
             <h2>User Stats</h2>
-            <p>total cities: {totalCities}</p>
-            <p>total expenses: {totalExpenses}</p>
-            <p>total expenses amount: {totalExpensesAmount}</p>
+            <p className={styles.paragraph}>Total cities: {totalCities}</p>
+            <p className={styles.paragraph}>Total expenses: {totalExpenses}</p>
+            <p className={styles.paragraph}>Total expenses amount: {totalExpensesAmount}</p>
           </div>
-          <BackButton />
+          <BackButton className={styles.backButton} />
         </>
       )}
     </div>
