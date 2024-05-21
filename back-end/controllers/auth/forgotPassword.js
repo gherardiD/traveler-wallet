@@ -25,11 +25,17 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
   try {
     // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
-    await sendEmail({
-      email: req.body.email,
+    const msg = {
+      to: req.user.email,
+      from: 'gherardi.daniele.studente@itispaleocapa.it', 
       subject: "Your password reset token (valid for 10 min)",
-      message,
-    });
+      text: "Forgot password",
+      html: `<p>${message}</p>`,
+    };
+
+    await sendEmail.send(msg);
+
+    console.log('Email sent')
 
     res.status(200).json({
       status: "success",

@@ -17,11 +17,16 @@ const checkUserEmail = catchAsync(async (req, res, next) => {
 
   try {
     // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
-    await sendEmail({
-      email: req.user.email,
+    const msg = {
+      to: req.user.email,
+      from: 'gherardi.daniele.studente@itispaleocapa.it', 
       subject: "Your email confirmation token (valid for 10 min)",
-      message,
-    });
+      text: "Confirm email",
+      html: `<strong>${message}</strong>`,
+    };
+    await sendEmail.send(msg);
+    
+    console.log('Email sent');
 
     res.status(200).json({
       status: "success",
