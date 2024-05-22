@@ -16,7 +16,6 @@ const checkUserEmail = catchAsync(async (req, res, next) => {
   const message = `Click on this link to confirm your email: ${resetURL}`;
 
   try {
-    // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
     const msg = {
       to: req.user.email,
       from: 'gherardi.daniele.studente@itispaleocapa.it', 
