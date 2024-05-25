@@ -53,10 +53,15 @@ export default function Login() {
           </div>
 
           <div className={styles.buttons}>
-            <Button type="primary">Login</Button>
-            <Button type="back" onClick={e => e.preventDefault}>
-              <Link to="/signup">Register</Link>
-            </Button>
+            <div>
+              <Button type="primary">Login</Button>
+              <Button type="secondary" onClick={(e) => e.preventDefault}>
+                <Link to="/signup">Register</Link>
+              </Button>
+            </div>
+            <span className={styles.forgot} type="secondary" onClick={() => navigate("/forgot-password")}>
+              Forgot password?
+            </span>
           </div>
         </form>
       )}

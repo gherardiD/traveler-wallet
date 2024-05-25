@@ -18,6 +18,8 @@ import EditCityForm from "./components/EditCityForm";
 import ExpenseForm from "./components/ExpenseForm";
 import Expense from "./components/Expense";
 import EditExpenseForm from "./components/EditExpenseForm";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -41,6 +43,11 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route
+              path="/reset-password/:passwordResetToken"
+              element={<ResetPassword />}
+            />
             <Route
               path="/confirm-email/:emailToken"
               element={<ConfirmEmail />}

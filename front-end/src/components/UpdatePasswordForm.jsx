@@ -4,14 +4,16 @@ import { useAuth } from "../contexts/AuthContext";
 import Spinner from "./Spinner";
 import Message from "./Message";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function UpdatePasswordForm({ toggleUpdatePasswordForm }) {
-  const { changePassword, isLoading, error } = useAuth();
+  const navigate = useNavigate();
+  const { changePassword, isLoading, error, logout } = useAuth();
   const [formData, setFormData] = useState({
-    oldPassword: "",
+    passwordCurrent: "",
     password: "",
-    confirmPassword: "",
+    passwordConfirm: "",
   });
 
   const handleInputChange = (e) => {
@@ -29,6 +31,8 @@ function UpdatePasswordForm({ toggleUpdatePasswordForm }) {
   function handleSubmit(e) {
     e.preventDefault();
     changePassword(formData);
+    logout();
+    navigate("/login");
   }
 
   return (
@@ -38,18 +42,18 @@ function UpdatePasswordForm({ toggleUpdatePasswordForm }) {
       {!error && !isLoading && (
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.row}>
-            <label htmlFor="old-password">Password</label>
+            <label htmlFor="old-password">Old password</label>
             <input
-              type="oldPassword"
-              id="oldPassword"
-              name="oldPassword"
+              type="password"
+              id="passwordCurrent"
+              name="passwordCurrent"
               onChange={(e) => handleInputChange(e)}
-              value={formData.oldPassword}
+              value={formData.passwordCurrent}
             />
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">New password</label>
             <input
               type="password"
               id="password"
@@ -60,13 +64,13 @@ function UpdatePasswordForm({ toggleUpdatePasswordForm }) {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="confirmPassword">Confirm password</label>
+            <label htmlFor="passwordConfirm">Confirm new password</label>
             <input
               type="password"
-              id="confirmPassword"
-              name="confirmPassword"
+              id="passwordConfirm"
+              name="passwordConfirm"
               onChange={(e) => handleInputChange(e)}
-              value={formData.confirmPassword}
+              value={formData.passwordConfirm}
             />
           </div>
 

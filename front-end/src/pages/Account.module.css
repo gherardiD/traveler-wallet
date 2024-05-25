@@ -8,8 +8,8 @@
 } */
 
 .container {
-  background-color: #1f2937; 
-  color: #fff;
+  background-color: #1f2937;
+  color: #f2eded;
   padding: 40px;
   border-radius: 10px;
   max-width: 800px;
@@ -27,7 +27,6 @@
   font-size: 1.5em;
   margin-bottom: 20px;
 }
-
 
 .toggle {
   background-color: #22c55e;

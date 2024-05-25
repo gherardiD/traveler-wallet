@@ -4,7 +4,6 @@ const catchAsync = require("../../utils/catchAsync");
 const sendEmail = require("../../utils/sendEmail");
 
 const forgotPassword = catchAsync(async (req, res, next) => {
-  // get user based on POSTed email
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -15,7 +14,6 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  // send it to user's email
   // const resetURL = `${req.protocol}://localhost:${process.env.FRONT_END_PORT}/reset-password/${resetToken}`;
   const resetURL = `${process.env.FRONT_END_URL}/reset-password/${resetToken}`;
 
@@ -24,18 +22,17 @@ const forgotPassword = catchAsync(async (req, res, next) => {
   console.log(resetURL);
 
   try {
-    // ! send email works only with gherardi.daniele.studente@itispaleocapa.it
     const msg = {
-      to: req.user.email,
-      from: 'gherardi.daniele.studente@itispaleocapa.it', 
+      to: req.body.email,
+      from: "gherardi.daniele.studente@itispaleocapa.it",
       subject: "Your password reset token (valid for 10 min)",
-      text: "Forgot password",
+      text: "Reset password",
       html: `<p>${message}</p>`,
     };
 
     await sendEmail.send(msg);
 
-    console.log('Email sent')
+    console.log("Email sent");
 
     res.status(200).json({
       status: "success",

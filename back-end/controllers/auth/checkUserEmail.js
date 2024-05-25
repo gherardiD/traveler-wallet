@@ -18,14 +18,15 @@ const checkUserEmail = catchAsync(async (req, res, next) => {
   try {
     const msg = {
       to: req.user.email,
-      from: 'gherardi.daniele.studente@itispaleocapa.it', 
+      from: "gherardi.daniele.studente@itispaleocapa.it",
       subject: "Your email confirmation token (valid for 10 min)",
       text: "Confirm email",
       html: `<strong>${message}</strong>`,
     };
+
     await sendEmail.send(msg);
-    
-    console.log('Email sent');
+
+    console.log("Email sent");
 
     res.status(200).json({
       status: "success",

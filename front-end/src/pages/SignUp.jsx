@@ -79,7 +79,7 @@ function SignUp() {
             id="password"
             name="password"
             onChange={(e) => handleInputChange(e)}
-            value={formData.passwordConfirm}
+            value={formData.password}
           />
         </div>
         <div className={styles.row}>
