@@ -23,8 +23,7 @@ import ResetPassword from "./pages/ResetPassword";
 
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const Product = lazy(() => import("./pages/Product"));
-const Pricing = lazy(() => import("./pages/Pricing"));
+const Stats = lazy(() => import("./pages/Stats"));
 const AppLayout = lazy(() => import("./pages/AppLayout"));
 const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 const Login = lazy(() => import("./pages/Login"));
@@ -39,8 +38,7 @@ function App() {
         <Suspense fallback={<SpinnerFullPage />}>
           <Routes>
             <Route index element={<HomePage />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/stats" element={<Stats />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

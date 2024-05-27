@@ -1,0 +1,49 @@
+
+
+.stats {
+  margin: 2.5rem;
+  padding: 2.5rem 5rem;
+  background-color: var(--color-dark--1);
+  min-height: calc(100vh - 5rem);
+}
+
+.container {
+  background-color: var(--color-dark--2);
+  border-radius: 7px;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 80rem;
+  margin: 4rem auto;
+}
+
+.chartContainer {
+  flex: 1;
+  height: 300px; /* Adjust height as needed */
+}
+
+.statsList {
+  display: flex;
+  flex: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: small;
+}
+
+.statsListItem {
+  background-color: var(--color-dark--3);
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.statType {
+  font-weight: bold;
+}
+
+.statDetail {
+  display: block;
+  margin-top: 0.5rem;
+}

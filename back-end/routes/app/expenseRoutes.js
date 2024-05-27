@@ -18,7 +18,13 @@ const deleteExpense = require("../../controllers/expense/every/deleteExpense");
 const protect = require("../../controllers/auth/protect");
 const restrictTo = require("../../controllers/auth/restrictTo");
 
+const {
+  getExpenseStats,
+} = require("../../controllers/admin/expenseStatsController");
+
 const router = express.Router();
+
+router.route("/stats").get(getExpenseStats);
 
 router.use(protect);
 

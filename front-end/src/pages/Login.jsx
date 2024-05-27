@@ -59,7 +59,11 @@ export default function Login() {
                 <Link to="/signup">Register</Link>
               </Button>
             </div>
-            <span className={styles.forgot} type="secondary" onClick={() => navigate("/forgot-password")}>
+            <span
+              className={styles.forgot}
+              type="secondary"
+              onClick={() => navigate("/forgot-password")}
+            >
               Forgot password?
             </span>
           </div>
